@@ -1,0 +1,2584 @@
+---
+title: "Code for: Finite mixture models for trajectory analysis of in-hospital routinely laboratory values: application as biomarkers in spinal cord injury patients"
+subtitle: "Master in Bioinformatics and Biostatistics. Universitat Oberta de Catalunya and Universitat de Barcelona"
+author: "Abel Torres Espin"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_depth: 3
+    theme: readable
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, error = FALSE, warning = FALSE, fig.width = 10)
+```
+
+# Setup
+
+## Libraries
+```{r}
+library(tidyverse) # for data wrangling and other upper level functionalities
+library(DT) # for table functionalities 
+library(data.table) # to work with big datasets
+library(gtsummary) # for summary tables
+library(patchwork) # for figures
+library(kableExtra) # for more html tables
+library(lcmm) # for trajectory modeling
+library(parallel) # for parallelization
+library(gbmt) # for multy-trajectory modeling as by Nagin
+library(caret) # for prediction modeling
+```
+
+# The dataset build
+
+Data has been download from [PhysioNet](https://physionet.org/). Both MIMIC databases (DB) are relational DB structured in tables. Documentation about the DB schema can be found [here](https://mimic.mit.edu/docs/).
+
+    Note that data access need Data Use Agreement with PhysioNet. No data is provided in this document or repository. The code would not run without the data!
+
+
+For cohort selection, we used the International Statistical Classification of Disease (ICD) codes, version 9/10. From the respective DB, the following tables have been download and are locally accessible:
+
+**MIMIC-III**
+* `PATIENTS`: information demographics for each patient in the DB
+* `ADMISSIONS`: Unique hospitalizations of each patient in the DB
+* `DIAGNOSES_ICD`: Hospital assigned diagnoses with ICD codes
+* `LABEVENTS`: Laboratory measurements for patients
+* `D_LABITEMS`: dictionary with each laboratory assay metadata
+* `D_ICD_DIAGNOSES`: definitions for ICDs diagnoses
+
+**MIMIC-IV**
+* `core/patients`: information demographics for each patient in the DB
+* `core/admissions`: Unique hospitalizations of each patient in the DB
+* `hosp/diagnoses_icd`: Hospital assigned diagnoses with ICD codes
+* `hosp/labevents`: Laboratory measurements for patients
+* `hosp/d_labitems`: dictionary with each laboratory assay metadata
+* `hosp/d_icd_diagnoses`: definitions for ICDs diagnoses
+
+## Patient selection
+
+**The inclusion criteria are:**
+
+* Adults
+* Acute patients with ICD codes with specification of spinal cord injury (SCI) or spine trauma (vertebral fracture). This include ICD9 codes of the following series (full list can be seen in the appendix)
+  * `952`: Spinal cord injury without evidence of spinal bone injury
+  * `953`: Injury to nerve roots and spinal plexus
+  * `806`: Fracture of vertebral column with spinal cord injury
+  * `805`: Fracture of vertebral column without mention of spinal cord injury
+
+*Note*.The list of ICD10 can be seen in the `data/icd10_codes_sci.csv`
+
+
+In MIMIC diagnostics table, there is one row per diagnostic per patient per hospital admission. Some patients may have more than one hospital admission. We selected the first hospital admission per patient that shows in the DB. From there, we filtered the patients that have presence of selected ICD9/10 codes in their hospital stay.
+
+### Creating ICD9/10 filtering
+
+MIMIC-III/IV uses both ICD9 and 10. For filtering, we created a separated list of ICD9 and ICD10 codes in two .csv files. Here we upload the files and create a character vector with all the codes for the filtering. We append `\\b` in front of each code as this helps with the processes of filtering by regular expressions. `\\b` ensures that each code matches from the **beginning** of the code, preventing middle code mismatches since some times codes are truncated or has extensions.
+
+```{r}
+#From manually created list
+icd9_codes_sci<-read.csv('icd9_codes_sci.csv')
+icd10_codes_sci<-read.csv('icd10_codes_sci.csv')
+
+#Inclusion codes
+icd_scAll_filter<-paste(c(paste0("\\b",unique(icd9_codes_sci$icd9_codes_L1)),
+                          paste0("\\b",unique(icd10_codes_sci$icd10_codes_L1))), 
+                       collapse = "|")
+
+head(icd_scAll_filter)
+```
+
+#### MIMIC III
+
+*Not computed on time of knitting*
+```{r eval=FALSE}
+## read data
+mimic3_diagnostic<-read.csv('data/MIMICIII/DIAGNOSES_ICD.csv.gz')
+mimic3_admissions<-read.csv('data/MIMICIII/ADMISSIONS.csv.gz')
+mimic3_patients<-read.csv('data/MIMICIII/PATIENTS.csv.gz')
+
+mimic3_patients<-mimic3_patients%>%
+  mutate(SUBJECT_ID = as.character(SUBJECT_ID))%>%
+  select(-ROW_ID)
+
+## Patients with diagnostics related to ICD9 codes
+mimic3_diagnostic_sci9<-mimic3_diagnostic%>%
+  filter(str_detect(ICD9_CODE,icd_scAll_filter))
+
+## Total number of admissions at mimic
+mimic3_sci_hadm_id<-unique(mimic3_diagnostic_sci9$HADM_ID)
+
+## Pulling data for all id patients together
+mimic3_diagnostic_sci9<-mimic3_diagnostic%>%
+  filter(HADM_ID%in%as.numeric(mimic3_sci_hadm_id))%>%#Filter by ICD9 sci relevant
+  mutate(SUBJECT_ID = as.character(SUBJECT_ID))%>%
+  arrange(SEQ_NUM, SUBJECT_ID)%>%
+  group_by(HADM_ID)%>%
+  mutate(n_codes = n())%>%
+  summarise_all(.funs = function (x){
+    paste(unique(x), collapse = " | ")
+  })%>%
+  select(-ROW_ID)
+
+# Number of patients with more than one hospital admission
+sum(duplicated(mimic3_diagnostic_sci9$SUBJECT_ID))
+```
+
+We see that 13 patients had more than one hospital admission. We select the first admission using the information of the admission table.
+
+```{r eval = FALSE}
+mimic3_filtered<-mimic3_admissions%>%
+  mutate(SUBJECT_ID=as.character(SUBJECT_ID))%>%
+  right_join(mimic3_diagnostic_sci9)%>%
+  left_join(mimic3_patients)%>%
+  arrange(EDREGTIME)%>% #arrange the dataframe by admission time
+  group_by(SUBJECT_ID)%>%#perform operation per subject
+  mutate(n_hadm = n())%>% #enumerate the order of the admission per patient
+  filter(n_hadm == 1, EDREGTIME !="")%>% #select the first admission
+  select(-ROW_ID)
+
+# mimic3_filtered%>%
+#   DT::datatable()
+```
+
+**Save data object**
+```{r eval = FALSE}
+saveRDS(mimic3_filtered, file = "data/MIMICIII/mimic3_filtered.Rds")
+```
+
+**Calculating age in MIMIC-III**
+
+MIMIC-III does not provide age. Dates for each patient are shifted for privacy reasons, but temporal consistency is maintained. We can calculate age at hospital arrival by subtracting date of birth from arrival time (ED registery time).
+
+```{r}
+mimic3_filtered<-readRDS("data/MIMICIII/mimic3_filtered.Rds")
+
+mimic3_filtered<-mimic3_filtered%>%
+  mutate(DOB = strptime(DOB, format = "%Y-%m-%d %H:%M:%S"),
+         EDREGTIME = strptime(EDREGTIME,format = "%Y-%m-%d %H:%M:%S"),
+         age = abs(as.numeric(difftime(DOB, EDREGTIME, units = "days"))),
+         age = floor(age/365),
+         age = ifelse(age>=300, 89, age)) ## shift from >= 300 to 89
+
+summary(mimic3_filtered$age)
+```
+
+
+We can see that there are no kids (minimal age is 15) in the dataset. We can also see that the max is 303. This is due to the fact that, for privacy reasons, ages above 89 are shifted to 300. No further filter is required.
+
+The number of unique patients in the MIMIC-III dataset is `r length(unique(mimic3_filtered$SUBJECT_ID))`
+
+#### MIMIC IV
+*Not computed on time of knitting*
+```{r eval=FALSE}
+## read data
+mimic4_diagnostic<-read.csv('data/MIMICIV/diagnoses_icd.csv.gz')
+mimic4_admissions<-read.csv('data/MIMICIV/admissions.csv.gz')
+mimic4_patients<-read.csv('data/MIMICIV/patients.csv.gz')
+
+mimic4_patients<-mimic4_patients%>%
+  mutate(subject_id = as.character(subject_id))
+
+## Patients with diagnostics related to ICD9 codes
+mimic4_diagnostic_sc<-mimic4_diagnostic%>%
+  filter(str_detect(icd_code,icd_scAll_filter))
+
+## Total number of admissions at mimic
+mimic4_sci_hadm_id<-unique(mimic4_diagnostic_sc$hadm_id)
+
+## Pulling data for all id patients together
+mimic4_diagnostic_sc<-mimic4_diagnostic%>%
+  filter(hadm_id%in%as.numeric(mimic4_sci_hadm_id))%>%#Filter by ICD9/10 sci relevant
+  mutate(subject_id = as.character(subject_id))%>%
+  arrange(seq_num, subject_id)%>%
+  group_by(hadm_id)%>%
+  mutate(n_codes = n())%>%
+  summarise_all(.funs = function (x){
+    paste(unique(x), collapse = " | ")
+  })
+
+# Number of patients with more than one hospital admission
+sum(duplicated(mimic4_diagnostic_sc$subject_id))
+```
+
+488 patients had more than one hospital admission. We will select the first admission using the information of the admission table.
+
+```{r eval=FALSE}
+mimic4_filtered<-mimic4_admissions%>%
+  mutate(subject_id = as.character(subject_id))%>%
+  right_join(mimic4_diagnostic_sc)%>%
+  left_join(mimic4_patients)%>%
+  arrange(edregtime)%>% #arrange the dataframe by admission time
+  group_by(subject_id)%>%#perform operation per subject
+  mutate(n_hadm = 1:n())%>% #enumerate the order of the admission per patient
+  filter(n_hadm == 1, edregtime !="") #select the first admission
+
+# mimic4_filtered%>%
+#   DT::datatable()
+```
+
+**Save data object**
+```{r eval = FALSE}
+saveRDS(mimic4_filtered, file = "data/MIMICIV/mimic4_filtered.Rds")
+```
+
+**Patient Age**
+
+In MIMIC-IV, exact age is not provided and it is cannot be computed. There is an "anchor" age, that provides an estimate of the age at admission on a range of 3 years.
+
+```{r}
+mimic4_filtered<-readRDS("data/MIMICIV/mimic4_filtered.Rds")
+summary(mimic4_filtered$anchor_age)
+```
+
+The number of unique patients in the MIMIC-IV dataset is `r length(unique(mimic4_filtered$subject_id))`
+
+#### Join both MIMIC
+
+Here we join both datasets with the filtered patient information. One problem at joining both datasets is that during the transition between MIMIC-III and MIMIC-IV, patient identification changed, and both datasets may overlap on a subset of patients. MIMIC-III has patients from 2001 to 2012, MIMIC-IV has patients from 2008 to 2019. In order to prevent patient duplication, we decided to filter out MIMIC-IV patients that contains the same ICD sequence (order, codes and length).
+
+```{r}
+sum(mimic4_filtered$icd_code%in%mimic3_filtered$ICD9_CODE)
+mimic4_filtered<-mimic4_filtered[which(!mimic4_filtered$icd_code%in%mimic3_filtered$ICD9_CODE),]
+```
+
+This reduces the MIMIC-IV in 515 patients, all from the overlapping years
+
+**Joining**
+```{r}
+colnames(mimic3_filtered)
+colnames(mimic4_filtered)
+```
+
+Notice that the variable names are not identical between both, so we had to do some cleaning and harmonization:
+
+* Transform MIMIC-III colnames to lower case
+* Change MIMIC-III ICD9_CODE to icd_code
+* Change MIMIC-IV 
+* Conserve the matching columns
+* Add a dataset variable identifying the origin
+* Row bind both datasets
+
+```{r}
+colnames(mimic3_filtered)<-str_to_lower(colnames(mimic3_filtered))
+colnames(mimic3_filtered)[20]<-"icd_code"
+
+mimic3_filtered$admittime<-strptime(mimic3_filtered$admittime, format = "%Y-%m-%d %H:%M:%S")
+mimic3_filtered$edregtime<-strptime(mimic3_filtered$edregtime, format = "%Y-%m-%d %H:%M:%S")
+
+colnames(mimic4_filtered)[21]<-"age"
+mimic4_filtered$admittime<-strptime(mimic4_filtered$admittime, format = "%Y-%m-%d %H:%M:%S")
+mimic4_filtered$edregtime<-strptime(mimic4_filtered$edregtime, format = "%Y-%m-%d %H:%M:%S")
+
+mimic3_filtered$dataset<-"MIMIC-III"
+mimic4_filtered$dataset<-"MIMIC-IV"
+
+vars_to_keep<-colnames(mimic3_filtered)[colnames(mimic3_filtered)%in%colnames(mimic4_filtered)]
+
+mimic_patients_all<-rbind(mimic3_filtered[,vars_to_keep],
+                          mimic4_filtered[,vars_to_keep])
+
+table(mimic_patients_all$dataset)
+length(unique(mimic_patients_all$subject_id))
+```
+
+### Extraction of laboratory analytes data
+
+Laboratory data table in both MIMIC-III and IV are too big to work with them on memory. For that we read them in chunks to filter the patients selected above. In addition, the files have been downloaded compressed. To reduce computational burden while reading the file in chunks, we decompressed the files first.
+
+#### MIMIC-III
+
+**Not run during knitting**
+```{r eval = FALSE}
+# Unzip the file. Do only once
+# R.utils::gunzip("data/MIMICIII/LABEVENTS.csv.gz")
+
+### Load the files
+mimic3_lab_path<-"data/MIMICIII/LABEVENTS.csv"
+mimic3_lab_header<-read.csv(mimic3_lab_path,
+                             nrows = 1, header = F)
+##header
+mimic3_lab_header
+
+# Function to subset each chunk
+mimic3_filter <- function(x, pos){
+  subset(x, HADM_ID %in% mimic_patients_all$hadm_id)
+}
+
+# Load and filter labs by chunks
+mimic3_lab_sc<-read_csv_chunked(mimic3_lab_path, 
+                 DataFrameCallback$new(mimic3_filter), chunk_size = 50000)
+```
+
+##### add lab item info
+
+**Not run during knitting**
+```{r eval=FALSE}
+### lab items
+mimic3_lab_items<-read.csv("data/MIMICIII/D_LABITEMS.csv.gz")
+
+mimic3_lab_sc<-mimic3_lab_sc%>%
+  select(-ROW_ID)%>%
+  left_join(mimic3_lab_items)%>%
+  select(-ROW_ID)
+```
+
+**Save the data**
+```{r eval=FALSE}
+saveRDS(mimic3_lab_sc, file = "data/MIMICIII/mimic3_lab_sc.Rds")
+```
+
+#### MIMIC-IV
+
+**Not run during knitting**
+```{r eval = FALSE}
+# Unzip the file. Do only once
+# R.utils::gunzip("data/MIMICIV/labevents.csv.gz")
+
+### Load the files
+mimic4_lab_path<-"data/MIMICIV/labevents.csv"
+mimic4_lab_header<-read.csv(mimic4_lab_path,
+                             nrows = 1, header = F)
+##header
+mimic4_lab_header
+
+# Function to subset each chunk
+mimic4_filter <- function(x, pos){
+  subset(x, hadm_id %in% mimic_patients_all$hadm_id)
+}
+
+# Load and filter labs by chunks
+mimic4_lab_sc<-read_csv_chunked(mimic4_lab_path, 
+                 DataFrameCallback$new(mimic4_filter), chunk_size = 50000)
+```
+
+##### add lab item info
+**Not run during knitting**
+```{r eval=FALSE}
+### lab items
+mimic4_lab_items<-read.csv("data/MIMICIV/d_labitems.csv.gz")
+
+mimic4_lab_sc<-mimic4_lab_sc%>%
+  left_join(mimic4_lab_items)
+```
+
+**Save the data**
+```{r eval=FALSE}
+saveRDS(mimic4_lab_sc, file = "data/MIMICIV/mimic4_lab_sc.Rds")
+```
+
+#### Join both MIMIC lab data
+
+```{r}
+## read lab information
+mimic3_lab_sc<-readRDS("data/MIMICIII/mimic3_lab_sc.Rds")
+mimic3_lab_items<-read.csv("data/MIMICIII/D_LABITEMS.csv.gz")
+
+colnames(mimic3_lab_items)<-str_to_lower(colnames(mimic3_lab_items))
+mimic3_lab_items$row_id<-NULL
+
+mimic4_lab_sc<-readRDS("data/MIMICIV/mimic4_lab_sc.Rds")
+mimic4_lab_items<-read.csv("data/MIMICIV/d_labitems.csv.gz")
+
+## Transform mimic III column names to lowercase
+colnames(mimic3_lab_sc)<-str_to_lower(colnames(mimic3_lab_sc))
+
+## Add dataset origin variable
+mimic3_lab_sc$dataset<-"MIMIC-III"
+mimic4_lab_sc$dataset<-"MIMIC-IV"
+
+## Keep variables that are common between both dataset
+var_labs_to_keep<-colnames(mimic3_lab_sc)[colnames(mimic3_lab_sc)%in%colnames(mimic4_lab_sc)]
+
+#Join both datasets
+mimic_labs_all<-rbind(mimic3_lab_sc[,var_labs_to_keep],
+                      mimic4_lab_sc[,var_labs_to_keep])
+
+mimic_labs_all$subject_id<-as.character(mimic_labs_all$subject_id)
+```
+
+The time for each item in MIMIC are shifted. We calculated the time of values respect to hospital arrival. For that, we need to join the labs data with the patient data.
+
+```{r}
+mimic_labs_all<-mimic_patients_all%>%
+  select(subject_id, hadm_id, edregtime)%>%
+  right_join(mimic_labs_all)%>%
+  mutate(charttime = strptime(charttime, format = "%Y-%m-%d %H:%M:%S"), 
+         time_minutes = as.numeric(difftime(charttime,edregtime, units = "min")))
+```
+
+
+## Extract patient characteristics
+
+The following section of the code harmonize the selected patient characteristics between both MIMIC datasets.
+
+There are differences in the coding of some variables across datasets. We recoded insurance and ethnicity to match. For ethnicity, we collapsed to the modeling set of levels from MIMIC-IV, for insurance, it is not clear whether *Other* in IV includes *Private and self Pay*. We collapsed/recoded as following: Government -> other government, Private, self Pay -> Other 
+
+```{r}
+mimic_patients_all<-mimic_patients_all%>%
+  mutate(
+    ethnicity = case_when(
+      str_detect(ethnicity, "ASIAN")~"ASIAN",
+      str_detect(ethnicity, "BLACK")~"BLACK/AFRICAN AMERICAN",
+      str_detect(ethnicity, "HISPANIC")~"HISPANIC/LATINO",
+      str_detect(ethnicity, "DECLINED")~NA_character_,
+      str_detect(ethnicity, "UNKNOWN|Unknown")~NA_character_,
+      is.na(ethnicity)~NA_character_,
+      str_detect(ethnicity, "WHITE")~"WHITE",
+      str_detect(ethnicity, "OTHER")~"OTHER",
+      str_detect(ethnicity, "MULTI")~"MULTI RACE/ETHNICITY"),
+    insurance = case_when(
+      str_detect(insurance, "Gov")~"Other Government", 
+      str_detect(insurance, "Private")~"Other", 
+      str_detect(insurance, "Self Pay")~"Other",
+      TRUE~insurance)
+  )
+```
+
+For encounter characteristics, we will include: admission type, admission location, discharge location. There were clear differences in the names of the levels between datasets. We harmonized these to the minimal information possible.
+
+```{r}
+mimic_patients_all<-mimic_patients_all%>%
+  mutate(
+    admission_type = case_when(
+      str_detect(admission_type, "EMER")~"EMERGENCY",
+      str_detect(admission_type, "EU")~"EMERGENCY",
+      str_detect(admission_type, "OBSER")~"OBSERVATION",
+      str_detect(admission_type, "ELECTIVE")~"ELECTIVE",
+      str_detect(admission_type, "SURGICAL")~"ELECTIVE",
+      TRUE~admission_type),
+    admission_location = case_when(
+      str_detect(admission_location, "CLINIC")~"CLINIC REFERRAL", 
+      str_detect(admission_location, "PHYS")~"CLINIC REFERRAL", 
+      str_detect(admission_location, "EMER")~"EMERGENCY ROOM",
+      str_detect(admission_location, "INFO")~NA_character_,
+      str_detect(admission_location, "TRANS.+HOSP")~"TRANSFER FROM HOSP",
+      str_detect(admission_location, "SKILLED")~"TRANSFER FROM SNF",
+      TRUE~admission_location),
+    discharge_location = case_when(
+      discharge_location==""~NA_character_,
+      str_detect(discharge_location, "DIED")~"DIED",
+      str_detect(discharge_location, "DEAD")~"DIED",
+      str_detect(discharge_location, "DISC-TRAN")~"TRANSFER TO OTHER",
+      str_detect(discharge_location, "OTHER")~"TRANSFER TO OTHER",
+      str_detect(discharge_location, "PSYCH")~"TRANSFER TO OTHER",
+      str_detect(discharge_location, "^HOME")~"HOME/HOSPICE",
+      str_detect(discharge_location, "HOSPICE")~"HOME/HOSPICE",
+      str_detect(discharge_location, "REHAB")~"REHAB",
+      str_detect(discharge_location, "SKILLED")~"SKILLED NURSING FACILITY",
+      str_detect(discharge_location, "SNF")~"SKILLED NURSING FACILITY",
+      str_detect(discharge_location, "ASSISTED LIVING")~"SKILLED NURSING FACILITY",
+      str_detect(discharge_location, "ADVI")~"AGAINST ADVICE",
+      str_detect(discharge_location, "LONG TERM")~"LONG TERM CARE",
+      str_detect(discharge_location, "SHORT TERM")~"SHORT TERM CARE",
+      TRUE~discharge_location)
+    )
+```
+
+#### Filter of patients from Emergency only
+
+With the variables harmonized, we filtered patients admitted to the hospital by emergency.
+
+```{r}
+mimic_patients_all<-mimic_patients_all%>%
+  filter(admission_type=="EMERGENCY")
+
+table(mimic_patients_all$dataset)
+```
+
+#### Cohort definition
+
+We defined three different cohorts depending on their ICD codes. We distinguish between:
+
+* `Spine Trauma`. Spine trauma with no mention of SCI
+* `SCI_Fracture`. SCI with spine trauma
+* `SCI_noFracture`. SCI with no mention of spine trauma
+
+```{r}
+### Determine patient group
+icd_fracture<-"\\b805|\\bS120|\\bS121|\\bS122|\\bS123|\\bS124|\\bS125|\\bS126|\\bS128|\\bS129|\\bS220|\\bS320|\\bS321"
+
+icd_sci<-"\\bS141|\\bS140|\\bS142|\\bS240|\\bS241|\\bS242|\\bS340|\\bS341|\\bS342|\\bS343"
+
+mimic_patients_all<-mimic_patients_all%>%
+  group_by(subject_id)%>%
+  mutate(cohort_group=case_when(
+    str_detect(icd_code, "\\b952|\\b953")&
+      !str_detect(icd_code, paste0(icd_fracture,"|\\b806"))~"SCI_noFracture",
+    str_detect(icd_code, paste0(icd_sci,"|\\b952|\\b953"))&
+      str_detect(icd_code, paste0(icd_fracture,"|\\b806"))~"SCI_Fracture",
+    str_detect(icd_code, "\\b806")~"SCI_Fracture",
+    str_detect(icd_code, icd_sci)&
+      !str_detect(icd_code, paste0(icd_fracture,"|\\b806"))~"SCI_noFracture",
+    str_detect(icd_code, icd_fracture)&
+      !str_detect(icd_code, paste0(icd_sci,"|\\b952|\\b953|\\b806"))~"Spine Trauma",
+    TRUE~"test"
+  ))
+
+table(mimic_patients_all$cohort_group)
+```
+
+## Analyte Exploratory Data Analysis (EDA)
+
+### Lab analytes summaries
+
+One issue we observed during the exploration of the data is that not all patients has data for all lab assay, and that the time for those assays after injury vary. In order to have a better sense of the data, we are going to summarize it.
+
+    Note on LOINC codes. LOINC stands for Logical Observation Identifiers Names and Codes, and it is a clinical terminology standard for laboratory test and results, which allow us to now detailed information of the extracted lab test.
+    
+```{r}
+## Filter labs data based on cohort selection
+mimic_labs_all<-mimic_labs_all%>%
+  filter(hadm_id%in%mimic_patients_all$hadm_id)
+
+## summaries
+summary_labs<-mimic_labs_all%>%
+  mutate(value = as.numeric(value),
+         hadm_id = as.character(hadm_id))%>%
+  filter(!is.na(value))%>%
+  group_by(itemid, hadm_id)%>%
+  summarise(time_points=n())%>%
+  group_by(itemid)%>%
+  summarise(mean_time_points=mean(time_points),max_time_points = max(time_points), n_patients=n())%>%
+  mutate(per_patients=n_patients/length(unique(mimic_labs_all$hadm_id)))%>%
+  left_join(mimic3_lab_items)%>%
+  left_join(mimic4_lab_items)
+
+summary_labs%>%
+  .[complete.cases(.),]%>%
+  arrange(desc(per_patients))%>%
+  select(itemid,loinc_code, label, fluid, category, per_patients)%>%
+  kbl(digits = 2)%>%
+  kable_paper()%>%
+  save_kable(file = "tables/summary_labs.html")
+
+addmargins(table(summary_labs$fluid, summary_labs$category, useNA = "always"))%>%
+  kbl()%>%
+  kable_paper()
+```
+
+**Summary**
+
+We see from the table that a lot of lab assays have been performed in very little number of patients. For consistency across datasets and proof of concept, we selected assays that are found across most patients. 
+
+**Most common 20 assays**
+```{r}
+summary_labs%>%
+  arrange(desc(per_patients))%>%
+  head(n=20)%>%
+  kableExtra::kbl()%>%
+  kable_classic()
+```
+
+Let's take a look at the most common analytes with some spaghetti plots and density plots. We define the set of the 20 most common analytes as the *modeling set*
+
+```{r}
+item_id<-summary_labs%>%
+  arrange(desc(per_patients))%>%
+  head(n=20)%>%
+  select(itemid)%>%
+  unlist()
+
+## define the modeling set
+mimic_modeling_set<-mimic_labs_all%>%
+  filter(itemid%in%item_id)%>%
+  filter(subject_id%in%mimic_patients_all$subject_id)
+```
+
+The time scale for MIMIC is in minutes. To have a better idea of the time interval between measures for each analyte, we summarize the time component.
+
+```{r}
+## Summary table for the time frequency
+time_frequency<-mimic_modeling_set%>%
+  group_by(subject_id, label)%>%
+  summarise(time_freq = mean(abs(diff(time_minutes)), na.rm = T))%>%
+  group_by(label)%>%
+  summarise(min = min(time_freq, na.rm = T),
+            Q1 = quantile(time_freq, probs = 0.25, na.rm = T),
+            median = median(time_freq, na.rm = T),
+            Q3 = quantile(time_freq, probs = 0.75, na.rm = T),
+            max = max(time_freq, na.rm = T))
+
+time_frequency%>%
+  kableExtra::kbl()%>%
+  kable_classic()
+```
+
+We work the rest of this analysis in fractions of days instead of minutes
+
+```{r}
+mimic_modeling_set%>%
+  ggplot(aes(floor(time_minutes/1440), valuenum))+
+  geom_line(aes(group=subject_id))+
+  facet_wrap(~label, scales = "free")+
+  xlab("Days from arrival")+
+  ylab("Analyte value")+
+  theme_minimal()
+
+ggsave("figures/modeling_set_labs_raw.png", height = 6, width = 10)
+```
+
+This next chunk takes the count of the number of patients with data per day
+
+```{r}
+mimic_modeling_set%>%
+  mutate(time_days = floor(time_minutes/1440))%>%
+  group_by(time_days, label, subject_id)%>%
+  summarise(mean_values = mean (valuenum, na.rm = T))%>%
+  group_by(time_days, label)%>%
+  summarise(count = n())%>%
+  filter(time_days>=0)%>%
+  ggplot(aes(time_days, log(count)))+
+  geom_line()+
+  facet_wrap(~label, scales = "free")+
+  xlab("Days from arrival")+
+  ylab("Number of subject (log scale)")+
+  theme_minimal()
+
+ggsave("figures/modeling_set_labs_log_subjects.png", height = 6, width = 10)
+```
+
+Marginal densities of the modeling set
+
+```{r}
+mimic_modeling_set%>%
+  ggplot(aes(valuenum))+
+  geom_density()+
+  facet_wrap(~label, scales = "free")+
+  xlab("Analyte value")+
+  theme_minimal()
+
+ggsave("figures/modeling_set_labs_density.png", height = 6, width = 10)
+```
+
+### Analyte data cleaning
+
+We can see the presence of potential outliers as well as patients that have data for a long period of time. 
+
+To deal with outliers that may be indicative of wrong readings, we filter all the extreme values (unwanted data, anomalies). Since we don't want to take potential real values away even if they are extreme, we apply a very permissive filter. we could use $1.5*IQR$ inner fence method suggested by John Tukey (also known as the Tukey's rule), however, it may be quite restrictive in this case, specially with skewed distributions (Seo 2006). There are some functionalities in R to clean time-series data (see fpp2) package, however, this assume equispaced observations in time, which is not the case here. Therefore, for simplicity we apply an heuristic filter followings Tukey's rule for each subject, but using the deciles instead of the quantiles.
+
+    Note. Anomaly detection in temporal data is a big topic that we do not explore here
+
+* The first filter we consider is to eliminate any value of 0 which makes little sense in these variables.
+
+* Then filter extreme values with quantile(prob = 0.1) - 1.5IQR as lower cut off and quantile(prob = 0.9) + 1.5IQR
+
+```{r}
+mimic_modeling_set<-mimic_modeling_set%>%
+  filter(valuenum>0, time_minutes>=0)
+
+## custom function for detecting and deleting extreme values
+extreme_deletion<-function(x, prob = c(0.2,0.8), factor = 1.5){
+  down<-quantile(x, prob[1])-factor*IQR(x)
+  up<-quantile(x, prob[2])+factor*IQR(x)
+  
+  x<-ifelse(x>up, NA,x)
+  x<-ifelse(x<down, NA,x)
+  
+  return(x)
+}
+
+mimic_modeling_set<-mimic_modeling_set%>%
+  arrange(time_minutes)%>%
+  group_by(label, subject_id)%>%
+  mutate(value_clean = extreme_deletion(valuenum),
+         out = ifelse(is.na(value_clean), 1,0))%>%
+  filter(out == 0)
+
+```
+
+### Selecting time window for analysis
+
+Let's see the distribution of discharge time
+
+```{r}
+mimic_patients_all<-mimic_patients_all%>%
+  mutate(dischtime=strptime(dischtime, format = "%Y-%m-%d %H:%M:%S"),
+         time_disch_days=as.numeric(difftime(dischtime, admittime, units = "days")))
+
+los_plot_a<-ggplot(mimic_patients_all, aes(time_disch_days))+
+  geom_histogram()+
+  ylab("Lenght of stay (days)")+
+  theme_minimal()
+
+los_plot_b<-mimic_modeling_set%>%
+  group_by(subject_id, label)%>%
+  summarise(count = n())%>%
+  ggplot(aes(label, log(count)))+
+  xlab(NULL)+
+  ylab("Number of timepoints\nper subject (log scale)")+
+  geom_boxplot()+
+  coord_flip()+
+  theme_minimal()
+
+los_plot_c<-mimic_modeling_set%>%
+  group_by(subject_id, label)%>%
+  summarise(count = n())%>%
+  ggplot(aes(label, count))+
+  xlab(NULL)+
+  ylab("Number of timepoints\nper subject")+
+  geom_boxplot()+
+  coord_flip()+
+  theme_minimal()+
+  ylim(0, 50)
+
+fig_los<-los_plot_a+los_plot_b+los_plot_c
+fig_los<-fig_los+plot_annotation(tag_levels = "a")
+fig_los
+
+ggsave("figures/modeling_set_los.png", height = 3.5, width = 10)
+
+```
+
+Given the above data, we analyzed data no longer than 21 days from hospital arrival (3 first weeks).
+
+```{r}
+mimic_modeling_set<-mimic_modeling_set%>%
+  mutate(time_days=time_minutes/1440)%>%
+  filter(time_days<=21)
+```
+
+In addition, we only considered subjects with at least 3 measures
+
+```{r}
+time_mimic_labs_sum<-mimic_modeling_set%>%
+  group_by(subject_id, label)%>%
+  summarise(n_times=n())
+
+mimic_labs_hadm_filter<-time_mimic_labs_sum%>%
+  filter(n_times>2)
+
+## Filter based on subjects with more than 2 timepoints
+mimic_modeling_set_f<-mimic_modeling_set%>%
+  filter(subject_id%in%unique(mimic_labs_hadm_filter$subject_id))
+```
+
+**Clean Plots**
+```{r}
+## Spaghetti plot
+mimic_modeling_set_f%>%
+  ggplot(aes(time_days, value_clean))+
+  geom_line(aes(group=subject_id))+
+  facet_wrap(~label, scales = "free")+
+  xlab("Days from arrival")+
+  ylab("Analyte value")+
+  theme_minimal()
+
+ggsave("figures/modeling_set_labs_clean.png", height = 6, width = 10)
+
+## Marginal density
+mimic_modeling_set_f%>%
+  ggplot(aes(value_clean))+
+  geom_density()+
+  facet_wrap(~label, scales = "free")+
+  xlab("Analyte value")+
+  theme_minimal()
+
+ggsave("figures/modeling_set_labs_clean_density.png", height = 6, width = 10)
+```
+
+## Final cohort {.tabset}
+
+```{r}
+mimic_patients_all<-mimic_patients_all%>%
+  filter(subject_id%in%unique(mimic_labs_hadm_filter$subject_id))
+
+length(unique(mimic_patients_all$subject_id))
+```
+
+```{r}
+## Custom function for Exact fisher analysis with p.value simulation
+my_fisher<-function(data,variable, by, conf.level, ...){
+    data <- data[c(variable, by)] %>% dplyr::filter(complete.cases(.))
+  fisher.test(data[[variable]], factor(data[[by]]), simulate.p.value = T) %>%
+  broom::tidy()
+}
+```
+
+### Demographics table
+```{r}
+mimic_patients_all%>%
+  ungroup()%>%
+  select(age, gender, insurance, ethnicity, dataset, cohort_group)%>%
+  tbl_summary(by = cohort_group)%>%
+  add_p(test = list(all_categorical() ~ "my_fisher"))%>%
+  add_q()
+```
+
+### Stay characteristics
+```{r}
+mimic_patients_all%>%
+  ungroup()%>%
+  select(time_disch_days, admission_location, discharge_location, n_codes,cohort_group)%>%
+  mutate(n_codes = as.numeric(n_codes))%>%
+  tbl_summary(by = cohort_group)%>%
+  add_p(test = list(all_categorical() ~ "my_fisher"))%>%
+  add_q()
+```
+
+# Modeling
+
+```{r}
+mimic_modeling_set_f<-mimic_modeling_set_f%>%
+  ungroup()%>%
+  filter(subject_id%in%unique(mimic_patients_all$subject_id))%>%
+  mutate(subject_id_num=as.numeric(as.factor(subject_id)))
+
+saveRDS(mimic_modeling_set_f, "data/mimic_modeling_set_f.Rds")
+```
+
+### LCGA: Initial exploratory modeling
+
+The following script runs the modeling for the modeling set of analytes. Given that this is exploratory to have an initial sense of the trajectories, we will use LCGA (no random effect). This process is computationally costly. The function helps with running all the code for a single analyte. It iterates through different models for the selection of number of classes and polynomial order. For each analyte would perform a linear search for the number of components (ng = {1, 2, 3, 4, 5}) and a linear search for the polynomial order (1, 2, 3, 4).
+
+The results for each model are saved in the *./models/* folder as `.Rds` files.
+
+    Note that the data for each model is not saved to prevent the data to be accessible through the .Rds files. These files contain all the elements of the fitted models.
+
+**Not run on knitting time**
+```{r, eval=FALSE}
+mimic_modeling_set_f<-readRDS("mimic_modeling_set_f.Rds")
+modeling_set_list<-split(mimic_modeling_set_f,mimic_modeling_set_f$label)
+
+## Helper function
+my_LCGA<-function(dataset, G=2:5){
+  
+  dataset<-as.data.frame(dataset)
+  var_name<-dataset$label[1]
+  
+  ### initial 1 class model
+  cat("Model: m1p1", "\n")
+  
+  file<-paste0("models/expLCGA_",var_name,"_linear_m1p1.Rds")
+  if(!file%in%model_files){
+    m1 <- lcmm(value_clean ~ time_days,random =~ 1, 
+               subject = 'subject_id_num', data = dataset,maxiter = 200)
+    
+    saveRDS(m1, file = file)
+  } else{
+    m1<-readRDS(file)
+  }
+  
+  file<-paste0("models/expLCGA_",var_name,"_beta_m1p1.Rds")
+  if(!file%in%model_files){
+    m1_beta <- lcmm(value_clean ~ time_days,random =~ 1, 
+                    subject = 'subject_id_num',
+                  data = dataset, link="beta",maxiter = 200)
+  
+    saveRDS(m1_beta, file = file)
+  }else{
+    m1_beta<-readRDS(file)
+  }
+  
+  file<-paste0("models/expLCGA_",var_name,"_spline_m1p1.Rds")
+  if(!file%in%model_files){
+    m1_splines <- lcmm(value_clean ~ time_days,random =~ 1, 
+                       subject = 'subject_id_num',
+                       data = dataset, link="3-quant-splines",maxiter = 200)
+    
+    saveRDS(m1_splines, file = file)
+  }else{
+    m1_splines<-readRDS(file)
+  }
+  
+  cat("Model: m1p2", "\n")
+  
+  file<-paste0("models/expLCGA_",var_name,"_linear_m1p2.Rds")
+  if(!file%in%model_files){
+    m1p2 <- lcmm(value_clean ~ poly(time_days, 2),random =~ 1, 
+                 subject = 'subject_id_num', data = dataset,maxiter = 200)
+    
+    saveRDS(m1p2, file = file)
+  }else{
+    m1p2<-readRDS(file)
+  }
+  
+  file<-paste0("models/expLCGA_",var_name,"_beta_m1p2.Rds")
+  if(!file%in%model_files){
+    m1p2_beta <- lcmm(value_clean ~ poly(time_days, 2),random =~ 1, 
+                 subject = 'subject_id_num', data = dataset, 
+                 link = "beta",maxiter = 200)
+    
+    saveRDS(m1p2_beta, file = file)
+  }else{
+    m1p2_beta<-readRDS(file)
+  }
+  
+  file<-paste0("models/expLCGA_",var_name,"_splines_m1p2.Rds")
+  if(!file%in%model_files){
+    m1p2_splines <- lcmm(value_clean ~ poly(time_days, 2),random =~ 1, 
+                 subject = 'subject_id_num', data = dataset, 
+                 link = "3-quant-splines",maxiter = 200)
+    
+    saveRDS(m1p2_splines, file = file)
+  }else{
+    m1p2_splines<-readRDS(file)
+  }
+
+  cat("Model: m1p3", "\n")
+  
+  file<-paste0("models/expLCGA_",var_name,"_linear_m1p3.Rds")
+  if(!file%in%model_files){
+    m1p3 <- lcmm(value_clean ~ poly(time_days, 3),random =~ 1, 
+               subject = 'subject_id_num', data = dataset,maxiter = 200)
+    
+    saveRDS(m1p3, file = file)
+  }else{
+    m1p3<-readRDS(file)
+  }
+  
+  file<-paste0("models/expLCGA_",var_name,"_beta_m1p3.Rds")
+  if(!file%in%model_files){
+    m1p3_beta <- lcmm(value_clean ~ poly(time_days, 3),random =~ 1, 
+               subject = 'subject_id_num', data = dataset, 
+               link = "beta",maxiter = 200)
+    
+    saveRDS(m1p3_beta, file = file)
+  }else{
+    m1p3_beta<-readRDS(file)
+  }
+  
+  file<-paste0("models/expLCGA_",var_name,"_splines_m1p3.Rds")
+  if(!file%in%model_files){
+    m1p3_splines <- lcmm(value_clean ~ poly(time_days, 3),random =~ 1, 
+               subject = 'subject_id_num', data = dataset, 
+               link = "3-quant-splines",maxiter = 200)
+    
+    saveRDS(m1p3_splines, file = file)
+  }else{
+    m1p3_splines<-readRDS(file)
+  }
+
+
+  for (k in G){
+    cat("Model: k",k,"p1", "\n")
+    
+    file<-paste0("models/expLCGA_",var_name,"_linear_k",k,"p1.Rds")
+    if(!file%in%model_files){
+      temp_k <- lcmm(value_clean ~ time_days,random =~ 1, 
+                     subject = 'subject_id_num', 
+               data = dataset, mixture = ~time_days, 
+               ng = k, B = m1,maxiter = 200)
+      
+      saveRDS(temp_k, file = file)
+    }
+    
+    file<-paste0("models/expLCGA_",var_name,"_beta_k",k,"p1.Rds")
+    if(!file%in%model_files){
+      temp_k_beta <- lcmm(value_clean ~ time_days,random =~ 1, 
+                          subject = 'subject_id_num',
+                          data = dataset, mixture = ~time_days, 
+                          ng = k, B = m1_beta, link = "beta",maxiter = 200)
+      
+      saveRDS(temp_k_beta, file = file)
+    }
+    
+    file<-paste0("models/expLCGA_",var_name,"_splines_k",k,"p1.Rds")
+    if(!file%in%model_files){
+      temp_k_splines <- lcmm(value_clean ~ time_days,random =~ 1, 
+                             subject = 'subject_id_num', 
+                             link = "3-quant-splines",
+               data = dataset, mixture = ~time_days, ng = k, 
+               B = m1_splines,maxiter = 200)
+      
+      saveRDS(temp_k_splines, file = file)
+    }
+    
+    cat("Model: k",k,"p2", "\n")
+    
+    file<-paste0("models/expLCGA_",var_name,"_linear_k",k,"p2.Rds")
+    if(!file%in%model_files){
+      temp_kp2 <- lcmm(value_clean ~ poly(time_days, 2),random =~ 1, 
+                                subject = 'subject_id_num', 
+               data = dataset, mixture = ~poly(time_days, 2), 
+               ng = k, B = m1p2,maxiter = 200)
+      
+      saveRDS(temp_kp2, file = file)
+    }
+    
+    file<-paste0("models/expLCGA_",var_name,"_beta_k",k,"p2.Rds")
+    if(!file%in%model_files){
+      temp_kp2_beta <- lcmm(value_clean ~ poly(time_days, 2),random =~ 1, 
+                                subject = 'subject_id_num', 
+               data = dataset, mixture = ~poly(time_days, 2), 
+               ng = k, B = m1p2_beta, link = "beta",maxiter = 200)
+      
+      saveRDS(temp_kp2_beta, file = file)
+    }
+    
+    file <- paste0("models/expLCGA_",var_name,"_splines_k",k,"p2.Rds")
+    if(!file%in%model_files){
+      temp_kp2_splines <- lcmm(value_clean ~ poly(time_days, 2),random =~ 1, 
+                                subject = 'subject_id_num', 
+               data = dataset, mixture = ~poly(time_days, 2), 
+               ng = k, B = m1p2_splines, link = "3-quant-splines",
+               maxiter = 200)
+      
+      saveRDS(temp_kp2_splines, file = file)
+    }
+    
+    cat("Model: k",k,"p3", "\n")
+    
+    file<-paste0("models/expLCGA_",var_name,"_linear_k",k,"p3.Rds")
+    if(!file%in%model_files){
+      temp_kp3 <- lcmm(value_clean ~ poly(time_days, 3),
+                                  random =~ 1, subject = 'subject_id_num', 
+               data = dataset,
+               mixture = ~poly(time_days, 3),ng = k, 
+               B = m1p3,maxiter = 200)
+      
+      saveRDS(temp_kp3, file = file)
+    }
+    
+    file<-paste0("models/expLCGA_",var_name,"_beta_k",k,"p3.Rds")
+    if(!file%in%model_files){
+      temp_kp3_beta <- lcmm(value_clean ~ poly(time_days, 3),
+                                  random =~ 1, subject = 'subject_id_num', 
+               data = dataset, link = "beta",
+               mixture = ~poly(time_days, 3),ng = k, 
+               B = m1p3_beta,maxiter = 200)
+      
+      saveRDS(temp_kp3_beta, file = file)
+    }
+    
+    file<-paste0("models/expLCGA_",var_name,"_splines_k",k,"p3.Rds")
+    if(!file%in%model_files){
+      temp_kp3_splines <- lcmm(value_clean ~ poly(time_days, 3),
+                                  random =~ 1, subject = 'subject_id_num', 
+               data = dataset, link = "3-quant-splines",
+               mixture = ~poly(time_days, 3),ng = k, 
+               B = m1p3_splines,maxiter = 200)
+      
+      saveRDS(temp_kp3_splines, file = file)
+    }
+  }
+}
+
+
+## Iterate through all the analytes by parallelyzing
+cl<-makeCluster(15)
+model_files<-list.files("models/", full.names = T)
+clusterExport(cl, c("my_LCGA", "modeling_set_list", "model_files"))
+clusterEvalQ(cl, library(lcmm))
+
+parLapply(cl, 1:20, fun = function(a){
+  my_LCGA(modeling_set_list[[a]])
+})
+
+stopCluster(cl)
+```
+
+**Read the files and process them**
+```{r, eval=FALSE}
+model_files<-list.files("models/", full.names = T)
+
+lab_names<-unique(str_split(model_files, "_", simplify = T)[,2])
+models_list<-list()
+
+## Read all the models in a list of lists
+for (l in lab_names){
+  temp_list<-list()
+  for (f in model_files){
+    if (str_split(f, "_", simplify = T)[,2]==l){
+      temp_list[[f]]<-readRDS(f)
+    }
+  }
+
+  models_list[[l]]<-temp_list
+}
+
+saveRDS(models_list, "models/models_list.Rds")
+```
+
+The following function extracts the model selection metrics for each analyte
+
+```{r}
+model_metrics<-function(lab_name, models_list){
+  
+    lab_list<-models_list[[lab_name]]
+    
+    table_m_selection_l<-mapply(function(x, i){
+      temp_x<-as.data.frame(summarytable(x, which = c("G", "conv", "npm", "AIC", 
+                                        "BIC", "entropy","ICL", "%class")))
+      
+      for (c in c("%class2", "%class3", "%class4", "%class5")){
+        if (!c%in%colnames(temp_x)){
+          temp_x[,c]<-NA
+        }
+      }
+      
+      if( temp_x[1,]$G != 1){
+        pprob<-x$pprob
+        pprob$PPA<-apply(pprob[,3:ncol(pprob)], 1, max)
+        temp_x$APPA = mean(pprob$PPA)
+      }else{
+        temp_x$APPA = 1
+      }
+      
+      
+      modeltype<-str_split(i, "_", simplify = T)[,4]
+      
+      temp_x$analyte<-lab_name
+      temp_x$linktype<-str_split(i, "_", simplify = T)[,3]
+      temp_x$modeltype<-str_sub(modeltype, 1, 4)
+      temp_x$poly = str_sub(modeltype, 3,4)
+      
+      temp_x
+      
+    }, lab_list, names(lab_list), SIMPLIFY = F)
+    
+    
+    table_m_selection<-bind_rows(table_m_selection_l)
+    
+    table_m_selection<-table_m_selection%>%
+      mutate(linktype = ifelse(linktype == "splines", "spline", linktype),
+             linktype = factor(linktype, levels = c("linear", "beta", "spline")))
+    
+    table_m_selection_plot<-table_m_selection%>%
+      filter(conv %in% c(1,2))%>%
+      select(G, BIC, ICL, APPA, poly, linktype)%>%
+      pivot_longer(-c(G, poly, linktype))%>%
+      mutate(name = factor(name, levels = c("BIC", "ICL", "APPA")))
+      
+   figure<-ggplot(table_m_selection_plot, aes(G, value, color = poly,
+                                       shape = linktype, linetype = linktype))+
+      geom_point()+
+      geom_line()+
+      facet_wrap(~name, scales = "free")+
+      xlab("Number of classes")+
+      ylab(NULL)+
+      theme_minimal()+
+      ggtitle(unique(table_m_selection$analyte))
+    
+    return(list("lab_name" = lab_name, "table"= table_m_selection, 
+                "fig" = figure))
+}
+```
+
+The following chunks extract the model metrics and save the LCGA plots
+
+```{r, eval=FALSE}
+# models_list<-readRDS("data/models_list.Rds")
+
+model_selection_list<-list()
+for (l in lab_names){
+  model_selection_list[[l]]<-model_metrics(l, models_list)
+}
+
+```
+
+```{r, eval=FALSE}
+LCGA_plots<-lapply(model_selection_list, function(x){
+  ggsave(plot = x$fig, paste0("figures/LCGA fit plots/LCGA_", x$lab_name, ".png"), width = 8, height = 2.6)
+  x$fig
+})
+
+# saveRDS(LCGA_plots, "figures/LCGA_plots.Rds")
+```
+
+#### LCGA summaries
+
+**Summary Plots**
+```{r, eval=FALSE}
+hematology_var<-summary_labs%>%filter(category == "Hematology", fluid =="Blood",
+                                      label %in%lab_names)%>%.$label
+
+chemistry_var<-summary_labs%>%filter(category == "Chemistry", fluid =="Blood",
+                                      label %in% lab_names)%>%
+  .$label
+
+LCGA_fig_hem<-wrap_plots(LCGA_plots[hematology_var])+plot_layout(guides = "collect",ncol = 2)+plot_annotation(tag_levels = "a")
+
+ggsave(plot = LCGA_fig_hem, "figures/LCGA_fig_hem.png", width = 12, height = 12)
+
+LCGA_fig_chem<-wrap_plots(LCGA_plots[chemistry_var])+plot_layout(guides = "collect",ncol = 2)+plot_annotation(tag_levels = "a")
+
+ggsave(plot = LCGA_fig_chem, "figures/LCGA_fig_chem.png", width = 12, height = 14)
+```
+
+**Summary Tables**
+```{r, eval=FALSE}
+lapply(model_selection_list, function(x){
+  x$table%>%
+    arrange(G, linktype,npm, poly)%>%
+    select(G, conv, linktype,npm, poly, BIC, ICL, APPA, `%class1`, `%class2`,
+           `%class3`, `%class4`, `%class5`)%>%
+    rowwise()%>%
+    mutate(across(.cols = c("BIC", "ICL", "APPA", "%class1", "%class2",
+           "%class3", "%class4", "%class5"), .fns = function(x){
+             if(!conv%in%c(1,2)) NA else x
+           }))%>%
+    select(-conv)%>%
+    kableExtra::kbl(row.names = F,digits = 2)%>%
+    kable_styling(full_width = F)%>%
+    kable_classic()%>%
+    kableExtra::save_kable(file = paste0("tables/LCGA fit tables/LCGA_", 
+                                         x$lab_name, ".html"))
+})
+```
+
+### GMM: model search
+
+This section reads the selected model parameters from the LCGA exploration and fit selected GMM models. As before, this is computationally expensive and was done through paralellization.
+
+```{r}
+GMM_param<-read.csv("GMM_param.csv")
+colnames(GMM_param)[1]<-"analyte"
+
+my_GMM<-function(analyte, link, k, d){
+  
+  ## Custom function for the fitting of the GMM models based on the provided parameters
+  ## @ analyte: string with the name of the analyte
+  ## @ link: string with the name of the link function
+  ## @ k: number of classes to fit
+  ## @ d: degree of the polynomial for the time trend
+  
+  # analyte<-"Glucose"
+  dataset<-as.data.frame(modeling_set_list[[analyte]])
+  
+  file<-paste0("models_GMM/GMM_",analyte,"_", link, "_m",k,"p",d,".Rds")
+  
+  if (d == 1){
+    model_form<-"value_clean ~ time_days"
+    random<-"~ time_days"
+  }else{
+    model_form<-paste0("value_clean ~ splines::ns(time_days,",d,")")
+    random<-paste0("~ splines::ns(time_days,",d,")")
+  }
+  
+  if (k == 1){
+      if(!file%in%model_files){
+        
+        sink("test.txt",append = T)
+          cat(Sys.time(),analyte, link, k, d,"\n")
+        sink()
+  
+        m1 <- lcmm(as.formula(model_form),random =as.formula(random), 
+                   subject = 'subject_id_num', data = dataset,link = link,
+                   maxiter = 2000)
+      
+              saveRDS(m1, file = file)
+      }
+  }else{
+
+    
+    error<-try(
+      m1<-readRDS(paste0("models_GMM/GMM_",analyte,"_", 
+                         link, "_m1p",d,".Rds"))
+    )
+    
+    if (class(error) == "try_error"){
+        sink("test.txt",append = T)
+          cat(Sys.time(), analyte, link, k, d,"\n")
+        sink()
+    }
+    
+    if(!file%in%model_files){
+      
+        sink("test.txt",append = T)
+          cat(Sys.time(), analyte, link, k, d,"\n")
+        sink()
+        
+        m2 <- lcmm(as.formula(model_form),random =as.formula(random), 
+                   subject = 'subject_id_num', data = dataset,link = link,
+                   ng =k, mixture = as.formula(random), B = m1, 
+                   maxiter = 2000)
+      
+              saveRDS(m2, file = file)
+      }
+  }
+}
+```
+
+**Not run during Knitting**
+```{r, eval=FALSE}
+model_files<-list.files("models_GMM/", full.names = T)
+GMM_param<-GMM_param%>%
+  arrange(k)
+
+cl<-makeCluster(15)
+clusterExport(cl, c("modeling_set_list", "GMM_param", "my_GMM","model_files"))
+clusterEvalQ(cl, library(lcmm))
+clusterEvalQ(cl, library(splines))
+
+parLapply(cl, 1:nrow(GMM_param), function(i){
+  my_GMM(GMM_param[i,1], GMM_param[i,3], GMM_param[i,2],GMM_param[i,4])
+})
+
+stopCluster(cl)
+```
+
+**Read the files and process them**
+```{r, eval=FALSE}
+model_files<-list.files("models_GMM/", full.names = T)
+
+## Read all the models in a list of lists
+model_GMM_list<-lapply(model_files, readRDS)
+names(model_GMM_list) <- model_files
+```
+
+The following chunk extracts the summary metrics for model selection
+
+```{r, eval=FALSE}
+model_selection_GMM_list<-mapply(function(x, i){
+  
+  temp_x<-as.data.frame(summarytable(x, which = c("G", "conv", "npm", "AIC", 
+                                        "BIC", "entropy","ICL", "%class")))
+      
+      for (c in c("%class2", "%class3", "%class4", "%class5")){
+        if (!c%in%colnames(temp_x)){
+          temp_x[,c]<-NA
+        }
+      }
+      
+      if( temp_x[1,]$G != 1){
+        pprob<-x$pprob
+        pprob$PPA<-apply(pprob[,3:ncol(pprob)], 1, max)
+        temp_x$APPA = mean(pprob$PPA)
+      }else{
+        temp_x$APPA = 1
+      }
+      
+      modeltype<-str_split(i, "_", simplify = T)[,5]
+      
+      temp_x$analyte<-str_split(i, "_", simplify = T)[,3]
+      temp_x$linktype<-str_split(i, "_", simplify = T)[,4]
+      temp_x$modeltype<-str_sub(modeltype, 1, 4)
+      temp_x$poly = str_sub(modeltype, 3,4)
+      
+      temp_x
+      
+    }, model_GMM_list, names(model_GMM_list), SIMPLIFY = F)
+
+model_selection_GMM_df<-do.call(rbind, model_selection_GMM_list)
+model_selection_GMM_list <- split(model_selection_GMM_df, model_selection_GMM_df$analyte)
+
+GMM_plots<-lapply(model_selection_GMM_list, function(x){
+    table_m_selection<-x%>%
+      as.data.frame(.)%>%
+      mutate(linktype = ifelse(linktype == "3-quant-splines", "spline", linktype),
+             linktype = factor(linktype, levels = c("linear", "beta", "spline")))
+    
+    table_m_selection_plot<-table_m_selection%>%
+      filter(conv %in% c(1,2))%>%
+      select(G, BIC, ICL, APPA, poly, linktype)%>%
+      pivot_longer(-c(G, poly, linktype))%>%
+      mutate(name = factor(name, levels = c("BIC", "ICL", "APPA")))
+      
+   figure<-ggplot(table_m_selection_plot, aes(G, value, color = poly,
+                                       shape = linktype, linetype = linktype))+
+      geom_point()+
+      geom_line()+
+      facet_wrap(~name, scales = "free")+
+      xlab("Number of classes")+
+      ylab(NULL)+
+      theme_minimal()+
+      ggtitle(unique(table_m_selection$analyte))
+   
+   ggsave(plot = figure, paste0("figures/GMM fit plots/GMM_", unique(table_m_selection$analyte), ".png"), width = 8, height = 2.6)
+   
+   figure
+})
+```
+
+#### GMM summaries
+
+**Summary Plots**
+```{r, eval=FALSE}
+GMM_fig_hem<-wrap_plots(GMM_plots[hematology_var])+plot_layout(guides = "collect",ncol = 2)+plot_annotation(tag_levels = "a")
+
+ggsave(plot = GMM_fig_hem, "figures/GMM_fig_hem.png", width = 12, height = 12)
+
+GMM_fig_chem<-wrap_plots(GMM_plots[chemistry_var])+plot_layout(guides = "collect",ncol = 2)+plot_annotation(tag_levels = "a")
+
+ggsave(plot = GMM_fig_chem, "figures/GMM_fig_chem.png", width = 12, height = 14)
+```
+
+**Summary Tables**
+```{r, eval=FALSE}
+model_selection_GMM_df%>%
+    arrange(analyte, G, linktype,npm, poly)%>%
+    select(analyte, G, conv, linktype,npm, poly, BIC, ICL, APPA, `%class1`, `%class2`,
+           `%class3`, `%class4`, `%class5`)%>%
+    rowwise()%>%
+    mutate(across(.cols = c("BIC", "ICL", "APPA", "%class1", "%class2",
+           "%class3", "%class4", "%class5"), .fns = function(x){
+             if(!conv%in%c(1,2)) NA else x
+           }))%>%
+    select(-conv)%>%
+    kableExtra::kbl(row.names = F,digits = 2)%>%
+    kable_styling(full_width = F)%>%
+    kable_classic()%>%
+    kableExtra::save_kable(file = "tables/GMM fit tables/GMM_table.html")
+```
+
+## GMM: final models
+
+```{r}
+files_GMM_selected<-list.files("model_GMM_selected/", full.names = T)
+
+GMM_list<-lapply(files_GMM_selected, readRDS)
+names(GMM_list)<-files_GMM_selected
+
+GMM_list<-mapply(function(x, i){
+  d <- str_split(i, "_", simplify = T)[,6]
+  k <- str_sub(d, 2,2)
+  d <- str_sub(d, 4,4)
+  link <- str_split(i, "_", simplify = T)[,5]
+  
+  if (d ==1){
+    model_form<-paste0("value_clean ~ time_days")
+    random<-paste0("~ time_days")
+  }else{
+    model_form<-paste0("value_clean ~ splines::ns(time_days,",d,")")
+    random<-paste0("~ splines::ns(time_days,",d,")")
+  }
+  
+  x$call$fixed<-as.formula(model_form)
+  x$call$random<-as.formula(random)
+  x$call$mixture<-as.formula(random)
+  x$call$link<-link
+  x$call$ng<-as.numeric(k)
+  
+  return(x)
+  
+}, GMM_list, names(GMM_list), SIMPLIFY = F)
+```
+
+#### Plotting trajectories
+```{r }
+new_dataset<-data.frame(time_days = seq(0,21,length.out = 100))
+
+plot_GMM<-function(gmm_model, analyte, k){
+  
+  gmm_model$call$data<-new_dataset
+  pred<-predictY(gmm_model, new_dataset, draws = T, ndraws = 100)
+  
+  if(gmm_model$conv ==1){
+    if(k == 1){
+      pred_df<-do.call(cbind, pred)%>%
+      pivot_longer(-time_days)%>%
+      mutate(class = "class1",
+         quantile = str_split (name, "_", simplify = T)[,2])
+    }else{
+      pred_df<-do.call(cbind, pred)%>%
+      pivot_longer(-time_days)%>%
+      mutate(class = str_split(name, "_", simplify = T)[,3],
+         quantile = str_split (name, "_", simplify = T)[,2])
+    }
+      
+    p<-pred_df%>%
+    filter(quantile == 50)%>%
+    ggplot(aes(time_days, value, color = class, group = class))+
+    geom_path(size = 1)+
+    geom_path(data = pred_df%>%filter(quantile == 2.5), linetype = "dashed")+
+    geom_path(data = pred_df%>%filter(quantile == 97.5), linetype = "dashed")+
+    scale_color_manual(values = c("firebrick1","steelblue1", "chartreuse3"))+
+    xlab("Days after hospital arrival")+
+    ylab("Analyte value")+
+    theme_minimal()+
+          ggtitle(analyte)
+  }else{
+    pred_df<-do.call(cbind, pred)%>%
+      pivot_longer(-time_days)%>%
+      mutate(class = str_split(name, "_", simplify = T)[,2])
+      
+    p<-pred_df%>%
+    ggplot(aes(time_days, value, color = class, group = class))+
+    geom_path(size = 1)+
+    xlab("Days after hospital arrival")+
+    ylab("Analyte value")+
+    scale_color_manual(values = c("firebrick1","steelblue1", "chartreuse3"))+
+    theme_minimal()+
+                ggtitle(analyte)
+  }
+
+  return(p)
+}
+
+GMM_plots<-mapply(function(x, i){
+  analyte<-str_split(i, "_", simplify = T)[,4]
+  k <- str_split(i, "_", simplify = T)[,6]
+  k <- str_sub(k, 2,2)
+  
+  plot_GMM(x, analyte,k)
+}, GMM_list, names(GMM_list), SIMPLIFY = F)
+
+GMM_fig_traj<-wrap_plots(GMM_plots)+plot_layout(guides = "collect",ncol = 5)+plot_annotation(tag_levels = "a")
+
+GMM_fig_traj
+
+ggsave(plot = GMM_fig_traj, "figures/GMM_fig_traj.png", width = 14, height = 10)
+```
+
+#### Trajectory description
+
+Preparation of the class probability
+
+```{r}
+class_GMM_list<-mapply(function(x, i){
+  pprob<-x$pprob
+  if(ncol(pprob) == 4){
+    pprob$prob3<-NA
+  }else if(ncol(pprob) ==3){
+    pprob$prob2<-NA
+    pprob$prob3<-NA
+  }
+  pprob$analyte<-str_split(i, "_", simplify = T)[,4]
+  
+  return(pprob)
+}, GMM_list, names(GMM_list), SIMPLIFY = F)
+
+class_GMM_df<-do.call(rbind, class_GMM_list)
+
+subject_id_df<-mimic_modeling_set_f%>%
+  select(subject_id, subject_id_num)%>%
+  group_by(subject_id)%>%
+  summarise(subject_id_num = unique(subject_id_num))
+
+class_GMM_df<-class_GMM_df%>%
+  left_join(subject_id_df)%>%
+  left_join(mimic_patients_all)%>%
+  filter(!analyte %in%c("Bicarbonate", "Calcium, Total", "Creatinine"))
+```
+
+Tables of univariate analysis between classes per analyte
+
+```{r}
+class_GMM_df<-class_GMM_df%>%
+  mutate(n_codes = as.numeric(n_codes))
+```
+
+```{r, eval=FALSE}
+lapply(unique(class_GMM_df$analyte), function(x){
+  class_GMM_df%>%
+    filter(analyte == x)%>%
+    select(class, age, gender,ethnicity ,cohort_group, time_disch_days,
+           hospital_expire_flag, n_codes)%>%
+    tbl_summary(by=class)%>%
+    add_p(test = list(all_numeric()~"aov",all_categorical() ~ "my_fisher"))%>%
+    add_q()%>%
+    as_kable()%>%
+    kable_paper()%>%
+    save_kable(file = paste("tables/class_diff_", x,".html"))
+  
+})
+```
+
+### Group-Based Multi-trajectory Analysis (GBMT)
+
+In this work we also explored the idea of GBMT modeling for analytes. Given that most analytes correlate and this is a proof of concept, we kept this to just a subset of the modeling set of analytes.
+
+Similar than LCGA and GMM, we did a linear search of the parameter space and run the models through parallelization. To simplify the models further, we binned data by days by taking the average. Most patients had one value a day, so in most situations, the binning is just setting the time component to integer of a day instead of fractional days.
+
+```{r eval = FALSE}
+## Bin by day
+mimic_modeling_set_f_bin<-mimic_modeling_set_f%>%
+  filter(label%in%c("Hematocrit", "Glucose", "White Blood Cells","RDW", "Platelet Count"))%>%
+  mutate(time_days = ceiling(time_days))%>%
+  group_by(subject_id, label,time_days)%>%
+  summarise(value_clean = mean(value_clean, na.rm = T))
+
+mimic_modeling_set_f_wide<-mimic_modeling_set_f_bin%>%
+  pivot_wider(c(subject_id, time_days), names_from = label, values_from = value_clean,values_fn = function(x) mean(x, na.rm =T))%>%
+  as.data.frame(.)
+
+colnames(mimic_modeling_set_f_wide)<-make.names(colnames(mimic_modeling_set_f_wide))
+
+pd<-1:4 ## polynomial degrees for the search
+ng<-1:8 ## number of classes for the search
+param<-expand.grid(pd, ng)
+
+cl<-makeCluster(15)
+clusterExport(cl, c("mimic_modeling_set_f_wide", "param"))
+clusterEvalQ(cl, library(gbmt))
+
+parLapply(cl, 1:nrow(param), function(x){
+  
+  temp_pd<-param[x,1]
+  temp_ng<-param[x,2]
+  
+  temp_gbmt<-gbmt(data = mimic_modeling_set_f_wide, 
+           x.names = colnames(mimic_modeling_set_f_wide)[3:7], 
+           unit = "subject_id", 
+           time = "time_days", ng = temp_ng, d = temp_pd)
+  
+  saveRDS(temp_gbmt, paste0("model_gbmt/gbmt_", 
+                            temp_ng, "_", temp_pd,".RDS"))
+})
+
+stopCluster(cl)
+```
+
+#### GBMT summaries
+
+Read the saved models and extract summaries
+
+```{r}
+model_gbmt_files<-list.files("model_gbmt/", full.names = T)
+gbmt_list<-lapply(model_gbmt_files, function(x){
+  list("model" = readRDS(x), "file" = x)
+})
+
+model_summary_gbmt<-function(model_list){
+  
+  model<-model_list$model
+  ng<-str_split(model_list$file, "_", simplify = T)[,3]
+  
+  ## Get proportion of class assignment
+  class_assignment<-as.data.frame(prop.table(table(model$assign)))[,2]
+  class_assignment<-matrix(round(class_assignment*100, 2), 
+                           ncol = length(class_assignment))
+  
+  colnames(class_assignment)<-paste0("%class", 1:ncol(class_assignment))
+  
+  for (c in paste0("%class", 2:8)){
+        if (!c%in%colnames(class_assignment)){
+          class_assignment<-cbind(class_assignment, c = NA)
+        }
+  }
+  
+  colnames(class_assignment)<-paste0("%class", 1:ncol(class_assignment))
+  
+  table_summary<-data.frame(k = ng, poly = paste0("p",model$call$d),
+                npar = model$npar, BIC = BIC(model), APPA = mean(model$appa))
+  table_summary<-cbind(table_summary, as.data.frame(class_assignment))
+  
+  return(table_summary)
+}
+
+gbmt_summaries<-lapply(gbmt_list, model_summary_gbmt)
+gbmt_summaries<-do.call(rbind,gbmt_summaries)
+```
+
+**Model selection summary table**
+
+```{r}
+gbmt_summaries%>%
+  kable(digits = 2)%>%
+  kable_paper()%>%
+  save_kable(file = "tables/gbmt_summary.html")
+```
+
+**Model selection summary plots**
+```{r }
+gbmt_plot_a<-gbmt_summaries%>%
+  ggplot(aes(k, BIC, color = poly, group = poly))+
+    geom_line()+
+    geom_point()+
+  xlab("Number of classes")+
+  theme_minimal()
+
+gbmt_plot_b<-gbmt_summaries%>%
+  ggplot(aes(k, APPA, color = poly, group = poly))+
+    geom_line()+
+    geom_point()+
+  xlab("Number of classes")+
+  theme_minimal()
+
+fig_gbmt<-gbmt_plot_a + gbmt_plot_b + plot_layout(guide = "collect")+ plot_annotation(tag_levels = "a")
+
+fig_gbmt
+
+ggsave(fig_gbmt, filename = "figures/fig_gbmt_summary.png", width = 8, height = 3)
+```
+
+#### Final GBMT model
+
+Final selected model
+
+```{r}
+gbmt_selected<-gbmt_list[[12]]
+
+gbmt_to_plot<-gbmt:::predict.gbmt(gbmt_selected$model)
+gbmt_to_plot<-mapply(function(x, i){
+  level_2<-mapply(function(y, j, i){
+    y<-as.data.frame(y)
+    y$analyte<-j
+    y$class <- i
+    y$time_days <-0:21
+    return(y)
+  },x, names(x), i,SIMPLIFY = F)
+  
+  do.call(rbind, level_2)
+}, gbmt_to_plot, names(gbmt_to_plot), SIMPLIFY = F)
+
+gbmt_to_plot<-gbmt_to_plot%>%bind_rows()
+
+gbmt_final_plot<-ggplot(gbmt_to_plot, aes(time_days, mean, color = class, fill = class))+
+  geom_line(show.legend = F)+
+  geom_ribbon(aes(ymin = `2.5%`, ymax = `97.5%`), alpha = 0.3, show.legend = F)+
+  facet_grid(analyte~class, scales = "free")+
+  xlab("Days from hospital arrival")+
+  ylab("Scaled analyte value")+
+  theme_minimal()
+
+gbmt_final_plot
+
+ggsave(gbmt_final_plot, filename = "figures/gbmt_final.png", height = 6, width = 6)
+```
+
+**Univariate analysis between classes**
+
+```{r}
+gbmt_ppost<-as.data.frame(gbmt_selected$model$posterior)
+colnames(gbmt_ppost)<-c("ppost_1", "ppost_2", "ppost_3")
+
+gbmt_ppost$subject_id<-rownames(gbmt_ppost)
+
+class_name<-c("Class 1", "Class 2", "Class 3")
+for (i in 1:nrow(gbmt_ppost)){
+  gbmt_ppost$class[i]<-class_name[which.max(gbmt_ppost[i,1:3])]
+}
+
+class_GBMT_df<-gbmt_ppost%>%
+  left_join(subject_id_df)%>%
+  left_join(mimic_patients_all)%>%
+  mutate(n_codes = as.numeric(n_codes))
+
+class_GBMT_df%>%
+    select(class, age, gender,ethnicity ,cohort_group, time_disch_days,
+           hospital_expire_flag, n_codes)%>%
+    tbl_summary(by=class)%>%
+    add_p(test = list(all_numeric()~"aov",all_categorical() ~ "my_fisher"))%>%
+    add_q()%>%
+    as_kable()%>%
+    kable_paper()%>%
+    save_kable(file = "tables/class_diff_GBMT.html")
+```
+
+# Prediction Experiments
+
+The following script sets custom functions to run the prediction experiments
+
+```{r}
+
+#for extracting prediction performance
+pred_performance<-function(fit, X, Y, positive = "yes", negative = "no", roc = TRUE, roc_smooth = TRUE){
+  prediction<-predict(fit, X, type = "prob")
+  
+  if(roc){
+    r_curve<-pROC::roc(Y,prediction[,positive], smooth = roc_smooth)
+  }else{
+    r_curve = FALSE
+  }
+  
+  class_prediction<-as.factor(ifelse(prediction[,positive]>0.5, positive, negative))
+  c_matrix<-confusionMatrix(class_prediction, Y, positive = positive)
+  
+  return(list("fit" = fit, "pred" = prediction,
+                            "class" = class_prediction, "roc"=r_curve,
+                            "cMatrix" = c_matrix))
+}
+
+# to run the experiments I and II
+run_experiment<-function(prediction_df, target.name, predictor_start = 3,
+                         seed = 555, reps = 25, 
+                         n.yes.train, n.no.train, roc_smooth = TRUE){
+  set.seed(seed)
+
+
+  yes_class<-prediction_df%>%
+    filter(!!sym(target.name) == "yes")
+  yes_index<-sample(1:nrow(yes_class), n.yes.train, replace = F)
+  yes_train_df<-yes_class[yes_index, ]
+  yes_test_df<-yes_class[-yes_index, ]
+  
+  no_class<-prediction_df%>%
+    filter(!!sym(target.name) == "no")
+  no_index<-sample(1:nrow(no_class), n.no.train, replace = F)
+  no_train_df<-no_class[no_index, ]
+  no_test_df<-no_class[-no_index, ]
+  
+  ## Testing data preparation
+  test_df<-rbind(yes_test_df, no_test_df)
+  dmy <- dummyVars(" ~ .", data = test_df[,predictor_start:ncol(test_df)])
+  
+  X_test <- data.frame(predict(dmy, newdata = test_df))
+  Y_test<-as.factor(unlist(test_df[,target.name]))
+  
+  ## Training with downsampling and repeated model building
+  exp_fit_list<-list()
+  for (i in 1:reps){
+    print(i)
+    temp_train_df<-rbind(yes_train_df, no_train_df)
+    train_index<-tapply(1:nrow(temp_train_df), 
+                            INDEX = temp_train_df[,target.name], 
+                            FUN = function(x) sample(x, n.yes.train, replace = F)) 
+    
+    train_df<-temp_train_df[unlist(train_index),
+                            predictor_start:ncol(temp_train_df)]
+    dmy <- dummyVars(" ~ .", data = train_df)
+    X <- data.frame(predict(dmy, newdata = train_df))
+    Y<-as.factor(unlist(temp_train_df[unlist(train_index), target.name]))
+    
+    fit<-train( x = X, y = Y, method = "glmnet",
+                trControl = trainControl(method = "cv", number = 5, 
+                                         classProbs = TRUE))
+    
+    exp_fit_list[[i]]<-pred_performance(fit, X, Y, roc_smooth =roc_smooth)
+  }
+  
+  exp_test_fit<-lapply(exp_fit_list, function(x){
+    pred_performance(x$fit, X_test, Y_test,roc_smooth = roc_smooth)
+  })
+  
+  ## In-training prediction performance
+  in_train_r_curve<-lapply(exp_fit_list, function(x){
+    data.frame(sens = x$roc$sensitivities, spec = x$roc$specificities,
+               pre_type = "in-train")
+  })
+  
+  for(i in 1:length(in_train_r_curve)){
+    in_train_r_curve[[i]]$id<-i
+  }
+  
+  in_train_r_curve<-do.call(rbind, in_train_r_curve)
+  
+  ## out-train prediction performance
+  out_train_r_curve<-lapply(exp_test_fit, function(x){
+    data.frame(sens = x$roc$sensitivities, spec = x$roc$specificities,
+               pre_type = "out-train")
+  })
+  
+  for(i in 1:length(out_train_r_curve)){
+    out_train_r_curve[[i]]$id<-i
+  }
+  
+  out_train_r_curve<-do.call(rbind, out_train_r_curve)
+  r_curve<-rbind(in_train_r_curve, out_train_r_curve)
+  
+  line_df<-data.frame(x = c(0,1), y = c(0,1))
+  roc_plot<-ggplot(r_curve, aes(1-spec, sens, color =  pre_type, group = id))+
+    geom_path(alpha = 0.3)+
+    geom_line(data = line_df, aes(x, y), inherit.aes = F)+
+    theme_minimal()
+  
+  return(list("train_list" = exp_fit_list, "test_list" = exp_test_fit, 
+              "roc_plot" = roc_plot))
+}
+```
+
+## Experiment I
+
+**Not run during knitting**
+```{r, eval=FALSE}
+exp_I_list<-list()
+
+for (cutoff in c(3,7,14,21)){
+  
+  cat("Exp I, cutoff:", cutoff, "\n")
+  mimic_modeling_set_cut<-mimic_modeling_set_f%>%
+    filter(time_days<=cutoff)
+  modeling_set_cut_list<-split(mimic_modeling_set_cut,mimic_modeling_set_cut$label)
+  
+  predict_list<-list()
+  for (i in 1:length(GMM_list)){
+    print(i)
+    model<-GMM_list[[i]]
+    analyte<-str_split(names(GMM_list)[i], "_", simplify = T)[,4]
+    pre_data<-modeling_set_cut_list[[analyte]]
+    
+    if(model$ng == 1){
+      next()
+    }
+  
+    pprob<-predictClass(model, pre_data, "subject_id_num")
+    
+    if(ncol(pprob) == 4){
+      pprob$prob3<-NA
+    }else if(ncol(pprob) ==3){
+      pprob$prob2<-NA
+      pprob$prob3<-NA
+    }
+    pprob$analyte<-analyte
+    
+    predict_list[[i]]<-pprob
+  }
+  
+  saveRDS(predict_list, 
+          file = paste0("prediction_experiments/predict_list_",cutoff,
+                        "days.Rds"))
+  
+  predict_df<-do.call(rbind,predict_list)%>%
+    left_join(subject_id_df)%>%
+    left_join(mimic_patients_all)%>%
+    filter(!analyte %in%c("Bicarbonate", "Calcium, Total", "Creatinine"))%>%
+    select(prob1, prob2, prob3, analyte, subject_id, hospital_expire_flag)%>%
+    mutate(is_dead = ifelse(hospital_expire_flag, "yes", "no"))%>%
+    pivot_wider(id_cols =c(subject_id, is_dead),
+                names_from = analyte, values_from = c(prob1, prob2, prob3))
+  
+  predict_df<-predict_df%>%
+    select(-all_of(names(which(sapply(predict_df, 
+                                      function(x) mean(is.na(x)))==1))))%>%
+    filter(complete.cases(.))
+  
+  exp_I_list[[as.character(cutoff)]]<-run_experiment(predict_df, "is_dead", 
+                                       n.yes.train = 100, 
+                                       n.no.train = 1250)
+}
+
+saveRDS(exp_I_list, "prediction_experiments/exp_I_list.RDS")
+
+```
+
+### Extract performance
+```{r}
+exp_I_list<-readRDS("prediction_experiments/exp_I_list.RDS")
+exp_I_list<-exp_I_list[which(sapply(exp_I_list, function(x) !is.null(x)))]
+
+performance_df<-mapply(function(i, name_i){
+  
+  temp_df<-lapply(1:25, function(j){
+    df<-as.data.frame(rbind(i$train_list[[j]]$cMatrix$byClass,
+              i$test_list[[j]]$cMatrix$byClass))
+    df$auc<-c(i$train_list[[j]]$roc$auc,i$test_list[[j]]$roc$auc)
+    df$per_type<-c("in-train", "out-train")
+    df$cutoff<-name_i
+    
+    return(df)
+  })
+  
+  temp_df<-do.call(rbind, temp_df)
+  temp_df
+},exp_I_list, names(exp_I_list), SIMPLIFY = F)
+
+exp_I_per_df<-do.call(rbind, performance_df)
+```
+
+**Performance figure**
+```{r}
+exp_I_auc_plot<-exp_I_per_df%>%
+  mutate(cutoff = factor(cutoff, levels = c(1,3,7,14,21),
+                         labels = c("<= 1 days", "<= 3 days","<= 7 days","<= 14 days","<= 21 days")))%>%
+ggplot(aes(per_type, auc, fill = per_type))+
+  geom_boxplot()+
+  ylim(0.5,1)+
+  xlab(NULL)+ylab("AUC")+
+  facet_grid(~cutoff)+
+  theme_minimal()+
+  theme(axis.text.x = element_blank(), legend.title = element_blank(),
+        legend.position = c(0.8,0.2))+
+  ggtitle("Exp I: in-hospital death")
+```
+
+```{r}
+I_roc_21<-exp_I_list[["21"]]$roc_plot+
+  ggtitle("<= 21 days")+
+  theme(legend.title = element_blank(), legend.position = c(0.8, 0.2))
+
+fig_expI<-exp_I_auc_plot+I_roc_21
+fig_expI_layout<-c(
+  area(1, 1,r = 2),area(1,l =3)
+)
+
+fig_expI<- fig_expI+plot_annotation(tag_levels = "a")+plot_layout(design = fig_expI_layout)
+
+fig_expI
+
+ggsave(plot = fig_expI, "figures/fig_expI.png", width = 7, height = 3)
+```
+
+## Experiment II
+
+**Not run during knitting**
+```{r, eval=FALSE}
+exp_II_list<-list()
+for (cutoff in c(1,3,7,14,21)){
+  
+  cat("Exp II, cutoff:", cutoff, "\n")
+  mimic_modeling_set_cut<-mimic_modeling_set_f%>%
+    filter(time_days<=cutoff)
+  modeling_set_cut_list<-split(mimic_modeling_set_cut,mimic_modeling_set_cut$label)
+  
+  predict_list<-list()
+  for (i in 1:length(GMM_list)){
+    print(i)
+    model<-GMM_list[[i]]
+    analyte<-str_split(names(GMM_list)[i], "_", simplify = T)[,4]
+    pre_data<-modeling_set_cut_list[[analyte]]
+    
+    if(model$ng == 1){
+      next()
+    }
+  
+    pprob<-predictClass(model, pre_data, "subject_id_num")
+    
+    if(ncol(pprob) == 4){
+      pprob$prob3<-NA
+    }else if(ncol(pprob) ==3){
+      pprob$prob2<-NA
+      pprob$prob3<-NA
+    }
+    pprob$analyte<-analyte
+    
+    predict_list[[i]]<-pprob
+  }
+  
+  predict_df<-do.call(rbind,predict_list)%>%
+    left_join(subject_id_df)%>%
+    left_join(mimic_patients_all)%>%
+    filter(!analyte %in%c("Bicarbonate", "Calcium, Total", "Creatinine"))%>%
+    select(prob1, prob2, prob3, analyte, subject_id, cohort_group)%>%
+    filter(cohort_group != "SCI_noFracture")%>%
+    mutate(is_SCI = ifelse(cohort_group == "SCI_Fracture", "yes", "no"))%>%
+    pivot_wider(id_cols =c(subject_id, is_SCI),
+              names_from = analyte, values_from = c(prob1, prob2, prob3))
+  
+  predict_df<-predict_df%>%
+    select(-all_of(names(which(sapply(predict_df, 
+                                      function(x) mean(is.na(x)))==1))))%>%
+    filter(complete.cases(.))
+  
+  exp_II_list[[as.character(cutoff)]]<-run_experiment(predict_df, "is_SCI", 
+                                       n.yes.train = 120, 
+                                       n.no.train = 800)
+}
+
+saveRDS(exp_II_list, "prediction_experiments/exp_II_list.RDS")
+```
+
+### Extract performance
+
+```{r}
+exp_II_list<-readRDS("prediction_experiments/exp_II_list.RDS")
+
+exp_II_list<-exp_II_list[which(sapply(exp_II_list, function(x) !is.null(x)))]
+performance_df<-mapply(function(i, name_i){
+  
+  temp_df<-lapply(1:25, function(j){
+    df<-as.data.frame(rbind(i$train_list[[j]]$cMatrix$byClass,
+              i$test_list[[j]]$cMatrix$byClass))
+    df$auc<-c(i$train_list[[j]]$roc$auc,i$test_list[[j]]$roc$auc)
+    df$per_type<-c("in-train", "out-train")
+    df$cutoff<-name_i
+    
+    return(df)
+  })
+  
+  temp_df<-do.call(rbind, temp_df)
+  temp_df
+},exp_II_list, names(exp_II_list), SIMPLIFY = F)
+
+exp_II_per_df<-do.call(rbind, performance_df)
+```
+
+**Performance figure**
+```{r}
+exp_II_auc_plot<-exp_II_per_df%>%
+  mutate(cutoff = factor(cutoff, levels = c(1,3,7,14,21),
+                         labels = c("<= 1 days", "<= 3 days","<= 7 days","<= 14 days","<= 21 days")))%>%
+ggplot(aes(per_type, auc, fill = per_type))+
+  geom_boxplot()+
+  ylim(0.5,1)+
+  xlab(NULL)+ylab("AUC")+
+  facet_grid(~cutoff)+
+  theme_minimal()+
+  theme(axis.text.x = element_blank(), legend.title = element_blank(),
+        legend.position = "bottom", legend.margin = margin(t = -10))+
+  ggtitle("Exp II: has SCI")
+```
+
+```{r}
+II_roc_21<-exp_II_list[["21"]]$roc_plot+
+  ggtitle("<= 21 days")+
+  theme(legend.title = element_blank(), legend.position = c(0.8, 0.2))
+
+fig_expII<-exp_II_auc_plot+II_roc_21
+fig_expII_layout<-c(
+  area(1, 1,r = 2),area(1,l =3)
+)
+
+fig_expII<- fig_expII+plot_annotation(tag_levels = "a")+plot_layout(design = fig_expII_layout)
+
+fig_expII
+
+ggsave(plot = fig_expII, "figures/fig_expII.png", width = 7, height = 3)
+```
+
+## Experiment III
+
+Experiment III makes use of a dataset obtained from the TRACK-SCI study. Data is not provided and therefore code will not run.
+
+### TRACK-SCI labs
+```{r}
+#TRACK-SCI labs data from TRACK-SCI provided file
+track_sci_lab_raw<-read.csv("data/TRACKSCI/TRACK-SCI labs.csv")
+
+## Data frame structure
+str(track_sci_lab_raw)
+```
+
+We can observe the dataset for the lab assays is organized in long-view, with laboratory names in one column, values in another and time in another column. The variables of interest are:
+
+* `Study.ID`: unique identifier for a subject following study de-ID number.
+* `lab_name`: Name of the lab assay based on EHR extraction.
+* `ord_value_num`: value of the specific ordered lab assay.
+* `Time_From_Injury`: calculated time in minutes from the injury to the lab assay.
+
+**How many different lab test?** `r length(unique(track_sci_lab_raw$lab_name))`
+**How many different subjects?** `r length(unique(track_sci_lab_raw$Study.ID))`
+
+We are going to perform some wrangling and cleaning of the data before we continue to help with downstream processing. We create a new dataset to keep the raw data untouched.
+
+**Here:**
+
+* Create two new temporal variables, one in hours and another in days since injury.
+* Rename `ord_value_num` to `value` making sure to specify it as numeric (not necessary, but better to be sure).
+* Rename `Study.ID` to `subject_id` specifying it as character
+* Create a new variable called `subject_num` with each subject mapped to a number in order. This will facilitate future use.
+
+```{r}
+track_sci_lab_df<-track_sci_lab_raw%>%
+  mutate(Study_ID = as.factor(Study_ID),
+         Injury_datetime = as.Date(Injury_datetime,format = "%m/%d/%Y %H:%M"),
+         result_datetime = as.Date(result_datetime,format = "%m/%d/%Y %H:%M"),
+         Discharge_datetime = as.Date(Discharge_datetime, format = "%m/%d/%Y %H:%M"))%>%
+  rename(value = ord_value_num)
+```
+
+#### Summary
+
+```{r}
+summary_track_sci_labs<-track_sci_lab_df%>%
+  filter(!is.na(value))%>%
+  group_by(lab_name, Study_ID)%>%
+  summarise(n=n(), var_value = var(value, na.rm = T))%>%
+  group_by(lab_name)%>%
+  summarise(mean_times_n=mean(n),max_times_n = max(n), n_subjects = n(),
+            mean_var=mean(var_value, na.rm = T))%>%
+  arrange(desc(n_subjects), desc(mean_var))
+
+summary_track_sci_labs%>%
+  datatable()
+```
+
+**Read laboratory dictionary:** Name equivalence between TRACK-SCI and MIMIC modeling set analytes has been mapped manually.
+
+```{r}
+track_lab_list<-read.csv("data/TRACKSCI/modeling_set track to mimic.csv")
+
+track_sci_lab_df_f<-track_sci_lab_df%>%
+  filter(lab_name %in% track_lab_list$lab_name)
+
+for (i in 1:nrow(track_sci_lab_df_f)){
+  lab_name<-track_sci_lab_df_f$lab_name[i]
+  
+  new_name<-track_lab_list$new_name[which(lab_name == track_lab_list$lab_name)]
+  track_sci_lab_df_f$lab_name[i]<-new_name
+}
+```
+
+#### Preprocessing
+
+Pre processing of the TRACK-SCI data as we performed for MIMIC
+
+```{r}
+track_sci_lab_df_f<-track_sci_lab_df_f%>%
+  mutate(time_days = Time_from_Injury/1440)%>%
+  filter(time_days<=21, value>0)
+
+## custom function
+extreme_deletion<-function(x, prob = c(0.2,0.8), factor = 1.5){
+  down<-quantile(x, prob[1])-factor*IQR(x)
+  up<-quantile(x, prob[2])+factor*IQR(x)
+  
+  x<-ifelse(x>up, NA,x)
+  x<-ifelse(x<down, NA,x)
+  
+  return(x)
+}
+
+track_sci_lab_df_f<-track_sci_lab_df_f%>%
+  arrange(time_days)%>%
+  group_by(lab_name, Study_ID)%>%
+  mutate(value_clean = extreme_deletion(value),
+         out = ifelse(is.na(value_clean), 1,0),
+         subject_id_num = as.numeric(Study_ID))%>%
+  filter(out == 0)
+```
+
+**TRACK-SCI spaghetti plots**
+```{r}
+track_spaghetti_plot<-track_sci_lab_df_f%>%
+ggplot(aes(time_days, value_clean, group = Study_ID))+
+  geom_line()+
+  facet_wrap(~lab_name, scales = "free")+
+  ylab("Anlyte value")+xlab("Days from arrival")+
+  theme_minimal()
+
+ggsave("figures/track_modeling_set.png", track_spaghetti_plot, 
+       height = 6, width = 10)
+```
+
+**Load the outcome data**
+```{r}
+outcome_df<-read.csv("data/TRACKSCI/outcomes_TRACKSCI.csv")
+outcome_df<-outcome_df%>%
+  mutate(Study_ID = as.factor(Study_ID),
+         subject_id_num = as.numeric(Study_ID))
+```
+
+### Predict TRACK data
+```{r}
+track_minimal_list<-track_sci_lab_df_f%>%
+  arrange(lab_name)%>%
+  split(.$lab_name)
+```
+
+**Helper function to run experiment III**
+```{r}
+run_experimentIII<-function(prediction_df, target.name, seed = 555){
+  set.seed(seed)
+
+  exp_fit_list<-list()
+  exp_test_list<-list()
+  
+  for (i in 1:nrow(prediction_df)){
+    print(i)
+    
+    Y<-as.factor(unlist(prediction_df[-i,target.name]))
+    X<-as.data.frame(prediction_df[-i,3:ncol(prediction_df)])
+    
+    X_test<-as.data.frame(prediction_df[i,3:ncol(prediction_df)])
+    Y_test<-as.factor(unlist(prediction_df[i,target.name]))
+
+    fit<-train( x = X, y = Y, method = "glmnet",
+            trControl = trainControl(method = "cv",number = 3, 
+                                     classProbs = TRUE))
+    
+    exp_fit_list[[i]]<-pred_performance(fit, X, Y, positive = "AB", negative = "CDE")
+    exp_test_list[[i]]<-list("Y_test" = Y_test, "Y_pred" = predict(fit, X_test, type = "prob"))
+  }
+  
+  ## In-training prediction performance
+  in_train_r_curve<-lapply(exp_fit_list, function(x){
+    data.frame(sens = x$roc$sensitivities, spec = x$roc$specificities,
+               pre_type = "in-train")
+  })
+  
+  in_train_r_curve<-do.call(rbind, in_train_r_curve)
+  in_train_r_curve$id<-rep(1:(length(in_train_r_curve)/514), each = 514)
+  
+  ## out-train prediction performance
+  out_train_r_curve<-lapply(exp_test_list, function(x){
+    data.frame(x$Y_pred)
+  })
+  
+  out_train_r_curve<-do.call(rbind, out_train_r_curve)
+  Y_test<-unlist(lapply(exp_test_list, function(x){
+    data.frame(x$Y_test)
+  }))
+  
+  out_train_r_curve<-pROC::roc(Y_test,out_train_r_curve[,"CDE"], smooth = T)
+  out_train_r_curve<-data.frame(sens = out_train_r_curve$sensitivities, 
+                                spec = out_train_r_curve$specificities,
+                                pre_type = "LOOCV", id = rep(1,514))
+  
+  r_curve<-rbind(in_train_r_curve, out_train_r_curve)
+  
+  line_df<-data.frame(x = c(0,1), y = c(0,1))
+  roc_plot<-ggplot(r_curve, aes(1-spec, sens, color =  pre_type, group = id))+
+    geom_path(alpha = 0.3)+
+    geom_line(data = line_df, aes(x, y), inherit.aes = F)+
+    theme_minimal()
+  
+  return(list("train_list" = exp_fit_list, "test_list" = exp_test_list, 
+              "roc_plot" = roc_plot))
+}
+```
+
+**Not run during knitting**
+```{r, eval=FALSE}
+exp_III_list<-list()
+for (cutoff in c(1,3,7,14,21)){
+  
+  cat("Exp III, cutoff:", cutoff, "\n")
+  track_modeling_set_cut<-track_sci_lab_df_f%>%
+    filter(time_days<=cutoff)
+  modeling_set_cut_list<-split(track_modeling_set_cut,track_modeling_set_cut$lab_name)
+  
+  predict_list<-list()
+  for (i in 1:length(GMM_list)){
+    print(i)
+    model<-GMM_list[[i]]
+    analyte<-str_split(names(GMM_list)[i], "_", simplify = T)[,4]
+    pre_data<-as.data.frame(modeling_set_cut_list[[analyte]])
+    
+    if(nrow(pre_data) == 0){
+      next()
+    }
+    
+    if(model$ng == 1){
+      next()
+    }
+  
+    pprob<-predictClass(model, pre_data, "subject_id_num")
+    
+    if(ncol(pprob) == 4){
+      pprob$prob3<-NA
+    }else if(ncol(pprob) ==3){
+      pprob$prob2<-NA
+      pprob$prob3<-NA
+    }
+    pprob$analyte<-analyte
+    
+    predict_list[[i]]<-pprob
+  }
+  
+  predict_df<-do.call(rbind,predict_list)%>%
+    left_join(outcome_df)%>%
+    filter(!analyte %in%c("Bicarbonate", "Calcium, Total", "Creatinine"))%>%
+    select(prob1, prob2, prob3, analyte, Study_ID, latest_AIS_at_hospital)%>%
+    mutate(AIS_binary = ifelse(latest_AIS_at_hospital %in% c("A", "B"), "AB","CDE"))%>%
+    pivot_wider(id_cols =c(Study_ID, AIS_binary),
+              names_from = analyte, values_from = c(prob1, prob2, prob3))
+  
+  predict_df<-predict_df%>%
+    select(-all_of(names(which(sapply(predict_df, 
+                                      function(x) mean(is.na(x)))==1))))%>%
+    filter(complete.cases(.))
+  
+  exp_III_list[[as.character(cutoff)]]<-run_experimentIII(predict_df, "AIS_binary")
+}
+
+saveRDS(exp_III_list, "prediction_experiments/exp_III_list.RDS")
+```
+
+**Extract performance**
+```{r}
+exp_III_list<-readRDS("prediction_experiments/exp_III_list.RDS")
+
+exp_III_list<-exp_III_list[which(sapply(exp_III_list, function(x) !is.null(x)))]
+performance_df<-mapply(function(i, name_i){
+  
+  temp_df<-lapply(1:length(i), function(j){
+    
+    df<-as.data.frame(rbind(i$train_list[[j]]$cMatrix$byClass))
+    df$auc<-c(i$train_list[[j]]$roc$auc)
+    df$per_type<-c("in-train")
+    df$cutoff<-name_i
+    
+    return(df)
+  })
+  
+  Y_test_prob<-do.call(rbind, lapply(i$test_list, function(x){
+    x$Y_pred
+  }))
+  
+  Y_test<-do.call(rbind, lapply(i$test_list, function(x){
+    as.character(x$Y_test)
+  }))
+  
+  Y_roc<-pROC::roc(as.factor(Y_test),Y_test_prob[,"CDE"], smooth = T)
+  prediction<-ifelse(Y_test_prob[,"CDE"]>0.5, "CDE", "AB")
+  
+  test_df<-as.data.frame(rbind(confusionMatrix(as.factor(prediction), as.factor(Y_test), positive = "CDE")$byClass))
+  test_df$auc<-Y_roc$auc
+  test_df$per_type<-"LOOCV"
+  test_df$cutoff<-name_i
+  
+  temp_df<-do.call(rbind, temp_df)
+  temp_df<-rbind(temp_df, test_df)
+  temp_df
+  
+},exp_III_list, names(exp_III_list), SIMPLIFY = F)
+
+exp_III_per_df<-do.call(rbind, performance_df)
+```
+
+**Performance figure**
+```{r}
+exp_III_auc_plot<-exp_III_per_df%>%
+  mutate(cutoff = factor(cutoff, levels = c(1,3,7,14,21),
+                         labels = c("<= 1 days", "<= 3 days","<= 7 days","<= 14 days","<= 21 days")))%>%
+ggplot(aes(per_type, auc, fill = per_type))+
+  geom_boxplot()+
+  ylim(0.5,1)+
+  xlab(NULL)+ylab("AUC")+
+  facet_grid(~cutoff)+
+  theme_minimal()+
+  theme(axis.text.x = element_blank(), legend.title = element_blank(),
+        legend.position = "bottom", legend.margin = margin(t = -10))+
+  ggtitle("Exp III: last AIS in-hospital (AB vs. CDE)")
+```
+
+```{r}
+III_roc_21<-exp_III_list[["21"]]$roc_plot+
+  ggtitle("<= 21 days")+
+  theme(legend.title = element_blank(), legend.position = c(0.8, 0.2))
+
+fig_expIII<-exp_III_auc_plot+III_roc_21
+fig_III_layout<-c(
+  area(1, 1,r = 2),area(1,l =3)
+)
+
+fig_expIII<- fig_expIII+plot_annotation(tag_levels = "a")+plot_layout(design = fig_III_layout)
+
+ggsave(plot = fig_expIII, "figures/fig_expIII.png", width = 7, height = 3)
+```
+
+# ANNEX
+
+## Data simulation for figures
+
+**One class exampla**
+
+```{r}
+set.seed(555)
+color_class<-c("firebrick1", "steelblue2", "purple")
+
+
+one_class_sim <- latrend::generateLongData(sizes = 50, id = "Id",
+                            data = data.frame(Time = c(0,0.2,0.7,1)),
+                            cluster = ~poly(Time, 2, raw = TRUE),
+                            clusterCoefs = cbind(c(1, 9, -6)),
+                            noiseScales = c(0.4),
+                            randomScales = cbind(0.6),
+                            clusterNames = "Class 1")
+
+figXa<-ggplot(one_class_sim, aes(Time, Value, group = Id))+
+  geom_line(alpha = 0.2)+
+  geom_point(alpha = 0.3)+
+  theme_minimal()+
+  ggtitle("Single population\nlongitudinal data")
+
+figXb<-ggplot(one_class_sim, aes(factor(Time), Value, group = factor(Time)))+
+  geom_jitter(alpha=0.1, width = 0.2)+
+  stat_summary(fun = "mean", geom = "point", size = 2)+
+  stat_summary(fun.data = mean_sdl, fun.args = list("mult" = 1),geom = "errorbar", width = 0.2)+
+  theme_minimal()+
+  xlab("Time category")+
+  ggtitle("One-way RM-ANOVA")
+
+figXc<-ggplot(one_class_sim, aes(Time, Value, group = Id))+
+  geom_point(alpha = 0.1)+
+  stat_smooth(geom = "line", method = "lm", se = F, alpha = 0.05)+
+  geom_smooth(aes(group = Class, color = Class), method = "lm", se = F, size = 1)+
+  scale_color_manual(values = color_class[1])+
+  theme_minimal()+
+  theme(legend.position = "none")+
+  ggtitle("Linear mixed model\nlinear trend")
+
+figXd<-ggplot(one_class_sim, aes(Time, Value, group = Id))+
+  geom_point(alpha = 0.1)+
+    stat_smooth(geom = "line", method = "lm", se = F, formula = y~poly(x,2), alpha = 0.05)+
+  geom_smooth(aes(group = Class, color = Class), method = "lm", se = F, formula = y~poly(x,2), size = 1)+
+  scale_color_manual(values = color_class[2])+
+  theme_minimal()+
+  theme(legend.position = "none")+
+  ggtitle("Linear mixed model\npolynomial 2 trend")
+
+figX<-figXa+figXb+figXc+figXd
+
+figX<-figX+plot_layout(nrow = 1)+plot_annotation(tag_levels = "a")
+
+figX
+
+ggsave("figures/figX.png", width = 12, height = 4)
+```
+
+**More than one class**
+```{r}
+set.seed(555)
+two_class_sim <- latrend::generateLongData(sizes = c(100, 80), id = "Id",
+                            cluster = ~poly(Time, 2, raw = TRUE),
+                            clusterCoefs = cbind(c(1, 5, -4), c(1.5, 7, -3)),
+                            noiseScales = c(0.4, 0.4),
+                            randomScales = cbind(0.6, 0.6),
+                            clusterNames = c("Class 1", "Class 2"))
+
+figX1a<-ggplot(two_class_sim, aes(Time, Value, group = Id))+
+  geom_line(alpha = 0.3)+
+  theme_minimal()+
+    ggtitle("Two populations\nlogitudinal data")
+
+
+figX1b<-ggplot(two_class_sim, aes(Time, Value, group = Id))+
+  stat_smooth(geom = "line", method = "lm", se = F, formula = y~poly(x,2), alpha = 0.05)+
+  stat_summary(fun.data = mean_sdl, fun.args = list("mult" = 1), geom = "ribbon", aes(group = Class, color = Class), alpha = 0, linetype = "dashed")+
+  geom_smooth(aes(group = Class, color = Class), method = "lm", se = F, formula = y~poly(x,2), size = 1)+
+  scale_color_manual(values = color_class)+
+  theme_minimal()+
+  theme(legend.position = c(0.2,0.9), legend.title = element_blank())+
+    ggtitle("Longitudinal FMM\nTwo populations")
+
+
+three_class_sim <- latrend::generateLongData(sizes = c(100, 80, 110), id = "Id",
+                            cluster = ~poly(Time, 2, raw = TRUE),
+                            clusterCoefs = cbind(c(1, 5, -4.5), c(1.5, 7, -2), 
+                                                 c(3.2, 1, 0)),
+                            noiseScales = c(0.4, 0.4, 0.3),
+                            randomScales = cbind(0.6, 0.6, 0.5),
+                            clusterNames = c("Class 1", "Class 2", "Class 3"))
+
+figX1c<-ggplot(three_class_sim, aes(Time, Value, group = Id))+
+  geom_line(alpha = 0.3)+
+  theme_minimal()+
+  ggtitle("Three population\nlongitudinal data")
+
+
+figX1d<-ggplot(three_class_sim, aes(Time, Value, group = Id))+
+    stat_smooth(geom = "line", method = "lm", se = F, formula = y~poly(x,2), alpha = 0.05)+
+  stat_summary(fun.data = mean_sdl, fun.args = list("mult" = 1), geom = "ribbon", aes(group = Class, color = Class), alpha = 0, linetype = "dashed")+
+  geom_smooth(aes(group = Class, color = Class), method = "lm", se = F, formula = y~poly(x,2), size = 1)+
+  scale_color_manual(values = color_class)+
+  theme_minimal()+
+  theme(legend.position = c(0.2,0.9), legend.title = element_blank())+
+  ggtitle("Longitudinal FMM\nThree populations")
+
+figX1<-figX1a+figX1b+figX1c+figX1d
+
+figX1<-figX1+plot_layout(nrow = 1)+plot_annotation(tag_levels = "a")
+
+figX1
+
+ggsave("figures/figX1.png", width = 12, height = 4)
+```
+
+**Three class non-linear**
+
+```{r}
+three_class_sim <- latrend::generateLongData(sizes = c(100, 80, 110), id = "Id",
+                            cluster = ~splines::bs(Time, df = 3),
+                            clusterCoefs = cbind(c(1, 15, -3, 1), 
+                                                 c(1, 7, -4,8), 
+                                                 c(3.2, 1, 0,0)),
+                            noiseScales = c(0.4, 0.4, 0.3),
+                            randomScales = cbind(0.6, 0.6, 0.5),
+                            clusterNames = c("Class 1", "Class 2", "Class 3"))
+
+figX2a<-ggplot(three_class_sim, aes(Time, Value, group = Id))+
+  geom_line(alpha = 0.3)+
+  theme_minimal()
+
+figX2b<-ggplot(three_class_sim, aes(Time, Value, group = Id))+
+  geom_line(alpha = 0.3)+
+  theme_minimal()+
+  facet_grid(~Class)
+
+
+figX2c<-ggplot(three_class_sim, aes(Time, Value, group = Id))+
+  geom_line(alpha = 0.05)+
+  geom_smooth(aes(group = Class, color = "Poly (1, line)"), method = "lm", se = F, formula = y~poly(x,1), size = 1, show.legend = T)+
+  geom_smooth(aes(group = Class, color = "Poly (2, quadratic)"), method = "lm", se = F, formula = y~poly(x,2), size = 1)+
+  geom_smooth(aes(group = Class, color = "Poly (3, cubic)"), method = "lm", se = F, formula = y~poly(x,3), size = 1)+
+  theme_minimal()+
+  scale_color_manual(values=c("steelblue2", "purple1", "red"))+
+  theme(legend.position = c(0.5,0.9), legend.title = element_blank(),
+        legend.direction = "horizontal")+
+  facet_grid(~Class)
+
+
+figX2<-figX2b+figX2c
+
+figX2<-figX2+plot_layout(nrow = 2)+plot_annotation(tag_levels = "a")
+
+figX2
+
+ggsave("figures/figX2.png", width = 8, height = 5)
+```

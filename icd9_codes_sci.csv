@@ -1,0 +1,110 @@
+icd9_code,short_label,long_label,icd9_codes_L1,is_sci
+95203,Central cord synd/c1-c4,c1-c4 level with central cord syndrome,952,1
+95204,C1-c4 spin cord inj NEC,c1-c4 level with other specified spinal cord injury,952,1
+95205,C5-c7 spin cord inj NOS,c5-c7 level with unspecified spinal cord injury,952,1
+95206,Complete les cord/c5-c7,c5-c7 level with complete lesion of spinal cord,952,1
+95207,Anterior cord synd/c5-c7,c5-c7 level with anterior cord syndrome,952,1
+95208,Central cord synd/c5-c7,c5-c7 level with central cord syndrome,952,1
+95209,C5-c7 spin cord inj NEC,c5-c7 level with other specified spinal cord injury,952,1
+95210,T1-t6 spin cord inj NOS,t1-t6 level with unspecified spinal cord injury,952,1
+95211,Complete les cord/t1-t6,t1-t6 level with complete lesion of spinal cord,952,1
+95212,Anterior cord synd/t1-t6,t1-t6 level with anterior cord syndrome,952,1
+95213,Central cord synd/t1-t6,t1-t6 level with central cord syndrome,952,1
+95214,T1-t6 spin cord inj NEC,t1-t6 level with other specified spinal cord injury,952,1
+95215,T7-t12 spin cord inj NOS,t7-t12 level with unspecified spinal cord injury,952,1
+95216,Complete les cord/t7-t12,t7-t12 level with complete lesion of spinal cord,952,1
+95217,Anterior cord syn/t7-t12,t7-t12 level with anterior cord syndrome,952,1
+95218,Central cord syn/t7-t12,t7-t12 level with central cord syndrome,952,1
+95219,T7-t12 spin cord inj NEC,t7-t12 level with other specified spinal cord injury,952,1
+80500,Fx cervical vert NOS-cl,"closed fracture of cervical vertebra, unspecified level",805,0
+80501,Fx c1 vertebra-closed,closed fracture of first cervical vertebra,805,0
+80502,Fx c2 vertebra-closed,closed fracture of second cervical vertebra,805,0
+80503,Fx c3 vertebra-closed,closed fracture of third cervical vertebra,805,0
+80504,Fx c4 vertebra-closed,closed fracture of fourth cervical vertebra,805,0
+80505,Fx c5 vertebra-closed,closed fracture of fifth cervical vertebra,805,0
+80506,Fx c6 vertebra-closed,closed fracture of sixth cervical vertebra,805,0
+80507,Fx c7 vertebra-closed,closed fracture of seventh cervical vertebra,805,0
+80508,Fx mult cervical vert-cl,closed fracture of multiple cervical vertebrae,805,0
+80510,Fx cervical vert NOS-opn,"open fracture of cervical vertebra, unspecified level",805,0
+80511,Fx c1 vertebra-open,open fracture of first cervical vertebra,805,0
+80512,Fx c2 vertebra-open,open fracture of second cervical vertebra,805,0
+80513,Fx c3 vertebra-open,open fracture of third cervical vertebra,805,0
+80514,Fx c4 vertebra-open,open fracture of fourth cervical vertebra,805,0
+80515,Fx c5 vertebra-open,open fracture of fifth cervical vertebra,805,0
+80516,Fx c6 vertebra-open,open fracture of sixth cervical vertebra,805,0
+80517,Fx c7 vertebra-open,open fracture of seventh cervical vertebra,805,0
+80518,Fx mlt cervical vert-opn,open fracture of multiple cervical vertebrae,805,0
+8052,Fx dorsal vertebra-close,closed fracture of dorsal [thoracic] vertebra without mention of spinal cord injury,805,0
+8053,Fx dorsal vertebra-open,open fracture of dorsal [thoracic] vertebra without mention of spinal cord injury,805,0
+8054,Fx lumbar vertebra-close,closed fracture of lumbar vertebra without mention of spinal cord injury,805,0
+8055,Fx lumbar vertebra-open,open fracture of lumbar vertebra without mention of spinal cord injury,805,0
+95200,C1-c4 spin cord inj NOS,c1-c4 level with unspecified spinal cord injury,952,1
+95201,Complete les cord/c1-c4,c1-c4 level with complete lesion of spinal cord,952,1
+95202,Anterior cord synd/c1-c4,c1-c4 level with anterior cord syndrome,952,1
+9522,Lumbar spinal cord injur,lumbar spinal cord injury without evidence of spinal bone injury,952,1
+9523,Sacral spinal cord injur,sacral spinal cord injury without evidence of spinal bone injury,952,1
+9524,Cauda equina injury,cauda equina spinal cord injury without evidence of spinal bone injury,952,1
+9528,Spin cord inj-mult site,multiple sites of spinal cord injury without evidence of spinal bone injury,952,1
+9529,Spinal cord injury NOS,unspecified site of spinal cord injury without evidence of spinal bone injury,952,1
+9530,Cervical root injury,injury to cervical nerve root,953,1
+9531,Dorsal root injury,injury to dorsal nerve root,953,1
+9532,Lumbar root injury,injury to lumbar nerve root,953,1
+9533,Sacral root injury,injury to sacral nerve root,953,1
+9538,Mult nerve root/plex inj,injury to multiple sites of nerve roots and spinal plexus,953,1
+9539,Inj nerve root/plex NOS,injury to unspecified site of nerve roots and spinal plexus,953,1
+8056,Fx sacrum/coccyx-closed,closed fracture of sacrum and coccyx without mention of spinal cord injury,805,0
+8057,Fx sacrum/coccyx-open,open fracture of sacrum and coccyx without mention of spinal cord injury,805,0
+8058,Vertebral fx NOS-closed,closed fracture of unspecified vertebral column without mention of spinal cord injury,805,0
+8059,Vertebral fx NOS-open,open fracture of unspecified vertebral column without mention of spinal cord injury,805,0
+80600,C1-c4 fx-cl/cord inj NOS,closed fracture of c1-c4 level with unspecified spinal cord injury,806,1
+80601,C1-c4 fx-cl/com cord les,closed fracture of c1-c4 level with complete lesion of cord,806,1
+80602,C1-c4 fx-cl/ant cord syn,closed fracture of c1-c4 level with anterior cord syndrome,806,1
+80603,C1-c4 fx-cl/cen cord syn,closed fracture of c1-c4 level with central cord syndrome,806,1
+80604,C1-c4 fx-cl/cord inj NEC,closed fracture of c1-c4 level with other specified spinal cord injury,806,1
+80605,C5-c7 fx-cl/cord inj NOS,closed fracture of c5-c7 level with unspecified spinal cord injury,806,1
+80606,C5-c7 fx-cl/com cord les,closed fracture of c5-c7 level with complete lesion of cord,806,1
+80607,C5-c7 fx-cl/ant cord syn,closed fracture of c5-c7 level with anterior cord syndrome,806,1
+80608,C5-c7 fx-cl/cen cord syn,closed fracture of c5-c7 level with central cord syndrome,806,1
+80609,C5-c7 fx-cl/cord inj NEC,closed fracture of c5-c7 level with other specified spinal cord injury,806,1
+80610,C1-c4 fx-op/cord inj NOS,open fracture of c1-c4 level with unspecified spinal cord injury,806,1
+80611,C1-c4 fx-op/com cord les,open fracture of c1-c4 level with complete lesion of cord,806,1
+80612,C1-c4 fx-op/ant cord syn,open fracture of c1-c4 level with anterior cord syndrome,806,1
+80613,C1-c4 fx-op/cen cord syn,open fracture of c1-c4 level with central cord syndrome,806,1
+80614,C1-c4 fx-op/cord inj NEC,open fracture of c1-c4 level with other specified spinal cord injury,806,1
+80615,C5-c7 fx-op/cord inj NOS,open fracture of c5-c7 level with unspecified spinal cord injury,806,1
+80616,C5-c7 fx-op/com cord les,open fracture of c5-c7 level with complete lesion of cord,806,1
+80617,C5-c7 fx-op/ant cord syn,open fracture of c5-c7 level with anterior cord syndrome,806,1
+80618,C5-c7 fx-op/cen cord syn,open fracture of c5-c7 level with central cord syndrome,806,1
+80619,C5-c7 fx-op/cord inj NEC,open fracture of c5-c7 level with other specified spinal cord injury,806,1
+80620,T1-t6 fx-cl/cord inj NOS,closed fracture of t1-t6 level with unspecified spinal cord injury,806,1
+80621,T1-t6 fx-cl/com cord les,closed fracture of t1-t6 level with complete lesion of cord,806,1
+80622,T1-t6 fx-cl/ant cord syn,closed fracture of t1-t6 level with anterior cord syndrome,806,1
+80623,T1-t6 fx-cl/cen cord syn,closed fracture of t1-t6 level with central cord syndrome,806,1
+80624,T1-t6 fx-cl/cord inj NEC,closed fracture of t1-t6 level with other specified spinal cord injury,806,1
+80625,T7-t12 fx-cl/crd inj NOS,closed fracture of t7-t12 level with unspecified spinal cord injury,806,1
+80626,T7-t12 fx-cl/com crd les,closed fracture of t7-t12 level with complete lesion of cord,806,1
+80627,T7-t12 fx-cl/ant crd syn,closed fracture of t7-t12 level with anterior cord syndrome,806,1
+80628,T7-t12 fx-cl/cen crd syn,closed fracture of t7-t12 level with central cord syndrome,806,1
+80629,T7-t12 fx-cl/crd inj NEC,closed fracture of t7-t12 level with other specified spinal cord injury,806,1
+80630,T1-t6 fx-op/cord inj NOS,open fracture of t1-t6 level with unspecified spinal cord injury,806,1
+80631,T1-t6 fx-op/com cord les,open fracture of t1-t6 level with complete lesion of cord,806,1
+80632,T1-t6 fx-op/ant cord syn,open fracture of t1-t6 level with anterior cord syndrome,806,1
+80633,T1-t6 fx-op/cen cord syn,open fracture of t1-t6 level with central cord syndrome,806,1
+80634,T1-t6 fx-op/cord inj NEC,open fracture of t1-t6 level with other specified spinal cord injury,806,1
+80635,T7-t12 fx-op/crd inj NOS,open fracture of t7-t12 level with unspecified spinal cord injury,806,1
+80636,T7-t12 fx-op/com crd les,open fracture of t7-t12 level with complete lesion of cord,806,1
+80637,T7-t12 fx-op/ant crd syn,open fracture of t7-t12 level with anterior cord syndrome,806,1
+80638,T7-t12 fx-op/cen crd syn,open fracture of t7-t12 level with central cord syndrome,806,1
+80639,T7-t12 fx-op/crd inj NEC,open fracture of t7-t12 level with other specified spinal cord injury,806,1
+8064,Cl lumbar fx w cord inj,closed fracture of lumbar spine with spinal cord injury,806,1
+8065,Opn lumbar fx w cord inj,open fracture of lumbar spine with spinal cord injury,806,1
+80660,Fx sacrum-cl/crd inj NOS,closed fracture of sacrum and coccyx with unspecified spinal cord injury,806,1
+80661,Fx sacr-cl/cauda equ les,closed fracture of sacrum and coccyx with complete cauda equina lesion,806,1
+80662,Fx sacr-cl/cauda inj NEC,closed fracture of sacrum and coccyx with other cauda equina injury,806,1
+80669,Fx sacrum-cl/crd inj NEC,closed fracture of sacrum and coccyx with other spinal cord injury,806,1
+80670,Fx sacrum-op/crd inj NOS,open fracture of sacrum and coccyx with unspecified spinal cord injury,806,1
+80671,Fx sacr-op/cauda equ les,open fracture of sacrum and coccyx with complete cauda equina lesion,806,1
+80672,Fx sacr-op/cauda inj NEC,open fracture of sacrum and coccyx with other cauda equina injury,806,1
+80679,Fx sacrum-op/crd inj NEC,open fracture of sacrum and coccyx with other spinal cord injury,806,1
+8068,Vert fx NOS-cl w crd inj,closed fracture of unspecified vertebral column with spinal cord injury,806,1
+8069,Vert fx NOS-op w crd inj,open fracture of unspecified vertebral column with spinal cord injury,806,1

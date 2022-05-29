@@ -1,0 +1,1306 @@
+icd10_code,icd10_definition,icd10_codes_L1,is_sci
+S12000A,"unspecified displaced fracture of first cervical vertebra, initial encounter for closed fracture",S120,0
+S12000B,"unspecified displaced fracture of first cervical vertebra, initial encounter for open fracture",S120,0
+S12000D,"unspecified displaced fracture of first cervical vertebra, subsequent encounter for fracture with routine healing",S120,0
+S12000G,"unspecified displaced fracture of first cervical vertebra, subsequent encounter for fracture with delayed healing",S120,0
+S12000K,"unspecified displaced fracture of first cervical vertebra, subsequent encounter for fracture with nonunion",S120,0
+S12000S,"unspecified displaced fracture of first cervical vertebra, sequela",S120,0
+S12001A,"unspecified nondisplaced fracture of first cervical vertebra, initial encounter for closed fracture",S120,0
+S12001B,"unspecified nondisplaced fracture of first cervical vertebra, initial encounter for open fracture",S120,0
+S12001D,"unspecified nondisplaced fracture of first cervical vertebra, subsequent encounter for fracture with routine healing",S120,0
+S12001G,"unspecified nondisplaced fracture of first cervical vertebra, subsequent encounter for fracture with delayed healing",S120,0
+S12001K,"unspecified nondisplaced fracture of first cervical vertebra, subsequent encounter for fracture with nonunion",S120,0
+S12001S,"unspecified nondisplaced fracture of first cervical vertebra, sequela",S120,0
+S1201XA,"stable burst fracture of first cervical vertebra, initial encounter for closed fracture",S120,0
+S1201XB,"stable burst fracture of first cervical vertebra, initial encounter for open fracture",S120,0
+S1201XD,"stable burst fracture of first cervical vertebra, subsequent encounter for fracture with routine healing",S120,0
+S1201XG,"stable burst fracture of first cervical vertebra, subsequent encounter for fracture with delayed healing",S120,0
+S1201XK,"stable burst fracture of first cervical vertebra, subsequent encounter for fracture with nonunion",S120,0
+S1201XS,"stable burst fracture of first cervical vertebra, sequela",S120,0
+S1202XA,"unstable burst fracture of first cervical vertebra, initial encounter for closed fracture",S120,0
+S1202XB,"unstable burst fracture of first cervical vertebra, initial encounter for open fracture",S120,0
+S1202XD,"unstable burst fracture of first cervical vertebra, subsequent encounter for fracture with routine healing",S120,0
+S1202XG,"unstable burst fracture of first cervical vertebra, subsequent encounter for fracture with delayed healing",S120,0
+S1202XK,"unstable burst fracture of first cervical vertebra, subsequent encounter for fracture with nonunion",S120,0
+S1202XS,"unstable burst fracture of first cervical vertebra, sequela",S120,0
+S12030A,"displaced posterior arch fracture of first cervical vertebra, initial encounter for closed fracture",S120,0
+S12030B,"displaced posterior arch fracture of first cervical vertebra, initial encounter for open fracture",S120,0
+S12030D,"displaced posterior arch fracture of first cervical vertebra, subsequent encounter for fracture with routine healing",S120,0
+S12030G,"displaced posterior arch fracture of first cervical vertebra, subsequent encounter for fracture with delayed healing",S120,0
+S12030K,"displaced posterior arch fracture of first cervical vertebra, subsequent encounter for fracture with nonunion",S120,0
+S12030S,"displaced posterior arch fracture of first cervical vertebra, sequela",S120,0
+S12031A,"nondisplaced posterior arch fracture of first cervical vertebra, initial encounter for closed fracture",S120,0
+S12031B,"nondisplaced posterior arch fracture of first cervical vertebra, initial encounter for open fracture",S120,0
+S12031D,"nondisplaced posterior arch fracture of first cervical vertebra, subsequent encounter for fracture with routine healing",S120,0
+S12031G,"nondisplaced posterior arch fracture of first cervical vertebra, subsequent encounter for fracture with delayed healing",S120,0
+S12031K,"nondisplaced posterior arch fracture of first cervical vertebra, subsequent encounter for fracture with nonunion",S120,0
+S12031S,"nondisplaced posterior arch fracture of first cervical vertebra, sequela",S120,0
+S12040A,"displaced lateral mass fracture of first cervical vertebra, initial encounter for closed fracture",S120,0
+S12040B,"displaced lateral mass fracture of first cervical vertebra, initial encounter for open fracture",S120,0
+S12040D,"displaced lateral mass fracture of first cervical vertebra, subsequent encounter for fracture with routine healing",S120,0
+S12040G,"displaced lateral mass fracture of first cervical vertebra, subsequent encounter for fracture with delayed healing",S120,0
+S12040K,"displaced lateral mass fracture of first cervical vertebra, subsequent encounter for fracture with nonunion",S120,0
+S12040S,"displaced lateral mass fracture of first cervical vertebra, sequela",S120,0
+S12041A,"nondisplaced lateral mass fracture of first cervical vertebra, initial encounter for closed fracture",S120,0
+S12041B,"nondisplaced lateral mass fracture of first cervical vertebra, initial encounter for open fracture",S120,0
+S12041D,"nondisplaced lateral mass fracture of first cervical vertebra, subsequent encounter for fracture with routine healing",S120,0
+S12041G,"nondisplaced lateral mass fracture of first cervical vertebra, subsequent encounter for fracture with delayed healing",S120,0
+S12041K,"nondisplaced lateral mass fracture of first cervical vertebra, subsequent encounter for fracture with nonunion",S120,0
+S12041S,"nondisplaced lateral mass fracture of first cervical vertebra, sequela",S120,0
+S12090A,"other displaced fracture of first cervical vertebra, initial encounter for closed fracture",S120,0
+S12090B,"other displaced fracture of first cervical vertebra, initial encounter for open fracture",S120,0
+S12090D,"other displaced fracture of first cervical vertebra, subsequent encounter for fracture with routine healing",S120,0
+S12090G,"other displaced fracture of first cervical vertebra, subsequent encounter for fracture with delayed healing",S120,0
+S12090K,"other displaced fracture of first cervical vertebra, subsequent encounter for fracture with nonunion",S120,0
+S12090S,"other displaced fracture of first cervical vertebra, sequela",S120,0
+S12091A,"other nondisplaced fracture of first cervical vertebra, initial encounter for closed fracture",S120,0
+S12091B,"other nondisplaced fracture of first cervical vertebra, initial encounter for open fracture",S120,0
+S12091D,"other nondisplaced fracture of first cervical vertebra, subsequent encounter for fracture with routine healing",S120,0
+S12091G,"other nondisplaced fracture of first cervical vertebra, subsequent encounter for fracture with delayed healing",S120,0
+S12091K,"other nondisplaced fracture of first cervical vertebra, subsequent encounter for fracture with nonunion",S120,0
+S12091S,"other nondisplaced fracture of first cervical vertebra, sequela",S120,0
+S12100A,"unspecified displaced fracture of second cervical vertebra, initial encounter for closed fracture",S121,0
+S12100B,"unspecified displaced fracture of second cervical vertebra, initial encounter for open fracture",S121,0
+S12100D,"unspecified displaced fracture of second cervical vertebra, subsequent encounter for fracture with routine healing",S121,0
+S12100G,"unspecified displaced fracture of second cervical vertebra, subsequent encounter for fracture with delayed healing",S121,0
+S12100K,"unspecified displaced fracture of second cervical vertebra, subsequent encounter for fracture with nonunion",S121,0
+S12100S,"unspecified displaced fracture of second cervical vertebra, sequela",S121,0
+S12101A,"unspecified nondisplaced fracture of second cervical vertebra, initial encounter for closed fracture",S121,0
+S12101B,"unspecified nondisplaced fracture of second cervical vertebra, initial encounter for open fracture",S121,0
+S12101D,"unspecified nondisplaced fracture of second cervical vertebra, subsequent encounter for fracture with routine healing",S121,0
+S12101G,"unspecified nondisplaced fracture of second cervical vertebra, subsequent encounter for fracture with delayed healing",S121,0
+S12101K,"unspecified nondisplaced fracture of second cervical vertebra, subsequent encounter for fracture with nonunion",S121,0
+S12101S,"unspecified nondisplaced fracture of second cervical vertebra, sequela",S121,0
+S12110A,"anterior displaced type ii dens fracture, initial encounter for closed fracture",S121,0
+S12110B,"anterior displaced type ii dens fracture, initial encounter for open fracture",S121,0
+S12110D,"anterior displaced type ii dens fracture, subsequent encounter for fracture with routine healing",S121,0
+S12110G,"anterior displaced type ii dens fracture, subsequent encounter for fracture with delayed healing",S121,0
+S12110K,"anterior displaced type ii dens fracture, subsequent encounter for fracture with nonunion",S121,0
+S12110S,"anterior displaced type ii dens fracture, sequela",S121,0
+S12111A,"posterior displaced type ii dens fracture, initial encounter for closed fracture",S121,0
+S12111B,"posterior displaced type ii dens fracture, initial encounter for open fracture",S121,0
+S12111D,"posterior displaced type ii dens fracture, subsequent encounter for fracture with routine healing",S121,0
+S12111G,"posterior displaced type ii dens fracture, subsequent encounter for fracture with delayed healing",S121,0
+S12111K,"posterior displaced type ii dens fracture, subsequent encounter for fracture with nonunion",S121,0
+S12111S,"posterior displaced type ii dens fracture, sequela",S121,0
+S12112A,"nondisplaced type ii dens fracture, initial encounter for closed fracture",S121,0
+S12112B,"nondisplaced type ii dens fracture, initial encounter for open fracture",S121,0
+S12112D,"nondisplaced type ii dens fracture, subsequent encounter for fracture with routine healing",S121,0
+S12112G,"nondisplaced type ii dens fracture, subsequent encounter for fracture with delayed healing",S121,0
+S12112K,"nondisplaced type ii dens fracture, subsequent encounter for fracture with nonunion",S121,0
+S12112S,"nondisplaced type ii dens fracture, sequela",S121,0
+S12120A,"other displaced dens fracture, initial encounter for closed fracture",S121,0
+S12120B,"other displaced dens fracture, initial encounter for open fracture",S121,0
+S12120D,"other displaced dens fracture, subsequent encounter for fracture with routine healing",S121,0
+S12120G,"other displaced dens fracture, subsequent encounter for fracture with delayed healing",S121,0
+S12120K,"other displaced dens fracture, subsequent encounter for fracture with nonunion",S121,0
+S12120S,"other displaced dens fracture, sequela",S121,0
+S12121A,"other nondisplaced dens fracture, initial encounter for closed fracture",S121,0
+S12121B,"other nondisplaced dens fracture, initial encounter for open fracture",S121,0
+S12121D,"other nondisplaced dens fracture, subsequent encounter for fracture with routine healing",S121,0
+S12121G,"other nondisplaced dens fracture, subsequent encounter for fracture with delayed healing",S121,0
+S12121K,"other nondisplaced dens fracture, subsequent encounter for fracture with nonunion",S121,0
+S12121S,"other nondisplaced dens fracture, sequela",S121,0
+S12130A,"unspecified traumatic displaced spondylolisthesis of second cervical vertebra, initial encounter for closed fracture",S121,0
+S12130B,"unspecified traumatic displaced spondylolisthesis of second cervical vertebra, initial encounter for open fracture",S121,0
+S12130D,"unspecified traumatic displaced spondylolisthesis of second cervical vertebra, subsequent encounter for fracture with routine healing",S121,0
+S12130G,"unspecified traumatic displaced spondylolisthesis of second cervical vertebra, subsequent encounter for fracture with delayed healing",S121,0
+S12130K,"unspecified traumatic displaced spondylolisthesis of second cervical vertebra, subsequent encounter for fracture with nonunion",S121,0
+S12130S,"unspecified traumatic displaced spondylolisthesis of second cervical vertebra, sequela",S121,0
+S12131A,"unspecified traumatic nondisplaced spondylolisthesis of second cervical vertebra, initial encounter for closed fracture",S121,0
+S12131B,"unspecified traumatic nondisplaced spondylolisthesis of second cervical vertebra, initial encounter for open fracture",S121,0
+S12131D,"unspecified traumatic nondisplaced spondylolisthesis of second cervical vertebra, subsequent encounter for fracture with routine healing",S121,0
+S12131G,"unspecified traumatic nondisplaced spondylolisthesis of second cervical vertebra, subsequent encounter for fracture with delayed healing",S121,0
+S12131K,"unspecified traumatic nondisplaced spondylolisthesis of second cervical vertebra, subsequent encounter for fracture with nonunion",S121,0
+S12131S,"unspecified traumatic nondisplaced spondylolisthesis of second cervical vertebra, sequela",S121,0
+S1214XA,"type iii traumatic spondylolisthesis of second cervical vertebra, initial encounter for closed fracture",S121,0
+S1214XB,"type iii traumatic spondylolisthesis of second cervical vertebra, initial encounter for open fracture",S121,0
+S1214XD,"type iii traumatic spondylolisthesis of second cervical vertebra, subsequent encounter for fracture with routine healing",S121,0
+S1214XG,"type iii traumatic spondylolisthesis of second cervical vertebra, subsequent encounter for fracture with delayed healing",S121,0
+S1214XK,"type iii traumatic spondylolisthesis of second cervical vertebra, subsequent encounter for fracture with nonunion",S121,0
+S1214XS,"type iii traumatic spondylolisthesis of second cervical vertebra, sequela",S121,0
+S12150A,"other traumatic displaced spondylolisthesis of second cervical vertebra, initial encounter for closed fracture",S121,0
+S12150B,"other traumatic displaced spondylolisthesis of second cervical vertebra, initial encounter for open fracture",S121,0
+S12150D,"other traumatic displaced spondylolisthesis of second cervical vertebra, subsequent encounter for fracture with routine healing",S121,0
+S12150G,"other traumatic displaced spondylolisthesis of second cervical vertebra, subsequent encounter for fracture with delayed healing",S121,0
+S12150K,"other traumatic displaced spondylolisthesis of second cervical vertebra, subsequent encounter for fracture with nonunion",S121,0
+S12150S,"other traumatic displaced spondylolisthesis of second cervical vertebra, sequela",S121,0
+S12151A,"other traumatic nondisplaced spondylolisthesis of second cervical vertebra, initial encounter for closed fracture",S121,0
+S12151B,"other traumatic nondisplaced spondylolisthesis of second cervical vertebra, initial encounter for open fracture",S121,0
+S12151D,"other traumatic nondisplaced spondylolisthesis of second cervical vertebra, subsequent encounter for fracture with routine healing",S121,0
+S12151G,"other traumatic nondisplaced spondylolisthesis of second cervical vertebra, subsequent encounter for fracture with delayed healing",S121,0
+S12151K,"other traumatic nondisplaced spondylolisthesis of second cervical vertebra, subsequent encounter for fracture with nonunion",S121,0
+S12151S,"other traumatic nondisplaced spondylolisthesis of second cervical vertebra, sequela",S121,0
+S12190A,"other displaced fracture of second cervical vertebra, initial encounter for closed fracture",S121,0
+S12190B,"other displaced fracture of second cervical vertebra, initial encounter for open fracture",S121,0
+S12190D,"other displaced fracture of second cervical vertebra, subsequent encounter for fracture with routine healing",S121,0
+S12190G,"other displaced fracture of second cervical vertebra, subsequent encounter for fracture with delayed healing",S121,0
+S12190K,"other displaced fracture of second cervical vertebra, subsequent encounter for fracture with nonunion",S121,0
+S12190S,"other displaced fracture of second cervical vertebra, sequela",S121,0
+S12191A,"other nondisplaced fracture of second cervical vertebra, initial encounter for closed fracture",S121,0
+S12191B,"other nondisplaced fracture of second cervical vertebra, initial encounter for open fracture",S121,0
+S12191D,"other nondisplaced fracture of second cervical vertebra, subsequent encounter for fracture with routine healing",S121,0
+S12191G,"other nondisplaced fracture of second cervical vertebra, subsequent encounter for fracture with delayed healing",S121,0
+S12191K,"other nondisplaced fracture of second cervical vertebra, subsequent encounter for fracture with nonunion",S121,0
+S12191S,"other nondisplaced fracture of second cervical vertebra, sequela",S121,0
+S12200A,"unspecified displaced fracture of third cervical vertebra, initial encounter for closed fracture",S122,0
+S12200B,"unspecified displaced fracture of third cervical vertebra, initial encounter for open fracture",S122,0
+S12200D,"unspecified displaced fracture of third cervical vertebra, subsequent encounter for fracture with routine healing",S122,0
+S12200G,"unspecified displaced fracture of third cervical vertebra, subsequent encounter for fracture with delayed healing",S122,0
+S12200K,"unspecified displaced fracture of third cervical vertebra, subsequent encounter for fracture with nonunion",S122,0
+S12200S,"unspecified displaced fracture of third cervical vertebra, sequela",S122,0
+S12201A,"unspecified nondisplaced fracture of third cervical vertebra, initial encounter for closed fracture",S122,0
+S12201B,"unspecified nondisplaced fracture of third cervical vertebra, initial encounter for open fracture",S122,0
+S12201D,"unspecified nondisplaced fracture of third cervical vertebra, subsequent encounter for fracture with routine healing",S122,0
+S12201G,"unspecified nondisplaced fracture of third cervical vertebra, subsequent encounter for fracture with delayed healing",S122,0
+S12201K,"unspecified nondisplaced fracture of third cervical vertebra, subsequent encounter for fracture with nonunion",S122,0
+S12201S,"unspecified nondisplaced fracture of third cervical vertebra, sequela",S122,0
+S12230A,"unspecified traumatic displaced spondylolisthesis of third cervical vertebra, initial encounter for closed fracture",S122,0
+S12230B,"unspecified traumatic displaced spondylolisthesis of third cervical vertebra, initial encounter for open fracture",S122,0
+S12230D,"unspecified traumatic displaced spondylolisthesis of third cervical vertebra, subsequent encounter for fracture with routine healing",S122,0
+S12230G,"unspecified traumatic displaced spondylolisthesis of third cervical vertebra, subsequent encounter for fracture with delayed healing",S122,0
+S12230K,"unspecified traumatic displaced spondylolisthesis of third cervical vertebra, subsequent encounter for fracture with nonunion",S122,0
+S12230S,"unspecified traumatic displaced spondylolisthesis of third cervical vertebra, sequela",S122,0
+S12231A,"unspecified traumatic nondisplaced spondylolisthesis of third cervical vertebra, initial encounter for closed fracture",S122,0
+S12231B,"unspecified traumatic nondisplaced spondylolisthesis of third cervical vertebra, initial encounter for open fracture",S122,0
+S12231D,"unspecified traumatic nondisplaced spondylolisthesis of third cervical vertebra, subsequent encounter for fracture with routine healing",S122,0
+S12231G,"unspecified traumatic nondisplaced spondylolisthesis of third cervical vertebra, subsequent encounter for fracture with delayed healing",S122,0
+S12231K,"unspecified traumatic nondisplaced spondylolisthesis of third cervical vertebra, subsequent encounter for fracture with nonunion",S122,0
+S12231S,"unspecified traumatic nondisplaced spondylolisthesis of third cervical vertebra, sequela",S122,0
+S1224XA,"type iii traumatic spondylolisthesis of third cervical vertebra, initial encounter for closed fracture",S122,0
+S1224XB,"type iii traumatic spondylolisthesis of third cervical vertebra, initial encounter for open fracture",S122,0
+S1224XD,"type iii traumatic spondylolisthesis of third cervical vertebra, subsequent encounter for fracture with routine healing",S122,0
+S1224XG,"type iii traumatic spondylolisthesis of third cervical vertebra, subsequent encounter for fracture with delayed healing",S122,0
+S1224XK,"type iii traumatic spondylolisthesis of third cervical vertebra, subsequent encounter for fracture with nonunion",S122,0
+S1224XS,"type iii traumatic spondylolisthesis of third cervical vertebra, sequela",S122,0
+S12250A,"other traumatic displaced spondylolisthesis of third cervical vertebra, initial encounter for closed fracture",S122,0
+S12250B,"other traumatic displaced spondylolisthesis of third cervical vertebra, initial encounter for open fracture",S122,0
+S12250D,"other traumatic displaced spondylolisthesis of third cervical vertebra, subsequent encounter for fracture with routine healing",S122,0
+S12250G,"other traumatic displaced spondylolisthesis of third cervical vertebra, subsequent encounter for fracture with delayed healing",S122,0
+S12250K,"other traumatic displaced spondylolisthesis of third cervical vertebra, subsequent encounter for fracture with nonunion",S122,0
+S12250S,"other traumatic displaced spondylolisthesis of third cervical vertebra, sequela",S122,0
+S12251A,"other traumatic nondisplaced spondylolisthesis of third cervical vertebra, initial encounter for closed fracture",S122,0
+S12251B,"other traumatic nondisplaced spondylolisthesis of third cervical vertebra, initial encounter for open fracture",S122,0
+S12251D,"other traumatic nondisplaced spondylolisthesis of third cervical vertebra, subsequent encounter for fracture with routine healing",S122,0
+S12251G,"other traumatic nondisplaced spondylolisthesis of third cervical vertebra, subsequent encounter for fracture with delayed healing",S122,0
+S12251K,"other traumatic nondisplaced spondylolisthesis of third cervical vertebra, subsequent encounter for fracture with nonunion",S122,0
+S12251S,"other traumatic nondisplaced spondylolisthesis of third cervical vertebra, sequela",S122,0
+S12290A,"other displaced fracture of third cervical vertebra, initial encounter for closed fracture",S122,0
+S12290B,"other displaced fracture of third cervical vertebra, initial encounter for open fracture",S122,0
+S12290D,"other displaced fracture of third cervical vertebra, subsequent encounter for fracture with routine healing",S122,0
+S12290G,"other displaced fracture of third cervical vertebra, subsequent encounter for fracture with delayed healing",S122,0
+S12290K,"other displaced fracture of third cervical vertebra, subsequent encounter for fracture with nonunion",S122,0
+S12290S,"other displaced fracture of third cervical vertebra, sequela",S122,0
+S12291A,"other nondisplaced fracture of third cervical vertebra, initial encounter for closed fracture",S122,0
+S12291B,"other nondisplaced fracture of third cervical vertebra, initial encounter for open fracture",S122,0
+S12291D,"other nondisplaced fracture of third cervical vertebra, subsequent encounter for fracture with routine healing",S122,0
+S12291G,"other nondisplaced fracture of third cervical vertebra, subsequent encounter for fracture with delayed healing",S122,0
+S12291K,"other nondisplaced fracture of third cervical vertebra, subsequent encounter for fracture with nonunion",S122,0
+S12291S,"other nondisplaced fracture of third cervical vertebra, sequela",S122,0
+S12300A,"unspecified displaced fracture of fourth cervical vertebra, initial encounter for closed fracture",S123,0
+S12300B,"unspecified displaced fracture of fourth cervical vertebra, initial encounter for open fracture",S123,0
+S12300D,"unspecified displaced fracture of fourth cervical vertebra, subsequent encounter for fracture with routine healing",S123,0
+S12300G,"unspecified displaced fracture of fourth cervical vertebra, subsequent encounter for fracture with delayed healing",S123,0
+S12300K,"unspecified displaced fracture of fourth cervical vertebra, subsequent encounter for fracture with nonunion",S123,0
+S12300S,"unspecified displaced fracture of fourth cervical vertebra, sequela",S123,0
+S12301A,"unspecified nondisplaced fracture of fourth cervical vertebra, initial encounter for closed fracture",S123,0
+S12301B,"unspecified nondisplaced fracture of fourth cervical vertebra, initial encounter for open fracture",S123,0
+S12301D,"unspecified nondisplaced fracture of fourth cervical vertebra, subsequent encounter for fracture with routine healing",S123,0
+S12301G,"unspecified nondisplaced fracture of fourth cervical vertebra, subsequent encounter for fracture with delayed healing",S123,0
+S12301K,"unspecified nondisplaced fracture of fourth cervical vertebra, subsequent encounter for fracture with nonunion",S123,0
+S12301S,"unspecified nondisplaced fracture of fourth cervical vertebra, sequela",S123,0
+S12330A,"unspecified traumatic displaced spondylolisthesis of fourth cervical vertebra, initial encounter for closed fracture",S123,0
+S12330B,"unspecified traumatic displaced spondylolisthesis of fourth cervical vertebra, initial encounter for open fracture",S123,0
+S12330D,"unspecified traumatic displaced spondylolisthesis of fourth cervical vertebra, subsequent encounter for fracture with routine healing",S123,0
+S12330G,"unspecified traumatic displaced spondylolisthesis of fourth cervical vertebra, subsequent encounter for fracture with delayed healing",S123,0
+S12330K,"unspecified traumatic displaced spondylolisthesis of fourth cervical vertebra, subsequent encounter for fracture with nonunion",S123,0
+S12330S,"unspecified traumatic displaced spondylolisthesis of fourth cervical vertebra, sequela",S123,0
+S12331A,"unspecified traumatic nondisplaced spondylolisthesis of fourth cervical vertebra, initial encounter for closed fracture",S123,0
+S12331B,"unspecified traumatic nondisplaced spondylolisthesis of fourth cervical vertebra, initial encounter for open fracture",S123,0
+S12331D,"unspecified traumatic nondisplaced spondylolisthesis of fourth cervical vertebra, subsequent encounter for fracture with routine healing",S123,0
+S12331G,"unspecified traumatic nondisplaced spondylolisthesis of fourth cervical vertebra, subsequent encounter for fracture with delayed healing",S123,0
+S12331K,"unspecified traumatic nondisplaced spondylolisthesis of fourth cervical vertebra, subsequent encounter for fracture with nonunion",S123,0
+S12331S,"unspecified traumatic nondisplaced spondylolisthesis of fourth cervical vertebra, sequela",S123,0
+S1234XA,"type iii traumatic spondylolisthesis of fourth cervical vertebra, initial encounter for closed fracture",S123,0
+S1234XB,"type iii traumatic spondylolisthesis of fourth cervical vertebra, initial encounter for open fracture",S123,0
+S1234XD,"type iii traumatic spondylolisthesis of fourth cervical vertebra, subsequent encounter for fracture with routine healing",S123,0
+S1234XG,"type iii traumatic spondylolisthesis of fourth cervical vertebra, subsequent encounter for fracture with delayed healing",S123,0
+S1234XK,"type iii traumatic spondylolisthesis of fourth cervical vertebra, subsequent encounter for fracture with nonunion",S123,0
+S1234XS,"type iii traumatic spondylolisthesis of fourth cervical vertebra, sequela",S123,0
+S12350A,"other traumatic displaced spondylolisthesis of fourth cervical vertebra, initial encounter for closed fracture",S123,0
+S12350B,"other traumatic displaced spondylolisthesis of fourth cervical vertebra, initial encounter for open fracture",S123,0
+S12350D,"other traumatic displaced spondylolisthesis of fourth cervical vertebra, subsequent encounter for fracture with routine healing",S123,0
+S12350G,"other traumatic displaced spondylolisthesis of fourth cervical vertebra, subsequent encounter for fracture with delayed healing",S123,0
+S12350K,"other traumatic displaced spondylolisthesis of fourth cervical vertebra, subsequent encounter for fracture with nonunion",S123,0
+S12350S,"other traumatic displaced spondylolisthesis of fourth cervical vertebra, sequela",S123,0
+S12351A,"other traumatic nondisplaced spondylolisthesis of fourth cervical vertebra, initial encounter for closed fracture",S123,0
+S12351B,"other traumatic nondisplaced spondylolisthesis of fourth cervical vertebra, initial encounter for open fracture",S123,0
+S12351D,"other traumatic nondisplaced spondylolisthesis of fourth cervical vertebra, subsequent encounter for fracture with routine healing",S123,0
+S12351G,"other traumatic nondisplaced spondylolisthesis of fourth cervical vertebra, subsequent encounter for fracture with delayed healing",S123,0
+S12351K,"other traumatic nondisplaced spondylolisthesis of fourth cervical vertebra, subsequent encounter for fracture with nonunion",S123,0
+S12351S,"other traumatic nondisplaced spondylolisthesis of fourth cervical vertebra, sequela",S123,0
+S12390A,"other displaced fracture of fourth cervical vertebra, initial encounter for closed fracture",S123,0
+S12390B,"other displaced fracture of fourth cervical vertebra, initial encounter for open fracture",S123,0
+S12390D,"other displaced fracture of fourth cervical vertebra, subsequent encounter for fracture with routine healing",S123,0
+S12390G,"other displaced fracture of fourth cervical vertebra, subsequent encounter for fracture with delayed healing",S123,0
+S12390K,"other displaced fracture of fourth cervical vertebra, subsequent encounter for fracture with nonunion",S123,0
+S12390S,"other displaced fracture of fourth cervical vertebra, sequela",S123,0
+S12391A,"other nondisplaced fracture of fourth cervical vertebra, initial encounter for closed fracture",S123,0
+S12391B,"other nondisplaced fracture of fourth cervical vertebra, initial encounter for open fracture",S123,0
+S12391D,"other nondisplaced fracture of fourth cervical vertebra, subsequent encounter for fracture with routine healing",S123,0
+S12391G,"other nondisplaced fracture of fourth cervical vertebra, subsequent encounter for fracture with delayed healing",S123,0
+S12391K,"other nondisplaced fracture of fourth cervical vertebra, subsequent encounter for fracture with nonunion",S123,0
+S12391S,"other nondisplaced fracture of fourth cervical vertebra, sequela",S123,0
+S12400A,"unspecified displaced fracture of fifth cervical vertebra, initial encounter for closed fracture",S124,0
+S12400B,"unspecified displaced fracture of fifth cervical vertebra, initial encounter for open fracture",S124,0
+S12400D,"unspecified displaced fracture of fifth cervical vertebra, subsequent encounter for fracture with routine healing",S124,0
+S12400G,"unspecified displaced fracture of fifth cervical vertebra, subsequent encounter for fracture with delayed healing",S124,0
+S12400K,"unspecified displaced fracture of fifth cervical vertebra, subsequent encounter for fracture with nonunion",S124,0
+S12400S,"unspecified displaced fracture of fifth cervical vertebra, sequela",S124,0
+S12401A,"unspecified nondisplaced fracture of fifth cervical vertebra, initial encounter for closed fracture",S124,0
+S12401B,"unspecified nondisplaced fracture of fifth cervical vertebra, initial encounter for open fracture",S124,0
+S12401D,"unspecified nondisplaced fracture of fifth cervical vertebra, subsequent encounter for fracture with routine healing",S124,0
+S12401G,"unspecified nondisplaced fracture of fifth cervical vertebra, subsequent encounter for fracture with delayed healing",S124,0
+S12401K,"unspecified nondisplaced fracture of fifth cervical vertebra, subsequent encounter for fracture with nonunion",S124,0
+S12401S,"unspecified nondisplaced fracture of fifth cervical vertebra, sequela",S124,0
+S12430A,"unspecified traumatic displaced spondylolisthesis of fifth cervical vertebra, initial encounter for closed fracture",S124,0
+S12430B,"unspecified traumatic displaced spondylolisthesis of fifth cervical vertebra, initial encounter for open fracture",S124,0
+S12430D,"unspecified traumatic displaced spondylolisthesis of fifth cervical vertebra, subsequent encounter for fracture with routine healing",S124,0
+S12430G,"unspecified traumatic displaced spondylolisthesis of fifth cervical vertebra, subsequent encounter for fracture with delayed healing",S124,0
+S12430K,"unspecified traumatic displaced spondylolisthesis of fifth cervical vertebra, subsequent encounter for fracture with nonunion",S124,0
+S12430S,"unspecified traumatic displaced spondylolisthesis of fifth cervical vertebra, sequela",S124,0
+S12431A,"unspecified traumatic nondisplaced spondylolisthesis of fifth cervical vertebra, initial encounter for closed fracture",S124,0
+S12431B,"unspecified traumatic nondisplaced spondylolisthesis of fifth cervical vertebra, initial encounter for open fracture",S124,0
+S12431D,"unspecified traumatic nondisplaced spondylolisthesis of fifth cervical vertebra, subsequent encounter for fracture with routine healing",S124,0
+S12431G,"unspecified traumatic nondisplaced spondylolisthesis of fifth cervical vertebra, subsequent encounter for fracture with delayed healing",S124,0
+S12431K,"unspecified traumatic nondisplaced spondylolisthesis of fifth cervical vertebra, subsequent encounter for fracture with nonunion",S124,0
+S12431S,"unspecified traumatic nondisplaced spondylolisthesis of fifth cervical vertebra, sequela",S124,0
+S1244XA,"type iii traumatic spondylolisthesis of fifth cervical vertebra, initial encounter for closed fracture",S124,0
+S1244XB,"type iii traumatic spondylolisthesis of fifth cervical vertebra, initial encounter for open fracture",S124,0
+S1244XD,"type iii traumatic spondylolisthesis of fifth cervical vertebra, subsequent encounter for fracture with routine healing",S124,0
+S1244XG,"type iii traumatic spondylolisthesis of fifth cervical vertebra, subsequent encounter for fracture with delayed healing",S124,0
+S1244XK,"type iii traumatic spondylolisthesis of fifth cervical vertebra, subsequent encounter for fracture with nonunion",S124,0
+S1244XS,"type iii traumatic spondylolisthesis of fifth cervical vertebra, sequela",S124,0
+S12450A,"other traumatic displaced spondylolisthesis of fifth cervical vertebra, initial encounter for closed fracture",S124,0
+S12450B,"other traumatic displaced spondylolisthesis of fifth cervical vertebra, initial encounter for open fracture",S124,0
+S12450D,"other traumatic displaced spondylolisthesis of fifth cervical vertebra, subsequent encounter for fracture with routine healing",S124,0
+S12450G,"other traumatic displaced spondylolisthesis of fifth cervical vertebra, subsequent encounter for fracture with delayed healing",S124,0
+S12450K,"other traumatic displaced spondylolisthesis of fifth cervical vertebra, subsequent encounter for fracture with nonunion",S124,0
+S12450S,"other traumatic displaced spondylolisthesis of fifth cervical vertebra, sequela",S124,0
+S12451A,"other traumatic nondisplaced spondylolisthesis of fifth cervical vertebra, initial encounter for closed fracture",S124,0
+S12451B,"other traumatic nondisplaced spondylolisthesis of fifth cervical vertebra, initial encounter for open fracture",S124,0
+S12451D,"other traumatic nondisplaced spondylolisthesis of fifth cervical vertebra, subsequent encounter for fracture with routine healing",S124,0
+S12451G,"other traumatic nondisplaced spondylolisthesis of fifth cervical vertebra, subsequent encounter for fracture with delayed healing",S124,0
+S12451K,"other traumatic nondisplaced spondylolisthesis of fifth cervical vertebra, subsequent encounter for fracture with nonunion",S124,0
+S12451S,"other traumatic nondisplaced spondylolisthesis of fifth cervical vertebra, sequela",S124,0
+S12490A,"other displaced fracture of fifth cervical vertebra, initial encounter for closed fracture",S124,0
+S12490B,"other displaced fracture of fifth cervical vertebra, initial encounter for open fracture",S124,0
+S12490D,"other displaced fracture of fifth cervical vertebra, subsequent encounter for fracture with routine healing",S124,0
+S12490G,"other displaced fracture of fifth cervical vertebra, subsequent encounter for fracture with delayed healing",S124,0
+S12490K,"other displaced fracture of fifth cervical vertebra, subsequent encounter for fracture with nonunion",S124,0
+S12490S,"other displaced fracture of fifth cervical vertebra, sequela",S124,0
+S12491A,"other nondisplaced fracture of fifth cervical vertebra, initial encounter for closed fracture",S124,0
+S12491B,"other nondisplaced fracture of fifth cervical vertebra, initial encounter for open fracture",S124,0
+S12491D,"other nondisplaced fracture of fifth cervical vertebra, subsequent encounter for fracture with routine healing",S124,0
+S12491G,"other nondisplaced fracture of fifth cervical vertebra, subsequent encounter for fracture with delayed healing",S124,0
+S12491K,"other nondisplaced fracture of fifth cervical vertebra, subsequent encounter for fracture with nonunion",S124,0
+S12491S,"other nondisplaced fracture of fifth cervical vertebra, sequela",S124,0
+S12500A,"unspecified displaced fracture of sixth cervical vertebra, initial encounter for closed fracture",S125,0
+S12500B,"unspecified displaced fracture of sixth cervical vertebra, initial encounter for open fracture",S125,0
+S12500D,"unspecified displaced fracture of sixth cervical vertebra, subsequent encounter for fracture with routine healing",S125,0
+S12500G,"unspecified displaced fracture of sixth cervical vertebra, subsequent encounter for fracture with delayed healing",S125,0
+S12500K,"unspecified displaced fracture of sixth cervical vertebra, subsequent encounter for fracture with nonunion",S125,0
+S12500S,"unspecified displaced fracture of sixth cervical vertebra, sequela",S125,0
+S12501A,"unspecified nondisplaced fracture of sixth cervical vertebra, initial encounter for closed fracture",S125,0
+S12501B,"unspecified nondisplaced fracture of sixth cervical vertebra, initial encounter for open fracture",S125,0
+S12501D,"unspecified nondisplaced fracture of sixth cervical vertebra, subsequent encounter for fracture with routine healing",S125,0
+S12501G,"unspecified nondisplaced fracture of sixth cervical vertebra, subsequent encounter for fracture with delayed healing",S125,0
+S12501K,"unspecified nondisplaced fracture of sixth cervical vertebra, subsequent encounter for fracture with nonunion",S125,0
+S12501S,"unspecified nondisplaced fracture of sixth cervical vertebra, sequela",S125,0
+S12530A,"unspecified traumatic displaced spondylolisthesis of sixth cervical vertebra, initial encounter for closed fracture",S125,0
+S12530B,"unspecified traumatic displaced spondylolisthesis of sixth cervical vertebra, initial encounter for open fracture",S125,0
+S12530D,"unspecified traumatic displaced spondylolisthesis of sixth cervical vertebra, subsequent encounter for fracture with routine healing",S125,0
+S12530G,"unspecified traumatic displaced spondylolisthesis of sixth cervical vertebra, subsequent encounter for fracture with delayed healing",S125,0
+S12530K,"unspecified traumatic displaced spondylolisthesis of sixth cervical vertebra, subsequent encounter for fracture with nonunion",S125,0
+S12530S,"unspecified traumatic displaced spondylolisthesis of sixth cervical vertebra, sequela",S125,0
+S12531A,"unspecified traumatic nondisplaced spondylolisthesis of sixth cervical vertebra, initial encounter for closed fracture",S125,0
+S12531B,"unspecified traumatic nondisplaced spondylolisthesis of sixth cervical vertebra, initial encounter for open fracture",S125,0
+S12531D,"unspecified traumatic nondisplaced spondylolisthesis of sixth cervical vertebra, subsequent encounter for fracture with routine healing",S125,0
+S12531G,"unspecified traumatic nondisplaced spondylolisthesis of sixth cervical vertebra, subsequent encounter for fracture with delayed healing",S125,0
+S12531K,"unspecified traumatic nondisplaced spondylolisthesis of sixth cervical vertebra, subsequent encounter for fracture with nonunion",S125,0
+S12531S,"unspecified traumatic nondisplaced spondylolisthesis of sixth cervical vertebra, sequela",S125,0
+S1254XA,"type iii traumatic spondylolisthesis of sixth cervical vertebra, initial encounter for closed fracture",S125,0
+S1254XB,"type iii traumatic spondylolisthesis of sixth cervical vertebra, initial encounter for open fracture",S125,0
+S1254XD,"type iii traumatic spondylolisthesis of sixth cervical vertebra, subsequent encounter for fracture with routine healing",S125,0
+S1254XG,"type iii traumatic spondylolisthesis of sixth cervical vertebra, subsequent encounter for fracture with delayed healing",S125,0
+S1254XK,"type iii traumatic spondylolisthesis of sixth cervical vertebra, subsequent encounter for fracture with nonunion",S125,0
+S1254XS,"type iii traumatic spondylolisthesis of sixth cervical vertebra, sequela",S125,0
+S12550A,"other traumatic displaced spondylolisthesis of sixth cervical vertebra, initial encounter for closed fracture",S125,0
+S12550B,"other traumatic displaced spondylolisthesis of sixth cervical vertebra, initial encounter for open fracture",S125,0
+S12550D,"other traumatic displaced spondylolisthesis of sixth cervical vertebra, subsequent encounter for fracture with routine healing",S125,0
+S12550G,"other traumatic displaced spondylolisthesis of sixth cervical vertebra, subsequent encounter for fracture with delayed healing",S125,0
+S12550K,"other traumatic displaced spondylolisthesis of sixth cervical vertebra, subsequent encounter for fracture with nonunion",S125,0
+S12550S,"other traumatic displaced spondylolisthesis of sixth cervical vertebra, sequela",S125,0
+S12551A,"other traumatic nondisplaced spondylolisthesis of sixth cervical vertebra, initial encounter for closed fracture",S125,0
+S12551B,"other traumatic nondisplaced spondylolisthesis of sixth cervical vertebra, initial encounter for open fracture",S125,0
+S12551D,"other traumatic nondisplaced spondylolisthesis of sixth cervical vertebra, subsequent encounter for fracture with routine healing",S125,0
+S12551G,"other traumatic nondisplaced spondylolisthesis of sixth cervical vertebra, subsequent encounter for fracture with delayed healing",S125,0
+S12551K,"other traumatic nondisplaced spondylolisthesis of sixth cervical vertebra, subsequent encounter for fracture with nonunion",S125,0
+S12551S,"other traumatic nondisplaced spondylolisthesis of sixth cervical vertebra, sequela",S125,0
+S12590A,"other displaced fracture of sixth cervical vertebra, initial encounter for closed fracture",S125,0
+S12590B,"other displaced fracture of sixth cervical vertebra, initial encounter for open fracture",S125,0
+S12590D,"other displaced fracture of sixth cervical vertebra, subsequent encounter for fracture with routine healing",S125,0
+S12590G,"other displaced fracture of sixth cervical vertebra, subsequent encounter for fracture with delayed healing",S125,0
+S12590K,"other displaced fracture of sixth cervical vertebra, subsequent encounter for fracture with nonunion",S125,0
+S12590S,"other displaced fracture of sixth cervical vertebra, sequela",S125,0
+S12591A,"other nondisplaced fracture of sixth cervical vertebra, initial encounter for closed fracture",S125,0
+S12591B,"other nondisplaced fracture of sixth cervical vertebra, initial encounter for open fracture",S125,0
+S12591D,"other nondisplaced fracture of sixth cervical vertebra, subsequent encounter for fracture with routine healing",S125,0
+S12591G,"other nondisplaced fracture of sixth cervical vertebra, subsequent encounter for fracture with delayed healing",S125,0
+S12591K,"other nondisplaced fracture of sixth cervical vertebra, subsequent encounter for fracture with nonunion",S125,0
+S12591S,"other nondisplaced fracture of sixth cervical vertebra, sequela",S125,0
+S12600A,"unspecified displaced fracture of seventh cervical vertebra, initial encounter for closed fracture",S126,0
+S12600B,"unspecified displaced fracture of seventh cervical vertebra, initial encounter for open fracture",S126,0
+S12600D,"unspecified displaced fracture of seventh cervical vertebra, subsequent encounter for fracture with routine healing",S126,0
+S12600G,"unspecified displaced fracture of seventh cervical vertebra, subsequent encounter for fracture with delayed healing",S126,0
+S12600K,"unspecified displaced fracture of seventh cervical vertebra, subsequent encounter for fracture with nonunion",S126,0
+S12600S,"unspecified displaced fracture of seventh cervical vertebra, sequela",S126,0
+S12601A,"unspecified nondisplaced fracture of seventh cervical vertebra, initial encounter for closed fracture",S126,0
+S12601B,"unspecified nondisplaced fracture of seventh cervical vertebra, initial encounter for open fracture",S126,0
+S12601D,"unspecified nondisplaced fracture of seventh cervical vertebra, subsequent encounter for fracture with routine healing",S126,0
+S12601G,"unspecified nondisplaced fracture of seventh cervical vertebra, subsequent encounter for fracture with delayed healing",S126,0
+S12601K,"unspecified nondisplaced fracture of seventh cervical vertebra, subsequent encounter for fracture with nonunion",S126,0
+S12601S,"unspecified nondisplaced fracture of seventh cervical vertebra, sequela",S126,0
+S12630A,"unspecified traumatic displaced spondylolisthesis of seventh cervical vertebra, initial encounter for closed fracture",S126,0
+S12630B,"unspecified traumatic displaced spondylolisthesis of seventh cervical vertebra, initial encounter for open fracture",S126,0
+S12630D,"unspecified traumatic displaced spondylolisthesis of seventh cervical vertebra, subsequent encounter for fracture with routine healing",S126,0
+S12630G,"unspecified traumatic displaced spondylolisthesis of seventh cervical vertebra, subsequent encounter for fracture with delayed healing",S126,0
+S12630K,"unspecified traumatic displaced spondylolisthesis of seventh cervical vertebra, subsequent encounter for fracture with nonunion",S126,0
+S12630S,"unspecified traumatic displaced spondylolisthesis of seventh cervical vertebra, sequela",S126,0
+S12631A,"unspecified traumatic nondisplaced spondylolisthesis of seventh cervical vertebra, initial encounter for closed fracture",S126,0
+S12631B,"unspecified traumatic nondisplaced spondylolisthesis of seventh cervical vertebra, initial encounter for open fracture",S126,0
+S12631D,"unspecified traumatic nondisplaced spondylolisthesis of seventh cervical vertebra, subsequent encounter for fracture with routine healing",S126,0
+S12631G,"unspecified traumatic nondisplaced spondylolisthesis of seventh cervical vertebra, subsequent encounter for fracture with delayed healing",S126,0
+S12631K,"unspecified traumatic nondisplaced spondylolisthesis of seventh cervical vertebra, subsequent encounter for fracture with nonunion",S126,0
+S12631S,"unspecified traumatic nondisplaced spondylolisthesis of seventh cervical vertebra, sequela",S126,0
+S1264XA,"type iii traumatic spondylolisthesis of seventh cervical vertebra, initial encounter for closed fracture",S126,0
+S1264XB,"type iii traumatic spondylolisthesis of seventh cervical vertebra, initial encounter for open fracture",S126,0
+S1264XD,"type iii traumatic spondylolisthesis of seventh cervical vertebra, subsequent encounter for fracture with routine healing",S126,0
+S1264XG,"type iii traumatic spondylolisthesis of seventh cervical vertebra, subsequent encounter for fracture with delayed healing",S126,0
+S1264XK,"type iii traumatic spondylolisthesis of seventh cervical vertebra, subsequent encounter for fracture with nonunion",S126,0
+S1264XS,"type iii traumatic spondylolisthesis of seventh cervical vertebra, sequela",S126,0
+S12650A,"other traumatic displaced spondylolisthesis of seventh cervical vertebra, initial encounter for closed fracture",S126,0
+S12650B,"other traumatic displaced spondylolisthesis of seventh cervical vertebra, initial encounter for open fracture",S126,0
+S12650D,"other traumatic displaced spondylolisthesis of seventh cervical vertebra, subsequent encounter for fracture with routine healing",S126,0
+S12650G,"other traumatic displaced spondylolisthesis of seventh cervical vertebra, subsequent encounter for fracture with delayed healing",S126,0
+S12650K,"other traumatic displaced spondylolisthesis of seventh cervical vertebra, subsequent encounter for fracture with nonunion",S126,0
+S12650S,"other traumatic displaced spondylolisthesis of seventh cervical vertebra, sequela",S126,0
+S12651A,"other traumatic nondisplaced spondylolisthesis of seventh cervical vertebra, initial encounter for closed fracture",S126,0
+S12651B,"other traumatic nondisplaced spondylolisthesis of seventh cervical vertebra, initial encounter for open fracture",S126,0
+S12651D,"other traumatic nondisplaced spondylolisthesis of seventh cervical vertebra, subsequent encounter for fracture with routine healing",S126,0
+S12651G,"other traumatic nondisplaced spondylolisthesis of seventh cervical vertebra, subsequent encounter for fracture with delayed healing",S126,0
+S12651K,"other traumatic nondisplaced spondylolisthesis of seventh cervical vertebra, subsequent encounter for fracture with nonunion",S126,0
+S12651S,"other traumatic nondisplaced spondylolisthesis of seventh cervical vertebra, sequela",S126,0
+S12690A,"other displaced fracture of seventh cervical vertebra, initial encounter for closed fracture",S126,0
+S12690B,"other displaced fracture of seventh cervical vertebra, initial encounter for open fracture",S126,0
+S12690D,"other displaced fracture of seventh cervical vertebra, subsequent encounter for fracture with routine healing",S126,0
+S12690G,"other displaced fracture of seventh cervical vertebra, subsequent encounter for fracture with delayed healing",S126,0
+S12690K,"other displaced fracture of seventh cervical vertebra, subsequent encounter for fracture with nonunion",S126,0
+S12690S,"other displaced fracture of seventh cervical vertebra, sequela",S126,0
+S12691A,"other nondisplaced fracture of seventh cervical vertebra, initial encounter for closed fracture",S126,0
+S12691B,"other nondisplaced fracture of seventh cervical vertebra, initial encounter for open fracture",S126,0
+S12691D,"other nondisplaced fracture of seventh cervical vertebra, subsequent encounter for fracture with routine healing",S126,0
+S12691G,"other nondisplaced fracture of seventh cervical vertebra, subsequent encounter for fracture with delayed healing",S126,0
+S12691K,"other nondisplaced fracture of seventh cervical vertebra, subsequent encounter for fracture with nonunion",S126,0
+S12691S,"other nondisplaced fracture of seventh cervical vertebra, sequela",S126,0
+S128XXA,"fracture of other parts of neck, initial encounter",S128,0
+S128XXD,"fracture of other parts of neck, subsequent encounter",S128,0
+S128XXS,"fracture of other parts of neck, sequela",S128,0
+S129XXA,"fracture of neck, unspecified, initial encounter",S129,0
+S129XXD,"fracture of neck, unspecified, subsequent encounter",S129,0
+S129XXS,"fracture of neck, unspecified, sequela",S129,0
+S140XXA,"concussion and edema of cervical spinal cord, initial encounter",S140,1
+S140XXD,"concussion and edema of cervical spinal cord, subsequent encounter",S140,1
+S140XXS,"concussion and edema of cervical spinal cord, sequela",S140,1
+S14101A,"unspecified injury at c1 level of cervical spinal cord, initial encounter",S141,1
+S14101D,"unspecified injury at c1 level of cervical spinal cord, subsequent encounter",S141,1
+S14101S,"unspecified injury at c1 level of cervical spinal cord, sequela",S141,1
+S14102A,"unspecified injury at c2 level of cervical spinal cord, initial encounter",S141,1
+S14102D,"unspecified injury at c2 level of cervical spinal cord, subsequent encounter",S141,1
+S14102S,"unspecified injury at c2 level of cervical spinal cord, sequela",S141,1
+S14103A,"unspecified injury at c3 level of cervical spinal cord, initial encounter",S141,1
+S14103D,"unspecified injury at c3 level of cervical spinal cord, subsequent encounter",S141,1
+S14103S,"unspecified injury at c3 level of cervical spinal cord, sequela",S141,1
+S14104A,"unspecified injury at c4 level of cervical spinal cord, initial encounter",S141,1
+S14104D,"unspecified injury at c4 level of cervical spinal cord, subsequent encounter",S141,1
+S14104S,"unspecified injury at c4 level of cervical spinal cord, sequela",S141,1
+S14105A,"unspecified injury at c5 level of cervical spinal cord, initial encounter",S141,1
+S14105D,"unspecified injury at c5 level of cervical spinal cord, subsequent encounter",S141,1
+S14105S,"unspecified injury at c5 level of cervical spinal cord, sequela",S141,1
+S14106A,"unspecified injury at c6 level of cervical spinal cord, initial encounter",S141,1
+S14106D,"unspecified injury at c6 level of cervical spinal cord, subsequent encounter",S141,1
+S14106S,"unspecified injury at c6 level of cervical spinal cord, sequela",S141,1
+S14107A,"unspecified injury at c7 level of cervical spinal cord, initial encounter",S141,1
+S14107D,"unspecified injury at c7 level of cervical spinal cord, subsequent encounter",S141,1
+S14107S,"unspecified injury at c7 level of cervical spinal cord, sequela",S141,1
+S14108A,"unspecified injury at c8 level of cervical spinal cord, initial encounter",S141,1
+S14108D,"unspecified injury at c8 level of cervical spinal cord, subsequent encounter",S141,1
+S14108S,"unspecified injury at c8 level of cervical spinal cord, sequela",S141,1
+S14109A,"unspecified injury at unspecified level of cervical spinal cord, initial encounter",S141,1
+S14109D,"unspecified injury at unspecified level of cervical spinal cord, subsequent encounter",S141,1
+S14109S,"unspecified injury at unspecified level of cervical spinal cord, sequela",S141,1
+S14111A,"complete lesion at c1 level of cervical spinal cord, initial encounter",S141,1
+S14111D,"complete lesion at c1 level of cervical spinal cord, subsequent encounter",S141,1
+S14111S,"complete lesion at c1 level of cervical spinal cord, sequela",S141,1
+S14112A,"complete lesion at c2 level of cervical spinal cord, initial encounter",S141,1
+S14112D,"complete lesion at c2 level of cervical spinal cord, subsequent encounter",S141,1
+S14112S,"complete lesion at c2 level of cervical spinal cord, sequela",S141,1
+S14113A,"complete lesion at c3 level of cervical spinal cord, initial encounter",S141,1
+S14113D,"complete lesion at c3 level of cervical spinal cord, subsequent encounter",S141,1
+S14113S,"complete lesion at c3 level of cervical spinal cord, sequela",S141,1
+S14114A,"complete lesion at c4 level of cervical spinal cord, initial encounter",S141,1
+S14114D,"complete lesion at c4 level of cervical spinal cord, subsequent encounter",S141,1
+S14114S,"complete lesion at c4 level of cervical spinal cord, sequela",S141,1
+S14115A,"complete lesion at c5 level of cervical spinal cord, initial encounter",S141,1
+S14115D,"complete lesion at c5 level of cervical spinal cord, subsequent encounter",S141,1
+S14115S,"complete lesion at c5 level of cervical spinal cord, sequela",S141,1
+S14116A,"complete lesion at c6 level of cervical spinal cord, initial encounter",S141,1
+S14116D,"complete lesion at c6 level of cervical spinal cord, subsequent encounter",S141,1
+S14116S,"complete lesion at c6 level of cervical spinal cord, sequela",S141,1
+S14117A,"complete lesion at c7 level of cervical spinal cord, initial encounter",S141,1
+S14117D,"complete lesion at c7 level of cervical spinal cord, subsequent encounter",S141,1
+S14117S,"complete lesion at c7 level of cervical spinal cord, sequela",S141,1
+S14118A,"complete lesion at c8 level of cervical spinal cord, initial encounter",S141,1
+S14118D,"complete lesion at c8 level of cervical spinal cord, subsequent encounter",S141,1
+S14118S,"complete lesion at c8 level of cervical spinal cord, sequela",S141,1
+S14119A,"complete lesion at unspecified level of cervical spinal cord, initial encounter",S141,1
+S14119D,"complete lesion at unspecified level of cervical spinal cord, subsequent encounter",S141,1
+S14119S,"complete lesion at unspecified level of cervical spinal cord, sequela",S141,1
+S14121A,"central cord syndrome at c1 level of cervical spinal cord, initial encounter",S141,1
+S14121D,"central cord syndrome at c1 level of cervical spinal cord, subsequent encounter",S141,1
+S14121S,"central cord syndrome at c1 level of cervical spinal cord, sequela",S141,1
+S14122A,"central cord syndrome at c2 level of cervical spinal cord, initial encounter",S141,1
+S14122D,"central cord syndrome at c2 level of cervical spinal cord, subsequent encounter",S141,1
+S14122S,"central cord syndrome at c2 level of cervical spinal cord, sequela",S141,1
+S14123A,"central cord syndrome at c3 level of cervical spinal cord, initial encounter",S141,1
+S14123D,"central cord syndrome at c3 level of cervical spinal cord, subsequent encounter",S141,1
+S14123S,"central cord syndrome at c3 level of cervical spinal cord, sequela",S141,1
+S14124A,"central cord syndrome at c4 level of cervical spinal cord, initial encounter",S141,1
+S14124D,"central cord syndrome at c4 level of cervical spinal cord, subsequent encounter",S141,1
+S14124S,"central cord syndrome at c4 level of cervical spinal cord, sequela",S141,1
+S14125A,"central cord syndrome at c5 level of cervical spinal cord, initial encounter",S141,1
+S14125D,"central cord syndrome at c5 level of cervical spinal cord, subsequent encounter",S141,1
+S14125S,"central cord syndrome at c5 level of cervical spinal cord, sequela",S141,1
+S14126A,"central cord syndrome at c6 level of cervical spinal cord, initial encounter",S141,1
+S14126D,"central cord syndrome at c6 level of cervical spinal cord, subsequent encounter",S141,1
+S14126S,"central cord syndrome at c6 level of cervical spinal cord, sequela",S141,1
+S14127A,"central cord syndrome at c7 level of cervical spinal cord, initial encounter",S141,1
+S14127D,"central cord syndrome at c7 level of cervical spinal cord, subsequent encounter",S141,1
+S14127S,"central cord syndrome at c7 level of cervical spinal cord, sequela",S141,1
+S14128A,"central cord syndrome at c8 level of cervical spinal cord, initial encounter",S141,1
+S14128D,"central cord syndrome at c8 level of cervical spinal cord, subsequent encounter",S141,1
+S14128S,"central cord syndrome at c8 level of cervical spinal cord, sequela",S141,1
+S14129A,"central cord syndrome at unspecified level of cervical spinal cord, initial encounter",S141,1
+S14129D,"central cord syndrome at unspecified level of cervical spinal cord, subsequent encounter",S141,1
+S14129S,"central cord syndrome at unspecified level of cervical spinal cord, sequela",S141,1
+S14131A,"anterior cord syndrome at c1 level of cervical spinal cord, initial encounter",S141,1
+S14131D,"anterior cord syndrome at c1 level of cervical spinal cord, subsequent encounter",S141,1
+S14131S,"anterior cord syndrome at c1 level of cervical spinal cord, sequela",S141,1
+S14132A,"anterior cord syndrome at c2 level of cervical spinal cord, initial encounter",S141,1
+S14132D,"anterior cord syndrome at c2 level of cervical spinal cord, subsequent encounter",S141,1
+S14132S,"anterior cord syndrome at c2 level of cervical spinal cord, sequela",S141,1
+S14133A,"anterior cord syndrome at c3 level of cervical spinal cord, initial encounter",S141,1
+S14133D,"anterior cord syndrome at c3 level of cervical spinal cord, subsequent encounter",S141,1
+S14133S,"anterior cord syndrome at c3 level of cervical spinal cord, sequela",S141,1
+S14134A,"anterior cord syndrome at c4 level of cervical spinal cord, initial encounter",S141,1
+S14134D,"anterior cord syndrome at c4 level of cervical spinal cord, subsequent encounter",S141,1
+S14134S,"anterior cord syndrome at c4 level of cervical spinal cord, sequela",S141,1
+S14135A,"anterior cord syndrome at c5 level of cervical spinal cord, initial encounter",S141,1
+S14135D,"anterior cord syndrome at c5 level of cervical spinal cord, subsequent encounter",S141,1
+S14135S,"anterior cord syndrome at c5 level of cervical spinal cord, sequela",S141,1
+S14136A,"anterior cord syndrome at c6 level of cervical spinal cord, initial encounter",S141,1
+S14136D,"anterior cord syndrome at c6 level of cervical spinal cord, subsequent encounter",S141,1
+S14136S,"anterior cord syndrome at c6 level of cervical spinal cord, sequela",S141,1
+S14137A,"anterior cord syndrome at c7 level of cervical spinal cord, initial encounter",S141,1
+S14137D,"anterior cord syndrome at c7 level of cervical spinal cord, subsequent encounter",S141,1
+S14137S,"anterior cord syndrome at c7 level of cervical spinal cord, sequela",S141,1
+S14138A,"anterior cord syndrome at c8 level of cervical spinal cord, initial encounter",S141,1
+S14138D,"anterior cord syndrome at c8 level of cervical spinal cord, subsequent encounter",S141,1
+S14138S,"anterior cord syndrome at c8 level of cervical spinal cord, sequela",S141,1
+S14139A,"anterior cord syndrome at unspecified level of cervical spinal cord, initial encounter",S141,1
+S14139D,"anterior cord syndrome at unspecified level of cervical spinal cord, subsequent encounter",S141,1
+S14139S,"anterior cord syndrome at unspecified level of cervical spinal cord, sequela",S141,1
+S14141A,"brown-sequard syndrome at c1 level of cervical spinal cord, initial encounter",S141,1
+S14141D,"brown-sequard syndrome at c1 level of cervical spinal cord, subsequent encounter",S141,1
+S14141S,"brown-sequard syndrome at c1 level of cervical spinal cord, sequela",S141,1
+S14142A,"brown-sequard syndrome at c2 level of cervical spinal cord, initial encounter",S141,1
+S14142D,"brown-sequard syndrome at c2 level of cervical spinal cord, subsequent encounter",S141,1
+S14142S,"brown-sequard syndrome at c2 level of cervical spinal cord, sequela",S141,1
+S14143A,"brown-sequard syndrome at c3 level of cervical spinal cord, initial encounter",S141,1
+S14143D,"brown-sequard syndrome at c3 level of cervical spinal cord, subsequent encounter",S141,1
+S14143S,"brown-sequard syndrome at c3 level of cervical spinal cord, sequela",S141,1
+S14144A,"brown-sequard syndrome at c4 level of cervical spinal cord, initial encounter",S141,1
+S14144D,"brown-sequard syndrome at c4 level of cervical spinal cord, subsequent encounter",S141,1
+S14144S,"brown-sequard syndrome at c4 level of cervical spinal cord, sequela",S141,1
+S14145A,"brown-sequard syndrome at c5 level of cervical spinal cord, initial encounter",S141,1
+S14145D,"brown-sequard syndrome at c5 level of cervical spinal cord, subsequent encounter",S141,1
+S14145S,"brown-sequard syndrome at c5 level of cervical spinal cord, sequela",S141,1
+S14146A,"brown-sequard syndrome at c6 level of cervical spinal cord, initial encounter",S141,1
+S14146D,"brown-sequard syndrome at c6 level of cervical spinal cord, subsequent encounter",S141,1
+S14146S,"brown-sequard syndrome at c6 level of cervical spinal cord, sequela",S141,1
+S14147A,"brown-sequard syndrome at c7 level of cervical spinal cord, initial encounter",S141,1
+S14147D,"brown-sequard syndrome at c7 level of cervical spinal cord, subsequent encounter",S141,1
+S14147S,"brown-sequard syndrome at c7 level of cervical spinal cord, sequela",S141,1
+S14148A,"brown-sequard syndrome at c8 level of cervical spinal cord, initial encounter",S141,1
+S14148D,"brown-sequard syndrome at c8 level of cervical spinal cord, subsequent encounter",S141,1
+S14148S,"brown-sequard syndrome at c8 level of cervical spinal cord, sequela",S141,1
+S14149A,"brown-sequard syndrome at unspecified level of cervical spinal cord, initial encounter",S141,1
+S14149D,"brown-sequard syndrome at unspecified level of cervical spinal cord, subsequent encounter",S141,1
+S14149S,"brown-sequard syndrome at unspecified level of cervical spinal cord, sequela",S141,1
+S14151A,"other incomplete lesion at c1 level of cervical spinal cord, initial encounter",S141,1
+S14151D,"other incomplete lesion at c1 level of cervical spinal cord, subsequent encounter",S141,1
+S14151S,"other incomplete lesion at c1 level of cervical spinal cord, sequela",S141,1
+S14152A,"other incomplete lesion at c2 level of cervical spinal cord, initial encounter",S141,1
+S14152D,"other incomplete lesion at c2 level of cervical spinal cord, subsequent encounter",S141,1
+S14152S,"other incomplete lesion at c2 level of cervical spinal cord, sequela",S141,1
+S14153A,"other incomplete lesion at c3 level of cervical spinal cord, initial encounter",S141,1
+S14153D,"other incomplete lesion at c3 level of cervical spinal cord, subsequent encounter",S141,1
+S14153S,"other incomplete lesion at c3 level of cervical spinal cord, sequela",S141,1
+S14154A,"other incomplete lesion at c4 level of cervical spinal cord, initial encounter",S141,1
+S14154D,"other incomplete lesion at c4 level of cervical spinal cord, subsequent encounter",S141,1
+S14154S,"other incomplete lesion at c4 level of cervical spinal cord, sequela",S141,1
+S14155A,"other incomplete lesion at c5 level of cervical spinal cord, initial encounter",S141,1
+S14155D,"other incomplete lesion at c5 level of cervical spinal cord, subsequent encounter",S141,1
+S14155S,"other incomplete lesion at c5 level of cervical spinal cord, sequela",S141,1
+S14156A,"other incomplete lesion at c6 level of cervical spinal cord, initial encounter",S141,1
+S14156D,"other incomplete lesion at c6 level of cervical spinal cord, subsequent encounter",S141,1
+S14156S,"other incomplete lesion at c6 level of cervical spinal cord, sequela",S141,1
+S14157A,"other incomplete lesion at c7 level of cervical spinal cord, initial encounter",S141,1
+S14157D,"other incomplete lesion at c7 level of cervical spinal cord, subsequent encounter",S141,1
+S14157S,"other incomplete lesion at c7 level of cervical spinal cord, sequela",S141,1
+S14158A,"other incomplete lesion at c8 level of cervical spinal cord, initial encounter",S141,1
+S14158D,"other incomplete lesion at c8 level of cervical spinal cord, subsequent encounter",S141,1
+S14158S,"other incomplete lesion at c8 level of cervical spinal cord, sequela",S141,1
+S14159A,"other incomplete lesion at unspecified level of cervical spinal cord, initial encounter",S141,1
+S14159D,"other incomplete lesion at unspecified level of cervical spinal cord, subsequent encounter",S141,1
+S14159S,"other incomplete lesion at unspecified level of cervical spinal cord, sequela",S141,1
+S142XXA,"injury of nerve root of cervical spine, initial encounter",S142,1
+S142XXD,"injury of nerve root of cervical spine, subsequent encounter",S142,1
+S142XXS,"injury of nerve root of cervical spine, sequela",S142,1
+S22000A,"wedge compression fracture of unspecified thoracic vertebra, initial encounter for closed fracture",S220,0
+S22000B,"wedge compression fracture of unspecified thoracic vertebra, initial encounter for open fracture",S220,0
+S22000D,"wedge compression fracture of unspecified thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22000G,"wedge compression fracture of unspecified thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22000K,"wedge compression fracture of unspecified thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22000S,"wedge compression fracture of unspecified thoracic vertebra, sequela",S220,0
+S22001A,"stable burst fracture of unspecified thoracic vertebra, initial encounter for closed fracture",S220,0
+S22001B,"stable burst fracture of unspecified thoracic vertebra, initial encounter for open fracture",S220,0
+S22001D,"stable burst fracture of unspecified thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22001G,"stable burst fracture of unspecified thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22001K,"stable burst fracture of unspecified thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22001S,"stable burst fracture of unspecified thoracic vertebra, sequela",S220,0
+S22002A,"unstable burst fracture of unspecified thoracic vertebra, initial encounter for closed fracture",S220,0
+S22002B,"unstable burst fracture of unspecified thoracic vertebra, initial encounter for open fracture",S220,0
+S22002D,"unstable burst fracture of unspecified thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22002G,"unstable burst fracture of unspecified thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22002K,"unstable burst fracture of unspecified thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22002S,"unstable burst fracture of unspecified thoracic vertebra, sequela",S220,0
+S22008A,"other fracture of unspecified thoracic vertebra, initial encounter for closed fracture",S220,0
+S22008B,"other fracture of unspecified thoracic vertebra, initial encounter for open fracture",S220,0
+S22008D,"other fracture of unspecified thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22008G,"other fracture of unspecified thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22008K,"other fracture of unspecified thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22008S,"other fracture of unspecified thoracic vertebra, sequela",S220,0
+S22009A,"unspecified fracture of unspecified thoracic vertebra, initial encounter for closed fracture",S220,0
+S22009B,"unspecified fracture of unspecified thoracic vertebra, initial encounter for open fracture",S220,0
+S22009D,"unspecified fracture of unspecified thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22009G,"unspecified fracture of unspecified thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22009K,"unspecified fracture of unspecified thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22009S,"unspecified fracture of unspecified thoracic vertebra, sequela",S220,0
+S22010A,"wedge compression fracture of first thoracic vertebra, initial encounter for closed fracture",S220,0
+S22010B,"wedge compression fracture of first thoracic vertebra, initial encounter for open fracture",S220,0
+S22010D,"wedge compression fracture of first thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22010G,"wedge compression fracture of first thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22010K,"wedge compression fracture of first thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22010S,"wedge compression fracture of first thoracic vertebra, sequela",S220,0
+S22011A,"stable burst fracture of first thoracic vertebra, initial encounter for closed fracture",S220,0
+S22011B,"stable burst fracture of first thoracic vertebra, initial encounter for open fracture",S220,0
+S22011D,"stable burst fracture of first thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22011G,"stable burst fracture of first thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22011K,"stable burst fracture of first thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22011S,"stable burst fracture of first thoracic vertebra, sequela",S220,0
+S22012A,"unstable burst fracture of first thoracic vertebra, initial encounter for closed fracture",S220,0
+S22012B,"unstable burst fracture of first thoracic vertebra, initial encounter for open fracture",S220,0
+S22012D,"unstable burst fracture of first thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22012G,"unstable burst fracture of first thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22012K,"unstable burst fracture of first thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22012S,"unstable burst fracture of first thoracic vertebra, sequela",S220,0
+S22018A,"other fracture of first thoracic vertebra, initial encounter for closed fracture",S220,0
+S22018B,"other fracture of first thoracic vertebra, initial encounter for open fracture",S220,0
+S22018D,"other fracture of first thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22018G,"other fracture of first thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22018K,"other fracture of first thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22018S,"other fracture of first thoracic vertebra, sequela",S220,0
+S22019A,"unspecified fracture of first thoracic vertebra, initial encounter for closed fracture",S220,0
+S22019B,"unspecified fracture of first thoracic vertebra, initial encounter for open fracture",S220,0
+S22019D,"unspecified fracture of first thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22019G,"unspecified fracture of first thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22019K,"unspecified fracture of first thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22019S,"unspecified fracture of first thoracic vertebra, sequela",S220,0
+S22020A,"wedge compression fracture of second thoracic vertebra, initial encounter for closed fracture",S220,0
+S22020B,"wedge compression fracture of second thoracic vertebra, initial encounter for open fracture",S220,0
+S22020D,"wedge compression fracture of second thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22020G,"wedge compression fracture of second thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22020K,"wedge compression fracture of second thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22020S,"wedge compression fracture of second thoracic vertebra, sequela",S220,0
+S22021A,"stable burst fracture of second thoracic vertebra, initial encounter for closed fracture",S220,0
+S22021B,"stable burst fracture of second thoracic vertebra, initial encounter for open fracture",S220,0
+S22021D,"stable burst fracture of second thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22021G,"stable burst fracture of second thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22021K,"stable burst fracture of second thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22021S,"stable burst fracture of second thoracic vertebra, sequela",S220,0
+S22022A,"unstable burst fracture of second thoracic vertebra, initial encounter for closed fracture",S220,0
+S22022B,"unstable burst fracture of second thoracic vertebra, initial encounter for open fracture",S220,0
+S22022D,"unstable burst fracture of second thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22022G,"unstable burst fracture of second thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22022K,"unstable burst fracture of second thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22022S,"unstable burst fracture of second thoracic vertebra, sequela",S220,0
+S22028A,"other fracture of second thoracic vertebra, initial encounter for closed fracture",S220,0
+S22028B,"other fracture of second thoracic vertebra, initial encounter for open fracture",S220,0
+S22028D,"other fracture of second thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22028G,"other fracture of second thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22028K,"other fracture of second thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22028S,"other fracture of second thoracic vertebra, sequela",S220,0
+S22029A,"unspecified fracture of second thoracic vertebra, initial encounter for closed fracture",S220,0
+S22029B,"unspecified fracture of second thoracic vertebra, initial encounter for open fracture",S220,0
+S22029D,"unspecified fracture of second thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22029G,"unspecified fracture of second thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22029K,"unspecified fracture of second thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22029S,"unspecified fracture of second thoracic vertebra, sequela",S220,0
+S22030A,"wedge compression fracture of third thoracic vertebra, initial encounter for closed fracture",S220,0
+S22030B,"wedge compression fracture of third thoracic vertebra, initial encounter for open fracture",S220,0
+S22030D,"wedge compression fracture of third thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22030G,"wedge compression fracture of third thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22030K,"wedge compression fracture of third thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22030S,"wedge compression fracture of third thoracic vertebra, sequela",S220,0
+S22031A,"stable burst fracture of third thoracic vertebra, initial encounter for closed fracture",S220,0
+S22031B,"stable burst fracture of third thoracic vertebra, initial encounter for open fracture",S220,0
+S22031D,"stable burst fracture of third thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22031G,"stable burst fracture of third thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22031K,"stable burst fracture of third thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22031S,"stable burst fracture of third thoracic vertebra, sequela",S220,0
+S22032A,"unstable burst fracture of third thoracic vertebra, initial encounter for closed fracture",S220,0
+S22032B,"unstable burst fracture of third thoracic vertebra, initial encounter for open fracture",S220,0
+S22032D,"unstable burst fracture of third thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22032G,"unstable burst fracture of third thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22032K,"unstable burst fracture of third thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22032S,"unstable burst fracture of third thoracic vertebra, sequela",S220,0
+S22038A,"other fracture of third thoracic vertebra, initial encounter for closed fracture",S220,0
+S22038B,"other fracture of third thoracic vertebra, initial encounter for open fracture",S220,0
+S22038D,"other fracture of third thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22038G,"other fracture of third thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22038K,"other fracture of third thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22038S,"other fracture of third thoracic vertebra, sequela",S220,0
+S22039A,"unspecified fracture of third thoracic vertebra, initial encounter for closed fracture",S220,0
+S22039B,"unspecified fracture of third thoracic vertebra, initial encounter for open fracture",S220,0
+S22039D,"unspecified fracture of third thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22039G,"unspecified fracture of third thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22039K,"unspecified fracture of third thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22039S,"unspecified fracture of third thoracic vertebra, sequela",S220,0
+S22040A,"wedge compression fracture of fourth thoracic vertebra, initial encounter for closed fracture",S220,0
+S22040B,"wedge compression fracture of fourth thoracic vertebra, initial encounter for open fracture",S220,0
+S22040D,"wedge compression fracture of fourth thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22040G,"wedge compression fracture of fourth thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22040K,"wedge compression fracture of fourth thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22040S,"wedge compression fracture of fourth thoracic vertebra, sequela",S220,0
+S22041A,"stable burst fracture of fourth thoracic vertebra, initial encounter for closed fracture",S220,0
+S22041B,"stable burst fracture of fourth thoracic vertebra, initial encounter for open fracture",S220,0
+S22041D,"stable burst fracture of fourth thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22041G,"stable burst fracture of fourth thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22041K,"stable burst fracture of fourth thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22041S,"stable burst fracture of fourth thoracic vertebra, sequela",S220,0
+S22042A,"unstable burst fracture of fourth thoracic vertebra, initial encounter for closed fracture",S220,0
+S22042B,"unstable burst fracture of fourth thoracic vertebra, initial encounter for open fracture",S220,0
+S22042D,"unstable burst fracture of fourth thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22042G,"unstable burst fracture of fourth thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22042K,"unstable burst fracture of fourth thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22042S,"unstable burst fracture of fourth thoracic vertebra, sequela",S220,0
+S22048A,"other fracture of fourth thoracic vertebra, initial encounter for closed fracture",S220,0
+S22048B,"other fracture of fourth thoracic vertebra, initial encounter for open fracture",S220,0
+S22048D,"other fracture of fourth thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22048G,"other fracture of fourth thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22048K,"other fracture of fourth thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22048S,"other fracture of fourth thoracic vertebra, sequela",S220,0
+S22049A,"unspecified fracture of fourth thoracic vertebra, initial encounter for closed fracture",S220,0
+S22049B,"unspecified fracture of fourth thoracic vertebra, initial encounter for open fracture",S220,0
+S22049D,"unspecified fracture of fourth thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22049G,"unspecified fracture of fourth thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22049K,"unspecified fracture of fourth thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22049S,"unspecified fracture of fourth thoracic vertebra, sequela",S220,0
+S22050A,"wedge compression fracture of t5-t6 vertebra, initial encounter for closed fracture",S220,0
+S22050B,"wedge compression fracture of t5-t6 vertebra, initial encounter for open fracture",S220,0
+S22050D,"wedge compression fracture of t5-t6 vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22050G,"wedge compression fracture of t5-t6 vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22050K,"wedge compression fracture of t5-t6 vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22050S,"wedge compression fracture of t5-t6 vertebra, sequela",S220,0
+S22051A,"stable burst fracture of t5-t6 vertebra, initial encounter for closed fracture",S220,0
+S22051B,"stable burst fracture of t5-t6 vertebra, initial encounter for open fracture",S220,0
+S22051D,"stable burst fracture of t5-t6 vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22051G,"stable burst fracture of t5-t6 vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22051K,"stable burst fracture of t5-t6 vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22051S,"stable burst fracture of t5-t6 vertebra, sequela",S220,0
+S22052A,"unstable burst fracture of t5-t6 vertebra, initial encounter for closed fracture",S220,0
+S22052B,"unstable burst fracture of t5-t6 vertebra, initial encounter for open fracture",S220,0
+S22052D,"unstable burst fracture of t5-t6 vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22052G,"unstable burst fracture of t5-t6 vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22052K,"unstable burst fracture of t5-t6 vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22052S,"unstable burst fracture of t5-t6 vertebra, sequela",S220,0
+S22058A,"other fracture of t5-t6 vertebra, initial encounter for closed fracture",S220,0
+S22058B,"other fracture of t5-t6 vertebra, initial encounter for open fracture",S220,0
+S22058D,"other fracture of t5-t6 vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22058G,"other fracture of t5-t6 vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22058K,"other fracture of t5-t6 vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22058S,"other fracture of t5-t6 vertebra, sequela",S220,0
+S22059A,"unspecified fracture of t5-t6 vertebra, initial encounter for closed fracture",S220,0
+S22059B,"unspecified fracture of t5-t6 vertebra, initial encounter for open fracture",S220,0
+S22059D,"unspecified fracture of t5-t6 vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22059G,"unspecified fracture of t5-t6 vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22059K,"unspecified fracture of t5-t6 vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22059S,"unspecified fracture of t5-t6 vertebra, sequela",S220,0
+S22060A,"wedge compression fracture of t7-t8 vertebra, initial encounter for closed fracture",S220,0
+S22060B,"wedge compression fracture of t7-t8 vertebra, initial encounter for open fracture",S220,0
+S22060D,"wedge compression fracture of t7-t8 vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22060G,"wedge compression fracture of t7-t8 vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22060K,"wedge compression fracture of t7-t8 vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22060S,"wedge compression fracture of t7-t8 vertebra, sequela",S220,0
+S22061A,"stable burst fracture of t7-t8 vertebra, initial encounter for closed fracture",S220,0
+S22061B,"stable burst fracture of t7-t8 vertebra, initial encounter for open fracture",S220,0
+S22061D,"stable burst fracture of t7-t8 vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22061G,"stable burst fracture of t7-t8 vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22061K,"stable burst fracture of t7-t8 vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22061S,"stable burst fracture of t7-t8 vertebra, sequela",S220,0
+S22062A,"unstable burst fracture of t7-t8 vertebra, initial encounter for closed fracture",S220,0
+S22062B,"unstable burst fracture of t7-t8 vertebra, initial encounter for open fracture",S220,0
+S22062D,"unstable burst fracture of t7-t8 vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22062G,"unstable burst fracture of t7-t8 vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22062K,"unstable burst fracture of t7-t8 vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22062S,"unstable burst fracture of t7-t8 vertebra, sequela",S220,0
+S22068A,"other fracture of t7-t8 thoracic vertebra, initial encounter for closed fracture",S220,0
+S22068B,"other fracture of t7-t8 thoracic vertebra, initial encounter for open fracture",S220,0
+S22068D,"other fracture of t7-t8 thoracic vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22068G,"other fracture of t7-t8 thoracic vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22068K,"other fracture of t7-t8 thoracic vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22068S,"other fracture of t7-t8 thoracic vertebra, sequela",S220,0
+S22069A,"unspecified fracture of t7-t8 vertebra, initial encounter for closed fracture",S220,0
+S22069B,"unspecified fracture of t7-t8 vertebra, initial encounter for open fracture",S220,0
+S22069D,"unspecified fracture of t7-t8 vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22069G,"unspecified fracture of t7-t8 vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22069K,"unspecified fracture of t7-t8 vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22069S,"unspecified fracture of t7-t8 vertebra, sequela",S220,0
+S22070A,"wedge compression fracture of t9-t10 vertebra, initial encounter for closed fracture",S220,0
+S22070B,"wedge compression fracture of t9-t10 vertebra, initial encounter for open fracture",S220,0
+S22070D,"wedge compression fracture of t9-t10 vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22070G,"wedge compression fracture of t9-t10 vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22070K,"wedge compression fracture of t9-t10 vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22070S,"wedge compression fracture of t9-t10 vertebra, sequela",S220,0
+S22071A,"stable burst fracture of t9-t10 vertebra, initial encounter for closed fracture",S220,0
+S22071B,"stable burst fracture of t9-t10 vertebra, initial encounter for open fracture",S220,0
+S22071D,"stable burst fracture of t9-t10 vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22071G,"stable burst fracture of t9-t10 vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22071K,"stable burst fracture of t9-t10 vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22071S,"stable burst fracture of t9-t10 vertebra, sequela",S220,0
+S22072A,"unstable burst fracture of t9-t10 vertebra, initial encounter for closed fracture",S220,0
+S22072B,"unstable burst fracture of t9-t10 vertebra, initial encounter for open fracture",S220,0
+S22072D,"unstable burst fracture of t9-t10 vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22072G,"unstable burst fracture of t9-t10 vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22072K,"unstable burst fracture of t9-t10 vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22072S,"unstable burst fracture of t9-t10 vertebra, sequela",S220,0
+S22078A,"other fracture of t9-t10 vertebra, initial encounter for closed fracture",S220,0
+S22078B,"other fracture of t9-t10 vertebra, initial encounter for open fracture",S220,0
+S22078D,"other fracture of t9-t10 vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22078G,"other fracture of t9-t10 vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22078K,"other fracture of t9-t10 vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22078S,"other fracture of t9-t10 vertebra, sequela",S220,0
+S22079A,"unspecified fracture of t9-t10 vertebra, initial encounter for closed fracture",S220,0
+S22079B,"unspecified fracture of t9-t10 vertebra, initial encounter for open fracture",S220,0
+S22079D,"unspecified fracture of t9-t10 vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22079G,"unspecified fracture of t9-t10 vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22079K,"unspecified fracture of t9-t10 vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22079S,"unspecified fracture of t9-t10 vertebra, sequela",S220,0
+S22080A,"wedge compression fracture of t11-t12 vertebra, initial encounter for closed fracture",S220,0
+S22080B,"wedge compression fracture of t11-t12 vertebra, initial encounter for open fracture",S220,0
+S22080D,"wedge compression fracture of t11-t12 vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22080G,"wedge compression fracture of t11-t12 vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22080K,"wedge compression fracture of t11-t12 vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22080S,"wedge compression fracture of t11-t12 vertebra, sequela",S220,0
+S22081A,"stable burst fracture of t11-t12 vertebra, initial encounter for closed fracture",S220,0
+S22081B,"stable burst fracture of t11-t12 vertebra, initial encounter for open fracture",S220,0
+S22081D,"stable burst fracture of t11-t12 vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22081G,"stable burst fracture of t11-t12 vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22081K,"stable burst fracture of t11-t12 vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22081S,"stable burst fracture of t11-t12 vertebra, sequela",S220,0
+S22082A,"unstable burst fracture of t11-t12 vertebra, initial encounter for closed fracture",S220,0
+S22082B,"unstable burst fracture of t11-t12 vertebra, initial encounter for open fracture",S220,0
+S22082D,"unstable burst fracture of t11-t12 vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22082G,"unstable burst fracture of t11-t12 vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22082K,"unstable burst fracture of t11-t12 vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22082S,"unstable burst fracture of t11-t12 vertebra, sequela",S220,0
+S22088A,"other fracture of t11-t12 vertebra, initial encounter for closed fracture",S220,0
+S22088B,"other fracture of t11-t12 vertebra, initial encounter for open fracture",S220,0
+S22088D,"other fracture of t11-t12 vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22088G,"other fracture of t11-t12 vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22088K,"other fracture of t11-t12 vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22088S,"other fracture of t11-t12 vertebra, sequela",S220,0
+S22089A,"unspecified fracture of t11-t12 vertebra, initial encounter for closed fracture",S220,0
+S22089B,"unspecified fracture of t11-t12 vertebra, initial encounter for open fracture",S220,0
+S22089D,"unspecified fracture of t11-t12 vertebra, subsequent encounter for fracture with routine healing",S220,0
+S22089G,"unspecified fracture of t11-t12 vertebra, subsequent encounter for fracture with delayed healing",S220,0
+S22089K,"unspecified fracture of t11-t12 vertebra, subsequent encounter for fracture with nonunion",S220,0
+S22089S,"unspecified fracture of t11-t12 vertebra, sequela",S220,0
+S240XXA,"concussion and edema of thoracic spinal cord, initial encounter",S240,1
+S240XXD,"concussion and edema of thoracic spinal cord, subsequent encounter",S240,1
+S240XXS,"concussion and edema of thoracic spinal cord, sequela",S240,1
+S24101A,"unspecified injury at t1 level of thoracic spinal cord, initial encounter",S241,1
+S24101D,"unspecified injury at t1 level of thoracic spinal cord, subsequent encounter",S241,1
+S24101S,"unspecified injury at t1 level of thoracic spinal cord, sequela",S241,1
+S24102A,"unspecified injury at t2-t6 level of thoracic spinal cord, initial encounter",S241,1
+S24102D,"unspecified injury at t2-t6 level of thoracic spinal cord, subsequent encounter",S241,1
+S24102S,"unspecified injury at t2-t6 level of thoracic spinal cord, sequela",S241,1
+S24103A,"unspecified injury at t7-t10 level of thoracic spinal cord, initial encounter",S241,1
+S24103D,"unspecified injury at t7-t10 level of thoracic spinal cord, subsequent encounter",S241,1
+S24103S,"unspecified injury at t7-t10 level of thoracic spinal cord, sequela",S241,1
+S24104A,"unspecified injury at t11-t12 level of thoracic spinal cord, initial encounter",S241,1
+S24104D,"unspecified injury at t11-t12 level of thoracic spinal cord, subsequent encounter",S241,1
+S24104S,"unspecified injury at t11-t12 level of thoracic spinal cord, sequela",S241,1
+S24109A,"unspecified injury at unspecified level of thoracic spinal cord, initial encounter",S241,1
+S24109D,"unspecified injury at unspecified level of thoracic spinal cord, subsequent encounter",S241,1
+S24109S,"unspecified injury at unspecified level of thoracic spinal cord, sequela",S241,1
+S24111A,"complete lesion at t1 level of thoracic spinal cord, initial encounter",S241,1
+S24111D,"complete lesion at t1 level of thoracic spinal cord, subsequent encounter",S241,1
+S24111S,"complete lesion at t1 level of thoracic spinal cord, sequela",S241,1
+S24112A,"complete lesion at t2-t6 level of thoracic spinal cord, initial encounter",S241,1
+S24112D,"complete lesion at t2-t6 level of thoracic spinal cord, subsequent encounter",S241,1
+S24112S,"complete lesion at t2-t6 level of thoracic spinal cord, sequela",S241,1
+S24113A,"complete lesion at t7-t10 level of thoracic spinal cord, initial encounter",S241,1
+S24113D,"complete lesion at t7-t10 level of thoracic spinal cord, subsequent encounter",S241,1
+S24113S,"complete lesion at t7-t10 level of thoracic spinal cord, sequela",S241,1
+S24114A,"complete lesion at t11-t12 level of thoracic spinal cord, initial encounter",S241,1
+S24114D,"complete lesion at t11-t12 level of thoracic spinal cord, subsequent encounter",S241,1
+S24114S,"complete lesion at t11-t12 level of thoracic spinal cord, sequela",S241,1
+S24119A,"complete lesion at unspecified level of thoracic spinal cord, initial encounter",S241,1
+S24119D,"complete lesion at unspecified level of thoracic spinal cord, subsequent encounter",S241,1
+S24119S,"complete lesion at unspecified level of thoracic spinal cord, sequela",S241,1
+S24131A,"anterior cord syndrome at t1 level of thoracic spinal cord, initial encounter",S241,1
+S24131D,"anterior cord syndrome at t1 level of thoracic spinal cord, subsequent encounter",S241,1
+S24131S,"anterior cord syndrome at t1 level of thoracic spinal cord, sequela",S241,1
+S24132A,"anterior cord syndrome at t2-t6 level of thoracic spinal cord, initial encounter",S241,1
+S24132D,"anterior cord syndrome at t2-t6 level of thoracic spinal cord, subsequent encounter",S241,1
+S24132S,"anterior cord syndrome at t2-t6 level of thoracic spinal cord, sequela",S241,1
+S24133A,"anterior cord syndrome at t7-t10 level of thoracic spinal cord, initial encounter",S241,1
+S24133D,"anterior cord syndrome at t7-t10 level of thoracic spinal cord, subsequent encounter",S241,1
+S24133S,"anterior cord syndrome at t7-t10 level of thoracic spinal cord, sequela",S241,1
+S24134A,"anterior cord syndrome at t11-t12 level of thoracic spinal cord, initial encounter",S241,1
+S24134D,"anterior cord syndrome at t11-t12 level of thoracic spinal cord, subsequent encounter",S241,1
+S24134S,"anterior cord syndrome at t11-t12 level of thoracic spinal cord, sequela",S241,1
+S24139A,"anterior cord syndrome at unspecified level of thoracic spinal cord, initial encounter",S241,1
+S24139D,"anterior cord syndrome at unspecified level of thoracic spinal cord, subsequent encounter",S241,1
+S24139S,"anterior cord syndrome at unspecified level of thoracic spinal cord, sequela",S241,1
+S24141A,"brown-sequard syndrome at t1 level of thoracic spinal cord, initial encounter",S241,1
+S24141D,"brown-sequard syndrome at t1 level of thoracic spinal cord, subsequent encounter",S241,1
+S24141S,"brown-sequard syndrome at t1 level of thoracic spinal cord, sequela",S241,1
+S24142A,"brown-sequard syndrome at t2-t6 level of thoracic spinal cord, initial encounter",S241,1
+S24142D,"brown-sequard syndrome at t2-t6 level of thoracic spinal cord, subsequent encounter",S241,1
+S24142S,"brown-sequard syndrome at t2-t6 level of thoracic spinal cord, sequela",S241,1
+S24143A,"brown-sequard syndrome at t7-t10 level of thoracic spinal cord, initial encounter",S241,1
+S24143D,"brown-sequard syndrome at t7-t10 level of thoracic spinal cord, subsequent encounter",S241,1
+S24143S,"brown-sequard syndrome at t7-t10 level of thoracic spinal cord, sequela",S241,1
+S24144A,"brown-sequard syndrome at t11-t12 level of thoracic spinal cord, initial encounter",S241,1
+S24144D,"brown-sequard syndrome at t11-t12 level of thoracic spinal cord, subsequent encounter",S241,1
+S24144S,"brown-sequard syndrome at t11-t12 level of thoracic spinal cord, sequela",S241,1
+S24149A,"brown-sequard syndrome at unspecified level of thoracic spinal cord, initial encounter",S241,1
+S24149D,"brown-sequard syndrome at unspecified level of thoracic spinal cord, subsequent encounter",S241,1
+S24149S,"brown-sequard syndrome at unspecified level of thoracic spinal cord, sequela",S241,1
+S24151A,"other incomplete lesion at t1 level of thoracic spinal cord, initial encounter",S241,1
+S24151D,"other incomplete lesion at t1 level of thoracic spinal cord, subsequent encounter",S241,1
+S24151S,"other incomplete lesion at t1 level of thoracic spinal cord, sequela",S241,1
+S24152A,"other incomplete lesion at t2-t6 level of thoracic spinal cord, initial encounter",S241,1
+S24152D,"other incomplete lesion at t2-t6 level of thoracic spinal cord, subsequent encounter",S241,1
+S24152S,"other incomplete lesion at t2-t6 level of thoracic spinal cord, sequela",S241,1
+S24153A,"other incomplete lesion at t7-t10 level of thoracic spinal cord, initial encounter",S241,1
+S24153D,"other incomplete lesion at t7-t10 level of thoracic spinal cord, subsequent encounter",S241,1
+S24153S,"other incomplete lesion at t7-t10 level of thoracic spinal cord, sequela",S241,1
+S24154A,"other incomplete lesion at t11-t12 level of thoracic spinal cord, initial encounter",S241,1
+S24154D,"other incomplete lesion at t11-t12 level of thoracic spinal cord, subsequent encounter",S241,1
+S24154S,"other incomplete lesion at t11-t12 level of thoracic spinal cord, sequela",S241,1
+S24159A,"other incomplete lesion at unspecified level of thoracic spinal cord, initial encounter",S241,1
+S24159D,"other incomplete lesion at unspecified level of thoracic spinal cord, subsequent encounter",S241,1
+S24159S,"other incomplete lesion at unspecified level of thoracic spinal cord, sequela",S241,1
+S242XXA,"injury of nerve root of thoracic spine, initial encounter",S242,1
+S242XXD,"injury of nerve root of thoracic spine, subsequent encounter",S242,1
+S242XXS,"injury of nerve root of thoracic spine, sequela",S242,1
+S32000A,"wedge compression fracture of unspecified lumbar vertebra, initial encounter for closed fracture",S320,0
+S32000B,"wedge compression fracture of unspecified lumbar vertebra, initial encounter for open fracture",S320,0
+S32000D,"wedge compression fracture of unspecified lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32000G,"wedge compression fracture of unspecified lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32000K,"wedge compression fracture of unspecified lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32000S,"wedge compression fracture of unspecified lumbar vertebra, sequela",S320,0
+S32001A,"stable burst fracture of unspecified lumbar vertebra, initial encounter for closed fracture",S320,0
+S32001B,"stable burst fracture of unspecified lumbar vertebra, initial encounter for open fracture",S320,0
+S32001D,"stable burst fracture of unspecified lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32001G,"stable burst fracture of unspecified lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32001K,"stable burst fracture of unspecified lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32001S,"stable burst fracture of unspecified lumbar vertebra, sequela",S320,0
+S32002A,"unstable burst fracture of unspecified lumbar vertebra, initial encounter for closed fracture",S320,0
+S32002B,"unstable burst fracture of unspecified lumbar vertebra, initial encounter for open fracture",S320,0
+S32002D,"unstable burst fracture of unspecified lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32002G,"unstable burst fracture of unspecified lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32002K,"unstable burst fracture of unspecified lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32002S,"unstable burst fracture of unspecified lumbar vertebra, sequela",S320,0
+S32008A,"other fracture of unspecified lumbar vertebra, initial encounter for closed fracture",S320,0
+S32008B,"other fracture of unspecified lumbar vertebra, initial encounter for open fracture",S320,0
+S32008D,"other fracture of unspecified lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32008G,"other fracture of unspecified lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32008K,"other fracture of unspecified lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32008S,"other fracture of unspecified lumbar vertebra, sequela",S320,0
+S32009A,"unspecified fracture of unspecified lumbar vertebra, initial encounter for closed fracture",S320,0
+S32009B,"unspecified fracture of unspecified lumbar vertebra, initial encounter for open fracture",S320,0
+S32009D,"unspecified fracture of unspecified lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32009G,"unspecified fracture of unspecified lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32009K,"unspecified fracture of unspecified lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32009S,"unspecified fracture of unspecified lumbar vertebra, sequela",S320,0
+S32010A,"wedge compression fracture of first lumbar vertebra, initial encounter for closed fracture",S320,0
+S32010B,"wedge compression fracture of first lumbar vertebra, initial encounter for open fracture",S320,0
+S32010D,"wedge compression fracture of first lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32010G,"wedge compression fracture of first lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32010K,"wedge compression fracture of first lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32010S,"wedge compression fracture of first lumbar vertebra, sequela",S320,0
+S32011A,"stable burst fracture of first lumbar vertebra, initial encounter for closed fracture",S320,0
+S32011B,"stable burst fracture of first lumbar vertebra, initial encounter for open fracture",S320,0
+S32011D,"stable burst fracture of first lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32011G,"stable burst fracture of first lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32011K,"stable burst fracture of first lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32011S,"stable burst fracture of first lumbar vertebra, sequela",S320,0
+S32012A,"unstable burst fracture of first lumbar vertebra, initial encounter for closed fracture",S320,0
+S32012B,"unstable burst fracture of first lumbar vertebra, initial encounter for open fracture",S320,0
+S32012D,"unstable burst fracture of first lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32012G,"unstable burst fracture of first lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32012K,"unstable burst fracture of first lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32012S,"unstable burst fracture of first lumbar vertebra, sequela",S320,0
+S32018A,"other fracture of first lumbar vertebra, initial encounter for closed fracture",S320,0
+S32018B,"other fracture of first lumbar vertebra, initial encounter for open fracture",S320,0
+S32018D,"other fracture of first lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32018G,"other fracture of first lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32018K,"other fracture of first lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32018S,"other fracture of first lumbar vertebra, sequela",S320,0
+S32019A,"unspecified fracture of first lumbar vertebra, initial encounter for closed fracture",S320,0
+S32019B,"unspecified fracture of first lumbar vertebra, initial encounter for open fracture",S320,0
+S32019D,"unspecified fracture of first lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32019G,"unspecified fracture of first lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32019K,"unspecified fracture of first lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32019S,"unspecified fracture of first lumbar vertebra, sequela",S320,0
+S32020A,"wedge compression fracture of second lumbar vertebra, initial encounter for closed fracture",S320,0
+S32020B,"wedge compression fracture of second lumbar vertebra, initial encounter for open fracture",S320,0
+S32020D,"wedge compression fracture of second lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32020G,"wedge compression fracture of second lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32020K,"wedge compression fracture of second lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32020S,"wedge compression fracture of second lumbar vertebra, sequela",S320,0
+S32021A,"stable burst fracture of second lumbar vertebra, initial encounter for closed fracture",S320,0
+S32021B,"stable burst fracture of second lumbar vertebra, initial encounter for open fracture",S320,0
+S32021D,"stable burst fracture of second lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32021G,"stable burst fracture of second lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32021K,"stable burst fracture of second lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32021S,"stable burst fracture of second lumbar vertebra, sequela",S320,0
+S32022A,"unstable burst fracture of second lumbar vertebra, initial encounter for closed fracture",S320,0
+S32022B,"unstable burst fracture of second lumbar vertebra, initial encounter for open fracture",S320,0
+S32022D,"unstable burst fracture of second lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32022G,"unstable burst fracture of second lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32022K,"unstable burst fracture of second lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32022S,"unstable burst fracture of second lumbar vertebra, sequela",S320,0
+S32028A,"other fracture of second lumbar vertebra, initial encounter for closed fracture",S320,0
+S32028B,"other fracture of second lumbar vertebra, initial encounter for open fracture",S320,0
+S32028D,"other fracture of second lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32028G,"other fracture of second lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32028K,"other fracture of second lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32028S,"other fracture of second lumbar vertebra, sequela",S320,0
+S32029A,"unspecified fracture of second lumbar vertebra, initial encounter for closed fracture",S320,0
+S32029B,"unspecified fracture of second lumbar vertebra, initial encounter for open fracture",S320,0
+S32029D,"unspecified fracture of second lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32029G,"unspecified fracture of second lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32029K,"unspecified fracture of second lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32029S,"unspecified fracture of second lumbar vertebra, sequela",S320,0
+S32030A,"wedge compression fracture of third lumbar vertebra, initial encounter for closed fracture",S320,0
+S32030B,"wedge compression fracture of third lumbar vertebra, initial encounter for open fracture",S320,0
+S32030D,"wedge compression fracture of third lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32030G,"wedge compression fracture of third lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32030K,"wedge compression fracture of third lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32030S,"wedge compression fracture of third lumbar vertebra, sequela",S320,0
+S32031A,"stable burst fracture of third lumbar vertebra, initial encounter for closed fracture",S320,0
+S32031B,"stable burst fracture of third lumbar vertebra, initial encounter for open fracture",S320,0
+S32031D,"stable burst fracture of third lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32031G,"stable burst fracture of third lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32031K,"stable burst fracture of third lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32031S,"stable burst fracture of third lumbar vertebra, sequela",S320,0
+S32032A,"unstable burst fracture of third lumbar vertebra, initial encounter for closed fracture",S320,0
+S32032B,"unstable burst fracture of third lumbar vertebra, initial encounter for open fracture",S320,0
+S32032D,"unstable burst fracture of third lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32032G,"unstable burst fracture of third lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32032K,"unstable burst fracture of third lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32032S,"unstable burst fracture of third lumbar vertebra, sequela",S320,0
+S32038A,"other fracture of third lumbar vertebra, initial encounter for closed fracture",S320,0
+S32038B,"other fracture of third lumbar vertebra, initial encounter for open fracture",S320,0
+S32038D,"other fracture of third lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32038G,"other fracture of third lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32038K,"other fracture of third lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32038S,"other fracture of third lumbar vertebra, sequela",S320,0
+S32039A,"unspecified fracture of third lumbar vertebra, initial encounter for closed fracture",S320,0
+S32039B,"unspecified fracture of third lumbar vertebra, initial encounter for open fracture",S320,0
+S32039D,"unspecified fracture of third lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32039G,"unspecified fracture of third lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32039K,"unspecified fracture of third lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32039S,"unspecified fracture of third lumbar vertebra, sequela",S320,0
+S32040A,"wedge compression fracture of fourth lumbar vertebra, initial encounter for closed fracture",S320,0
+S32040B,"wedge compression fracture of fourth lumbar vertebra, initial encounter for open fracture",S320,0
+S32040D,"wedge compression fracture of fourth lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32040G,"wedge compression fracture of fourth lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32040K,"wedge compression fracture of fourth lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32040S,"wedge compression fracture of fourth lumbar vertebra, sequela",S320,0
+S32041A,"stable burst fracture of fourth lumbar vertebra, initial encounter for closed fracture",S320,0
+S32041B,"stable burst fracture of fourth lumbar vertebra, initial encounter for open fracture",S320,0
+S32041D,"stable burst fracture of fourth lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32041G,"stable burst fracture of fourth lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32041K,"stable burst fracture of fourth lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32041S,"stable burst fracture of fourth lumbar vertebra, sequela",S320,0
+S32042A,"unstable burst fracture of fourth lumbar vertebra, initial encounter for closed fracture",S320,0
+S32042B,"unstable burst fracture of fourth lumbar vertebra, initial encounter for open fracture",S320,0
+S32042D,"unstable burst fracture of fourth lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32042G,"unstable burst fracture of fourth lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32042K,"unstable burst fracture of fourth lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32042S,"unstable burst fracture of fourth lumbar vertebra, sequela",S320,0
+S32048A,"other fracture of fourth lumbar vertebra, initial encounter for closed fracture",S320,0
+S32048B,"other fracture of fourth lumbar vertebra, initial encounter for open fracture",S320,0
+S32048D,"other fracture of fourth lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32048G,"other fracture of fourth lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32048K,"other fracture of fourth lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32048S,"other fracture of fourth lumbar vertebra, sequela",S320,0
+S32049A,"unspecified fracture of fourth lumbar vertebra, initial encounter for closed fracture",S320,0
+S32049B,"unspecified fracture of fourth lumbar vertebra, initial encounter for open fracture",S320,0
+S32049D,"unspecified fracture of fourth lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32049G,"unspecified fracture of fourth lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32049K,"unspecified fracture of fourth lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32049S,"unspecified fracture of fourth lumbar vertebra, sequela",S320,0
+S32050A,"wedge compression fracture of fifth lumbar vertebra, initial encounter for closed fracture",S320,0
+S32050B,"wedge compression fracture of fifth lumbar vertebra, initial encounter for open fracture",S320,0
+S32050D,"wedge compression fracture of fifth lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32050G,"wedge compression fracture of fifth lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32050K,"wedge compression fracture of fifth lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32050S,"wedge compression fracture of fifth lumbar vertebra, sequela",S320,0
+S32051A,"stable burst fracture of fifth lumbar vertebra, initial encounter for closed fracture",S320,0
+S32051B,"stable burst fracture of fifth lumbar vertebra, initial encounter for open fracture",S320,0
+S32051D,"stable burst fracture of fifth lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32051G,"stable burst fracture of fifth lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32051K,"stable burst fracture of fifth lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32051S,"stable burst fracture of fifth lumbar vertebra, sequela",S320,0
+S32052A,"unstable burst fracture of fifth lumbar vertebra, initial encounter for closed fracture",S320,0
+S32052B,"unstable burst fracture of fifth lumbar vertebra, initial encounter for open fracture",S320,0
+S32052D,"unstable burst fracture of fifth lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32052G,"unstable burst fracture of fifth lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32052K,"unstable burst fracture of fifth lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32052S,"unstable burst fracture of fifth lumbar vertebra, sequela",S320,0
+S32058A,"other fracture of fifth lumbar vertebra, initial encounter for closed fracture",S320,0
+S32058B,"other fracture of fifth lumbar vertebra, initial encounter for open fracture",S320,0
+S32058D,"other fracture of fifth lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32058G,"other fracture of fifth lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32058K,"other fracture of fifth lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32058S,"other fracture of fifth lumbar vertebra, sequela",S320,0
+S32059A,"unspecified fracture of fifth lumbar vertebra, initial encounter for closed fracture",S320,0
+S32059B,"unspecified fracture of fifth lumbar vertebra, initial encounter for open fracture",S320,0
+S32059D,"unspecified fracture of fifth lumbar vertebra, subsequent encounter for fracture with routine healing",S320,0
+S32059G,"unspecified fracture of fifth lumbar vertebra, subsequent encounter for fracture with delayed healing",S320,0
+S32059K,"unspecified fracture of fifth lumbar vertebra, subsequent encounter for fracture with nonunion",S320,0
+S32059S,"unspecified fracture of fifth lumbar vertebra, sequela",S320,0
+S3210XA,"unspecified fracture of sacrum, initial encounter for closed fracture",S321,0
+S3210XB,"unspecified fracture of sacrum, initial encounter for open fracture",S321,0
+S3210XD,"unspecified fracture of sacrum, subsequent encounter for fracture with routine healing",S321,0
+S3210XG,"unspecified fracture of sacrum, subsequent encounter for fracture with delayed healing",S321,0
+S3210XK,"unspecified fracture of sacrum, subsequent encounter for fracture with nonunion",S321,0
+S3210XS,"unspecified fracture of sacrum, sequela",S321,0
+S32110A,"nondisplaced zone i fracture of sacrum, initial encounter for closed fracture",S321,0
+S32110B,"nondisplaced zone i fracture of sacrum, initial encounter for open fracture",S321,0
+S32110D,"nondisplaced zone i fracture of sacrum, subsequent encounter for fracture with routine healing",S321,0
+S32110G,"nondisplaced zone i fracture of sacrum, subsequent encounter for fracture with delayed healing",S321,0
+S32110K,"nondisplaced zone i fracture of sacrum, subsequent encounter for fracture with nonunion",S321,0
+S32110S,"nondisplaced zone i fracture of sacrum, sequela",S321,0
+S32111A,"minimally displaced zone i fracture of sacrum, initial encounter for closed fracture",S321,0
+S32111B,"minimally displaced zone i fracture of sacrum, initial encounter for open fracture",S321,0
+S32111D,"minimally displaced zone i fracture of sacrum, subsequent encounter for fracture with routine healing",S321,0
+S32111G,"minimally displaced zone i fracture of sacrum, subsequent encounter for fracture with delayed healing",S321,0
+S32111K,"minimally displaced zone i fracture of sacrum, subsequent encounter for fracture with nonunion",S321,0
+S32111S,"minimally displaced zone i fracture of sacrum, sequela",S321,0
+S32112A,"severely displaced zone i fracture of sacrum, initial encounter for closed fracture",S321,0
+S32112B,"severely displaced zone i fracture of sacrum, initial encounter for open fracture",S321,0
+S32112D,"severely displaced zone i fracture of sacrum, subsequent encounter for fracture with routine healing",S321,0
+S32112G,"severely displaced zone i fracture of sacrum, subsequent encounter for fracture with delayed healing",S321,0
+S32112K,"severely displaced zone i fracture of sacrum, subsequent encounter for fracture with nonunion",S321,0
+S32112S,"severely displaced zone i fracture of sacrum, sequela",S321,0
+S32119A,"unspecified zone i fracture of sacrum, initial encounter for closed fracture",S321,0
+S32119B,"unspecified zone i fracture of sacrum, initial encounter for open fracture",S321,0
+S32119D,"unspecified zone i fracture of sacrum, subsequent encounter for fracture with routine healing",S321,0
+S32119G,"unspecified zone i fracture of sacrum, subsequent encounter for fracture with delayed healing",S321,0
+S32119K,"unspecified zone i fracture of sacrum, subsequent encounter for fracture with nonunion",S321,0
+S32119S,"unspecified zone i fracture of sacrum, sequela",S321,0
+S32120A,"nondisplaced zone ii fracture of sacrum, initial encounter for closed fracture",S321,0
+S32120B,"nondisplaced zone ii fracture of sacrum, initial encounter for open fracture",S321,0
+S32120D,"nondisplaced zone ii fracture of sacrum, subsequent encounter for fracture with routine healing",S321,0
+S32120G,"nondisplaced zone ii fracture of sacrum, subsequent encounter for fracture with delayed healing",S321,0
+S32120K,"nondisplaced zone ii fracture of sacrum, subsequent encounter for fracture with nonunion",S321,0
+S32120S,"nondisplaced zone ii fracture of sacrum, sequela",S321,0
+S32121A,"minimally displaced zone ii fracture of sacrum, initial encounter for closed fracture",S321,0
+S32121B,"minimally displaced zone ii fracture of sacrum, initial encounter for open fracture",S321,0
+S32121D,"minimally displaced zone ii fracture of sacrum, subsequent encounter for fracture with routine healing",S321,0
+S32121G,"minimally displaced zone ii fracture of sacrum, subsequent encounter for fracture with delayed healing",S321,0
+S32121K,"minimally displaced zone ii fracture of sacrum, subsequent encounter for fracture with nonunion",S321,0
+S32121S,"minimally displaced zone ii fracture of sacrum, sequela",S321,0
+S32122A,"severely displaced zone ii fracture of sacrum, initial encounter for closed fracture",S321,0
+S32122B,"severely displaced zone ii fracture of sacrum, initial encounter for open fracture",S321,0
+S32122D,"severely displaced zone ii fracture of sacrum, subsequent encounter for fracture with routine healing",S321,0
+S32122G,"severely displaced zone ii fracture of sacrum, subsequent encounter for fracture with delayed healing",S321,0
+S32122K,"severely displaced zone ii fracture of sacrum, subsequent encounter for fracture with nonunion",S321,0
+S32122S,"severely displaced zone ii fracture of sacrum, sequela",S321,0
+S32129A,"unspecified zone ii fracture of sacrum, initial encounter for closed fracture",S321,0
+S32129B,"unspecified zone ii fracture of sacrum, initial encounter for open fracture",S321,0
+S32129D,"unspecified zone ii fracture of sacrum, subsequent encounter for fracture with routine healing",S321,0
+S32129G,"unspecified zone ii fracture of sacrum, subsequent encounter for fracture with delayed healing",S321,0
+S32129K,"unspecified zone ii fracture of sacrum, subsequent encounter for fracture with nonunion",S321,0
+S32129S,"unspecified zone ii fracture of sacrum, sequela",S321,0
+S32130A,"nondisplaced zone iii fracture of sacrum, initial encounter for closed fracture",S321,0
+S32130B,"nondisplaced zone iii fracture of sacrum, initial encounter for open fracture",S321,0
+S32130D,"nondisplaced zone iii fracture of sacrum, subsequent encounter for fracture with routine healing",S321,0
+S32130G,"nondisplaced zone iii fracture of sacrum, subsequent encounter for fracture with delayed healing",S321,0
+S32130K,"nondisplaced zone iii fracture of sacrum, subsequent encounter for fracture with nonunion",S321,0
+S32130S,"nondisplaced zone iii fracture of sacrum, sequela",S321,0
+S32131A,"minimally displaced zone iii fracture of sacrum, initial encounter for closed fracture",S321,0
+S32131B,"minimally displaced zone iii fracture of sacrum, initial encounter for open fracture",S321,0
+S32131D,"minimally displaced zone iii fracture of sacrum, subsequent encounter for fracture with routine healing",S321,0
+S32131G,"minimally displaced zone iii fracture of sacrum, subsequent encounter for fracture with delayed healing",S321,0
+S32131K,"minimally displaced zone iii fracture of sacrum, subsequent encounter for fracture with nonunion",S321,0
+S32131S,"minimally displaced zone iii fracture of sacrum, sequela",S321,0
+S32132A,"severely displaced zone iii fracture of sacrum, initial encounter for closed fracture",S321,0
+S32132B,"severely displaced zone iii fracture of sacrum, initial encounter for open fracture",S321,0
+S32132D,"severely displaced zone iii fracture of sacrum, subsequent encounter for fracture with routine healing",S321,0
+S32132G,"severely displaced zone iii fracture of sacrum, subsequent encounter for fracture with delayed healing",S321,0
+S32132K,"severely displaced zone iii fracture of sacrum, subsequent encounter for fracture with nonunion",S321,0
+S32132S,"severely displaced zone iii fracture of sacrum, sequela",S321,0
+S32139A,"unspecified zone iii fracture of sacrum, initial encounter for closed fracture",S321,0
+S32139B,"unspecified zone iii fracture of sacrum, initial encounter for open fracture",S321,0
+S32139D,"unspecified zone iii fracture of sacrum, subsequent encounter for fracture with routine healing",S321,0
+S32139G,"unspecified zone iii fracture of sacrum, subsequent encounter for fracture with delayed healing",S321,0
+S32139K,"unspecified zone iii fracture of sacrum, subsequent encounter for fracture with nonunion",S321,0
+S32139S,"unspecified zone iii fracture of sacrum, sequela",S321,0
+S3214XA,"type 1 fracture of sacrum, initial encounter for closed fracture",S321,0
+S3214XB,"type 1 fracture of sacrum, initial encounter for open fracture",S321,0
+S3214XD,"type 1 fracture of sacrum, subsequent encounter for fracture with routine healing",S321,0
+S3214XG,"type 1 fracture of sacrum, subsequent encounter for fracture with delayed healing",S321,0
+S3214XK,"type 1 fracture of sacrum, subsequent encounter for fracture with nonunion",S321,0
+S3214XS,"type 1 fracture of sacrum, sequela",S321,0
+S3215XA,"type 2 fracture of sacrum, initial encounter for closed fracture",S321,0
+S3215XB,"type 2 fracture of sacrum, initial encounter for open fracture",S321,0
+S3215XD,"type 2 fracture of sacrum, subsequent encounter for fracture with routine healing",S321,0
+S3215XG,"type 2 fracture of sacrum, subsequent encounter for fracture with delayed healing",S321,0
+S3215XK,"type 2 fracture of sacrum, subsequent encounter for fracture with nonunion",S321,0
+S3215XS,"type 2 fracture of sacrum, sequela",S321,0
+S3216XA,"type 3 fracture of sacrum, initial encounter for closed fracture",S321,0
+S3216XB,"type 3 fracture of sacrum, initial encounter for open fracture",S321,0
+S3216XD,"type 3 fracture of sacrum, subsequent encounter for fracture with routine healing",S321,0
+S3216XG,"type 3 fracture of sacrum, subsequent encounter for fracture with delayed healing",S321,0
+S3216XK,"type 3 fracture of sacrum, subsequent encounter for fracture with nonunion",S321,0
+S3216XS,"type 3 fracture of sacrum, sequela",S321,0
+S3217XA,"type 4 fracture of sacrum, initial encounter for closed fracture",S321,0
+S3217XB,"type 4 fracture of sacrum, initial encounter for open fracture",S321,0
+S3217XD,"type 4 fracture of sacrum, subsequent encounter for fracture with routine healing",S321,0
+S3217XG,"type 4 fracture of sacrum, subsequent encounter for fracture with delayed healing",S321,0
+S3217XK,"type 4 fracture of sacrum, subsequent encounter for fracture with nonunion",S321,0
+S3217XS,"type 4 fracture of sacrum, sequela",S321,0
+S3219XA,"other fracture of sacrum, initial encounter for closed fracture",S321,0
+S3219XB,"other fracture of sacrum, initial encounter for open fracture",S321,0
+S3219XD,"other fracture of sacrum, subsequent encounter for fracture with routine healing",S321,0
+S3219XG,"other fracture of sacrum, subsequent encounter for fracture with delayed healing",S321,0
+S3219XK,"other fracture of sacrum, subsequent encounter for fracture with nonunion",S321,0
+S3219XS,"other fracture of sacrum, sequela",S321,0
+S3401XA,"concussion and edema of lumbar spinal cord, initial encounter",S340,1
+S3401XD,"concussion and edema of lumbar spinal cord, subsequent encounter",S340,1
+S3401XS,"concussion and edema of lumbar spinal cord, sequela",S340,1
+S3402XA,"concussion and edema of sacral spinal cord, initial encounter",S340,1
+S3402XD,"concussion and edema of sacral spinal cord, subsequent encounter",S340,1
+S3402XS,"concussion and edema of sacral spinal cord, sequela",S340,1
+S34101A,"unspecified injury to l1 level of lumbar spinal cord, initial encounter",S341,1
+S34101D,"unspecified injury to l1 level of lumbar spinal cord, subsequent encounter",S341,1
+S34101S,"unspecified injury to l1 level of lumbar spinal cord, sequela",S341,1
+S34102A,"unspecified injury to l2 level of lumbar spinal cord, initial encounter",S341,1
+S34102D,"unspecified injury to l2 level of lumbar spinal cord, subsequent encounter",S341,1
+S34102S,"unspecified injury to l2 level of lumbar spinal cord, sequela",S341,1
+S34103A,"unspecified injury to l3 level of lumbar spinal cord, initial encounter",S341,1
+S34103D,"unspecified injury to l3 level of lumbar spinal cord, subsequent encounter",S341,1
+S34103S,"unspecified injury to l3 level of lumbar spinal cord, sequela",S341,1
+S34104A,"unspecified injury to l4 level of lumbar spinal cord, initial encounter",S341,1
+S34104D,"unspecified injury to l4 level of lumbar spinal cord, subsequent encounter",S341,1
+S34104S,"unspecified injury to l4 level of lumbar spinal cord, sequela",S341,1
+S34105A,"unspecified injury to l5 level of lumbar spinal cord, initial encounter",S341,1
+S34105D,"unspecified injury to l5 level of lumbar spinal cord, subsequent encounter",S341,1
+S34105S,"unspecified injury to l5 level of lumbar spinal cord, sequela",S341,1
+S34109A,"unspecified injury to unspecified level of lumbar spinal cord, initial encounter",S341,1
+S34109D,"unspecified injury to unspecified level of lumbar spinal cord, subsequent encounter",S341,1
+S34109S,"unspecified injury to unspecified level of lumbar spinal cord, sequela",S341,1
+S34111A,"complete lesion of l1 level of lumbar spinal cord, initial encounter",S341,1
+S34111D,"complete lesion of l1 level of lumbar spinal cord, subsequent encounter",S341,1
+S34111S,"complete lesion of l1 level of lumbar spinal cord, sequela",S341,1
+S34112A,"complete lesion of l2 level of lumbar spinal cord, initial encounter",S341,1
+S34112D,"complete lesion of l2 level of lumbar spinal cord, subsequent encounter",S341,1
+S34112S,"complete lesion of l2 level of lumbar spinal cord, sequela",S341,1
+S34113A,"complete lesion of l3 level of lumbar spinal cord, initial encounter",S341,1
+S34113D,"complete lesion of l3 level of lumbar spinal cord, subsequent encounter",S341,1
+S34113S,"complete lesion of l3 level of lumbar spinal cord, sequela",S341,1
+S34114A,"complete lesion of l4 level of lumbar spinal cord, initial encounter",S341,1
+S34114D,"complete lesion of l4 level of lumbar spinal cord, subsequent encounter",S341,1
+S34114S,"complete lesion of l4 level of lumbar spinal cord, sequela",S341,1
+S34115A,"complete lesion of l5 level of lumbar spinal cord, initial encounter",S341,1
+S34115D,"complete lesion of l5 level of lumbar spinal cord, subsequent encounter",S341,1
+S34115S,"complete lesion of l5 level of lumbar spinal cord, sequela",S341,1
+S34119A,"complete lesion of unspecified level of lumbar spinal cord, initial encounter",S341,1
+S34119D,"complete lesion of unspecified level of lumbar spinal cord, subsequent encounter",S341,1
+S34119S,"complete lesion of unspecified level of lumbar spinal cord, sequela",S341,1
+S34121A,"incomplete lesion of l1 level of lumbar spinal cord, initial encounter",S341,1
+S34121D,"incomplete lesion of l1 level of lumbar spinal cord, subsequent encounter",S341,1
+S34121S,"incomplete lesion of l1 level of lumbar spinal cord, sequela",S341,1
+S34122A,"incomplete lesion of l2 level of lumbar spinal cord, initial encounter",S341,1
+S34122D,"incomplete lesion of l2 level of lumbar spinal cord, subsequent encounter",S341,1
+S34122S,"incomplete lesion of l2 level of lumbar spinal cord, sequela",S341,1
+S34123A,"incomplete lesion of l3 level of lumbar spinal cord, initial encounter",S341,1
+S34123D,"incomplete lesion of l3 level of lumbar spinal cord, subsequent encounter",S341,1
+S34123S,"incomplete lesion of l3 level of lumbar spinal cord, sequela",S341,1
+S34124A,"incomplete lesion of l4 level of lumbar spinal cord, initial encounter",S341,1
+S34124D,"incomplete lesion of l4 level of lumbar spinal cord, subsequent encounter",S341,1
+S34124S,"incomplete lesion of l4 level of lumbar spinal cord, sequela",S341,1
+S34125A,"incomplete lesion of l5 level of lumbar spinal cord, initial encounter",S341,1
+S34125D,"incomplete lesion of l5 level of lumbar spinal cord, subsequent encounter",S341,1
+S34125S,"incomplete lesion of l5 level of lumbar spinal cord, sequela",S341,1
+S34129A,"incomplete lesion of unspecified level of lumbar spinal cord, initial encounter",S341,1
+S34129D,"incomplete lesion of unspecified level of lumbar spinal cord, subsequent encounter",S341,1
+S34129S,"incomplete lesion of unspecified level of lumbar spinal cord, sequela",S341,1
+S34131A,"complete lesion of sacral spinal cord, initial encounter",S341,1
+S34131D,"complete lesion of sacral spinal cord, subsequent encounter",S341,1
+S34131S,"complete lesion of sacral spinal cord, sequela",S341,1
+S34132A,"incomplete lesion of sacral spinal cord, initial encounter",S341,1
+S34132D,"incomplete lesion of sacral spinal cord, subsequent encounter",S341,1
+S34132S,"incomplete lesion of sacral spinal cord, sequela",S341,1
+S34139A,"unspecified injury to sacral spinal cord, initial encounter",S341,1
+S34139D,"unspecified injury to sacral spinal cord, subsequent encounter",S341,1
+S34139S,"unspecified injury to sacral spinal cord, sequela",S341,1
+S3421XA,"injury of nerve root of lumbar spine, initial encounter",S342,1
+S3421XD,"injury of nerve root of lumbar spine, subsequent encounter",S342,1
+S3421XS,"injury of nerve root of lumbar spine, sequela",S342,1
+S3422XA,"injury of nerve root of sacral spine, initial encounter",S342,1
+S3422XD,"injury of nerve root of sacral spine, subsequent encounter",S342,1
+S3422XS,"injury of nerve root of sacral spine, sequela",S342,1
+S343XXA,"injury of cauda equina, initial encounter",S343,1
+S343XXD,"injury of cauda equina, subsequent encounter",S343,1
+S343XXS,"injury of cauda equina, sequela",S343,1
