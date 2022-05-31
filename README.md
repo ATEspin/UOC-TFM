@@ -1,2 +1,2 @@
 # UOC-TFM
-Repository for the code reproducing my Master thesis from UOC
+Repository for the code reproducing my Master thesis from UOC-UB
